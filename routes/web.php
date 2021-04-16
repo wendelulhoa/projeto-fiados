@@ -15,15 +15,35 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 
 // Route::post('user/create', 'UserController@create')->name('create-user');
 
-// Route::get('/home', 'HomeController@index')->name('home');
-
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
+
+/*rotas de tags*/
+
+Route::group(['prefix'=>'tag'], function(){
+    Route::get('', 'TagsController@index')->name('tags-index');
+    Route::post('/create', 'TagsController@create')->name('tags-create');
+    Route::post('/edit', 'TagsController@edit')->name('tags-edit');
+    Route::post('/delete', 'TagsController@delete')->name('tags-delete');
+});
+
+/*rotas categorias*/
+Route::group(['prefix'=>'category'], function(){
+    Route::get('', 'CategoryController@index')->name('category-index');
+    Route::post('/create', 'CategoryController@create')->name('category-create');
+    Route::post('/edit', 'CategoryController@edit')->name('category-edit');
+    Route::post('/delete', 'CategoryController@delete')->name('category-delete');
+});
+
+/*rotas de mods*/
+Route::group(['prefix'=>'mods'], function(){
+    Route::get('', 'ModsController@index')->name('mods-index');
+    Route::post('/create', 'ModsController@create')->name('mods-create');
+    Route::post('/edit', 'ModsController@edit')->name('mods-edit');
+    Route::post('/delete', 'ModsController@delete')->name('mods-delete');
+});
