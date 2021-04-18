@@ -9,13 +9,19 @@ use Illuminate\Http\Request;
 class TagsController extends Controller
 {
     public function index(){
-        return Tags::all();
+        try{
+            $tags = Tags::all() ?? [];
+            return view('tags.index', compact('tags'));
+        }catch(Exception $e){
+
+        }
+        
     }
 
     public function create(Request $request){
         try{
             Tags::create([
-                'name' => $request['name']
+                'name' => $request['tag']
             ]);
         }catch(Exception $e){
             return $e;

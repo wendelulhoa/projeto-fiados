@@ -9,21 +9,32 @@ use Illuminate\Http\Request;
 class ModsController extends Controller
 {
     public function index(){
-       return Mods::all();
+       try{
+            $mods = Mods::all() ?? [];
+            return view('mods.mods', compact('mods'));
+        }catch(Exception $e){
+
+        }
     }
 
     public function create(Request $request){
         try{
+            if (isset($request['file'])){
+                $path = $request->file->store('mods/images');
+            } else{
+                $path ='';
+            }
+
             Mods::create([
                 'name'       => $request['name'],
                 'description'=> $request['description'],
-                'images'     => json_encode(["teste"]),
+                'images'     => json_encode(['path'=>$path]),
                 'approved'   => false,
                 'tags'       => json_encode([1,2,3]),
-                'category'   => $request['category']
+                'category'   => $request['category'] ?? 1
             ]);
         }catch(Exception $e){
-            return $e;
+            dd($e);
         }
     }
 

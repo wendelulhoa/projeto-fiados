@@ -12,4 +12,5 @@ const mix = require('laravel-mix');
  */
 
 mix.copy('resources/css/style.css', 'public/css')
-    .copy('resources/images/logo.png', 'public/images');
+    .copy('resources/images/logo.png', 'public/images')
+    .copy('resources/css/style-menu.css', 'public/css');

@@ -6,16 +6,21 @@ use App\Models\CategoryMods;
 use Exception;
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+class CategoryModsController extends Controller
 {
     public function index(){
-        return CategoryMods::all();
+        try{
+            $category = CategoryMods::all() ?? [];
+            return view('categorymods.index', compact('category'));
+        }catch(Exception $e){
+
+        }
     }
 
     public function create(Request $request){
         try{
             CategoryMods::create([
-                'name' => $request['name']
+                'name' => $request['category']
             ]);
         }catch(Exception $e){
             return $e;
