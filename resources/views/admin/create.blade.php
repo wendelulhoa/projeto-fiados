@@ -30,7 +30,7 @@
 
                         <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
                             <div class="col-xs-12 col-lg-6">
-                            @include('mods.create', ['name'=>'categoria', 'placeholder'=>'Digite uma categoria', 'id'=>'category', 'route'=> Route('category-create')])
+                            @include('mods.create', ['name'=>'categoria', 'placeholder'=>'Digite uma categoria', 'id'=>'category', 'route'=> Route('category-create'), 'tags'=>$tags, 'category'=> $category])
                         </div>
                     </div>
                 </div>

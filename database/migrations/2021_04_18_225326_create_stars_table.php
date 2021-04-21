@@ -15,6 +15,8 @@ class CreateStarsTable extends Migration
     {
         Schema::create('stars', function (Blueprint $table) {
             $table->id();
+            $table->integer('id_mod')->nullable();
+            $table->float('stars')->nullable();
             $table->timestamps();
         });
     }

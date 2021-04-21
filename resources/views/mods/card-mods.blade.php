@@ -31,7 +31,7 @@
                     @php
                         $image = json_decode($item->images);
                     @endphp
-                    <a href="">
+                    <a href="{{ Route('mods-detail',['id'=>$item->id]) }}">
                        <img title="2017 Audi R8 V10 Plus [ Add-On | OIV ]" class="img-responsive"
                         alt="2017 Audi R8 V10 Plus [ Add-On | OIV ]"
                         src="{{ Route('index') . '/'. $image[0]->path }}">

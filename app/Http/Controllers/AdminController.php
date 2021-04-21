@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CategoryMods;
 use App\Models\Mods;
 use App\Models\Tags;
 use App\Models\User;
@@ -12,8 +13,8 @@ class AdminController extends Controller
 {
     public function index(){
        try{
-            $mods = Mods::paginate(2) ?? [];
-            $tags = Tags::paginate(2) ?? [];
+            $mods = Mods::paginate(5) ?? [];
+            $tags = Tags::paginate(5) ?? [];
             return view('admin.index', compact('mods','tags'));
         }catch(Exception $e){
 
@@ -24,7 +25,16 @@ class AdminController extends Controller
         $users = User::paginate(5);
         return view('admin.list-user', compact('users'));
     }
+    
     public function getStrutureCreate(){
-        return view('admin.create');
+        try{
+            $category = CategoryMods::all();
+            $tags     = Tags::all();
+
+            return view('admin.create', compact('category', 'tags'));
+        }catch(Exception $e){
+
+        }
+        
     }
 }

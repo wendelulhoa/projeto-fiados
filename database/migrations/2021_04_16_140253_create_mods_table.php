@@ -20,6 +20,7 @@ class CreateModsTable extends Migration
             $table->json('images')->nullable();
             $table->boolean('approved')->nullable();
             $table->json('tags')->nullable();
+            $table->text('link')->nullable();
             $table->integer('category')->nullable();
             $table->timestamps();
         });
