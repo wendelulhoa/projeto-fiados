@@ -63,7 +63,7 @@ Route::group(['prefix'=>'mods'], function(){
     Route::post('/delete', 'ModsController@delete')->name('mods-delete');
 });
 
-Route::group(['prefix'=>'admin'], function(){
+Route::group(['prefix'=>'admin', 'middleware'=>'auth'], function(){
     Route::get('', 'AdminController@index')->name('admin-index');
     Route::get('/listusers', 'AdminController@listUsers')->name('admin-listusers');
     Route::get('/create', 'AdminController@getStrutureCreate')->name('admin-create');
@@ -82,3 +82,5 @@ Route::get('mods/images/{args}', function ($args)
     }
     
 });
+
+Route::get('logout', 'Auth\LoginController@logout')->name('logout');

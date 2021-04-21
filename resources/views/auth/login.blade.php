@@ -13,7 +13,7 @@
 									<div class="card">
 										<div class="card-body">
 											<div class="text-center mb-6">
-												<img src="{{ mix('/images/logo.png') }}" class="header-brand-img main-logo" >
+												{{-- <img src="{{ mix('/images/logo.png') }}" class="header-brand-img main-logo" > --}}
 											</div>
 											<form method="POST" action="{{ route('login') }}">
 												{{csrf_field()}}

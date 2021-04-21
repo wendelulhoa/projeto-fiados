@@ -45,7 +45,7 @@
             aprovados</a>
         </li>
         <li class="nav-item">
-          <a href="" class="nav-link text-white link"><i class="fas fa-sign-out-alt fa-lg mr-3"></i>Sair</a>
+          <a href="{{ route('logout') }}" class="nav-link text-white link"><i class="fas fa-sign-out-alt fa-lg mr-3"></i>Sair</a>
 
 
         </li>
@@ -90,9 +90,7 @@
                   aprovados</a>
               </li>
               <li class="nav-item">
-                <a href="" class="nav-link text-white link"><i class="fas fa-sign-out-alt fa-lg mr-3"></i>Sair</a>
-
-
+                <a href="{{ route('logout') }}" class="nav-link text-white link"><i class="fas fa-sign-out-alt fa-lg mr-3"></i>Sair</a>
               </li>
 
             </ul>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -23,6 +24,14 @@ class HomeController extends Controller
      */
     public function index()
     {
+        switch(Auth::user()->type_user){
+            case 0:
+              return redirect('/');
+            break;
+            case 1:
+               return redirect('admin');
+            break;
+        }
         return view('home');
     }
 }

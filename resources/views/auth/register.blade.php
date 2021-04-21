@@ -14,7 +14,7 @@
 							<div class="card">
 								<div class="card-body">
 									<div class="text-center mb-6">
-										<img src="{{ mix('/images/logo.png') }}" class="header-brand-img main-logo" >
+										{{-- <img src="{{ mix('/images/logo.png') }}" class="header-brand-img main-logo" > --}}
 									</div>
 									<form action="{{route('register')}}" method="POST">
 										{{csrf_field()}}
