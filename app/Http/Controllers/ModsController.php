@@ -28,7 +28,7 @@ class ModsController extends Controller
             Mods::create([
                 'name'       => $request['name'],
                 'description'=> $request['description'],
-                'images'     => json_encode(['path'=>$path]),
+                'images'     => json_encode([['path'=>$path]]),
                 'approved'   => false,
                 'tags'       => json_encode([1,2,3]),
                 'category'   => $request['category'] ?? 1
@@ -45,7 +45,15 @@ class ModsController extends Controller
 
         }
     }
-
+    public function detail($id){
+        try{
+            $mod = Mods::where('id', $id)->get();
+            return view('mods.detail', compact('mod'));
+        }catch(Exception $e){
+            return $e;
+        }
+        
+    }
     public function delete(){
         try{
             Mods::where('id', '=', 1)->delete();

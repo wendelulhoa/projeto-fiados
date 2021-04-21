@@ -27,13 +27,19 @@
             <div class="d-flex justify-content-between">
                 <div class="text-right text-secondary">
                     @php
-                        $image = json_decode($item->images);
+                        $image = (array) json_decode($item->images);
                     @endphp
                     <a href="">
-                    <img title="2017 Audi R8 V10 Plus [ Add-On | OIV ]" class="img-responsive"
+                    @foreach ($image as $item)
+                    @php
+                        dd($image->path);
+                    @endphp
+                       <img title="2017 Audi R8 V10 Plus [ Add-On | OIV ]" class="img-responsive"
                         alt="2017 Audi R8 V10 Plus [ Add-On | OIV ]"
-                        src="{{ Route('index') . '/'. $image->path}}">
-                    </a>
+                        src="{{ Route('index') . '/'. count($image) > 1 ? $image[0]->path : $image['path']}}">
+                        </a> 
+                    @endforeach
+                    
 
                     <div class="row pt-2 ml-5 pl-4 ">
                         <i class="fas fa-download fa-1x"></i>
