@@ -66,7 +66,7 @@
             </div>
 
             <div class="borda-baixo pb-3 pt-3">
-              <i class="fas fa-user text-light fa-lg mr-3"></i> <a href="" class="text-white">wendel ulhoa</a>
+              <i class="fas fa-user text-light fa-lg mr-3"></i> <a href="" class="text-white">{{ Auth::user()->name }}</a>
             </div>
 
             <ul class="navbar-nav flex-column mt-4 ">
