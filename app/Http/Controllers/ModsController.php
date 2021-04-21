@@ -31,6 +31,7 @@ class ModsController extends Controller
                 'images'     => json_encode([['path'=>$path]]),
                 'approved'   => false,
                 'tags'       => $request['tag'],
+                'link'       => $request['link'],
                 'category'   => $request['category']
             ]);
         }catch(Exception $e){

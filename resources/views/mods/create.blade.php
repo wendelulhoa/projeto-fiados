@@ -13,7 +13,7 @@
                             </div>
                             <div class="form-group col-md-12">
                                 <label for="">link mod</label>
-                                <input type="text" name="mod-link" class="form-control reset" id="" placeholder="link do mod">
+                                <input type="text" name="link" class="form-control reset" id="" placeholder="link do mod">
                             </div>
                         </div>
                         <div class="form-row">

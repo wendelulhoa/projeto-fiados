@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Mods extends Model
 {
-    public $fillable = ['name', 'description', 'images', 'approved', 'tags' , 'category'];
+    public $fillable = ['name', 'description', 'images', 'approved', 'tags' , 'category', 'link'];
 }
