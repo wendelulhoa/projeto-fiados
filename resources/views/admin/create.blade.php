@@ -13,9 +13,9 @@
                             <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home"
                                 role="tab" aria-controls="nav-home" aria-selected="true">Tag</a>
                             <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile"
-                                role="tab" aria-controls="nav-profile" aria-selected="false">Categoria mod</a>
+                                role="tab" aria-controls="nav-profile" aria-selected="false">Categoria</a>
                             <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact"
-                                role="tab" aria-controls="nav-contact" aria-selected="false">Usuario</a>
+                                role="tab" aria-controls="nav-contact" aria-selected="false">Mod</a>
                         </div>
                     </nav>
                     <div class="tab-content" id="nav-tabContent">
