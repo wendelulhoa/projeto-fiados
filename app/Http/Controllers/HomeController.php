@@ -32,6 +32,6 @@ class HomeController extends Controller
                return redirect()->route('admin-index');
             break;
         }
-        return view('home');
+        return redirect()->route('index');
     }
 }

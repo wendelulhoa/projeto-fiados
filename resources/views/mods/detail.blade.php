@@ -44,7 +44,7 @@
     </div>
 </div>
 
-<div class="col-xl-8 col-lg-6 col-md-6 col-sm-8 p-2">
+<div class="col-xl-12 col-lg-12 p-2">
     <div class="card cartao ">
         <div class="card-body">
             <div class="d-flex justify-content-between">
@@ -73,7 +73,17 @@
 
                                             <div class="tab-pane fade" id="nav-profile" role="tabpanel"
                                                 aria-labelledby="nav-profile-tab">
-                                                
+                                                <form data-route="" >
+                                                    <div class="form-row align-items-center">
+                                                        <div class="col-sm-12 my-1">
+                                                            <label class="sr-only" for="inlineFormInputName">Name</label>
+                                                            <input type="text" class="form-control" id="inlineFormInputName" placeholder="Adicione um comentario...">
+                                                        </div>
+                                                        <div class="col-auto my-1">
+                                                            <button type="submit" class="btn btn-primary">Enviar</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
                                             </div>
 
                                         </div>
