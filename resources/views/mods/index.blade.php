@@ -14,6 +14,7 @@
                             </tr>
                         </thead>
                         <tbody>
+                            
                             @foreach ($mods as $item)
                             <tr>
                                 <td>{{ $item->name }}</td>

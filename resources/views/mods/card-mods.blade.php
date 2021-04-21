@@ -3,6 +3,8 @@
     .img-responsive {
         width: 100%;
         border-radius: 4px;
+        max-height: 175px;
+        object-fit: cover;
     }
 
     .cartao {
@@ -27,20 +29,13 @@
             <div class="d-flex justify-content-between">
                 <div class="text-right text-secondary">
                     @php
-                        $image = (array) json_decode($item->images);
+                        $image = json_decode($item->images);
                     @endphp
                     <a href="">
-                    @foreach ($image as $item)
-                    @php
-                        dd($image->path);
-                    @endphp
                        <img title="2017 Audi R8 V10 Plus [ Add-On | OIV ]" class="img-responsive"
                         alt="2017 Audi R8 V10 Plus [ Add-On | OIV ]"
-                        src="{{ Route('index') . '/'. count($image) > 1 ? $image[0]->path : $image['path']}}">
+                        src="{{ Route('index') . '/'. $image[0]->path }}">
                         </a> 
-                    @endforeach
-                    
-
                     <div class="row pt-2 ml-5 pl-4 ">
                         <i class="fas fa-download fa-1x"></i>
                         <p class="pl-2 pr-2">100</p>
@@ -50,7 +45,7 @@
                         <p class="pl-2">10</p>
                     </div>
                     <div class="row ml-2 ">
-                        <p class="font-weight-bold ">{{ $item->name }}</p>
+                        <p class="font-weight-bold ">{{$item->name}}</p>
                     </div>
                 </div>
             </div>
