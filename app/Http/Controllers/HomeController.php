@@ -26,10 +26,10 @@ class HomeController extends Controller
     {
         switch(Auth::user()->type_user){
             case 0:
-              return redirect('/');
+              return redirect()->route('index');
             break;
             case 1:
-               return redirect('admin');
+               return redirect()->route('admin-index');
             break;
         }
         return view('home');
