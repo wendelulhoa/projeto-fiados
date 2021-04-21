@@ -63,12 +63,19 @@
                                                 <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab"
                                                     href="#nav-profile" role="tab" aria-controls="nav-profile"
                                                     aria-selected="false">Comentarios</a>
+                                                <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab"
+                                                    href="#nav-dolwnload" role="tab" aria-controls="nav-profile"
+                                                    aria-selected="false">download</a>
                                             </div>
                                         </nav>
                                         <div class="tab-content" id="nav-tabContent">
                                             <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
                                                 aria-labelledby="nav-home-tab">
                                                 {{ $mod->description }}
+                                            </div>
+                                            <div class="tab-pane fade show active" id="nav-dolwnload" role="tabpanel"
+                                                aria-labelledby="nav-home-tab">
+                                                <a href="{{ $mod->link }}" class="btn btn-primary">Download</a>
                                             </div>
 
                                             <div class="tab-pane fade" id="nav-profile" role="tabpanel"
