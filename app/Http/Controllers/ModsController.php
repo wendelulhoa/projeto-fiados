@@ -24,7 +24,7 @@ class ModsController extends Controller
             } else{
                 $path ='';
             }
-
+            // return json_encode([['path'=>$path]]);
             Mods::create([
                 'name'       => $request['name'],
                 'description'=> $request['description'],
@@ -34,8 +34,9 @@ class ModsController extends Controller
                 'link'       => $request['link'],
                 'category'   => $request['category']
             ]);
+            
         }catch(Exception $e){
-            dd($e);
+            return ['error'=>$e];
         }
     }
 

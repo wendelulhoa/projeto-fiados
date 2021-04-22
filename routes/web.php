@@ -53,6 +53,11 @@ Route::group(['prefix'=>'category/mods'], function(){
     Route::post('/delete', 'CategoryModsController@delete')->name('category-delete');
 });
 
+route::get('teste', function(){
+    
+    $teste = Storage::allFiles('mods/images');
+    Storage::delete($teste);
+});
 /*rotas de mods*/
 Route::group(['prefix'=>'mods'], function(){
     Route::get('', 'ModsController@index')->name('mods-index');
