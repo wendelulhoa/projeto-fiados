@@ -110,3 +110,7 @@
         </div>
     </div>
     @endsection
+    
+@section('script')
+    @include('mods.mod-js')    
+@endsection

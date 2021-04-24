@@ -77,6 +77,12 @@ Route::group(['prefix'=>'admin', 'middleware'=>'auth'], function(){
     Route::get('/getcategoryandtags', 'AdminController@getCategoryAndTag')->name('admin-category-and-tag');
 });
 
+Route::group(['prefix'=>'user', 'middleware'=>'auth'], function(){
+    Route::get('', 'UserController@index')->name('user-index');
+
+    Route::get('/create', 'UserController@getStrutureCreate')->name('User-create');
+});
+
 // rota que acessa as fotos salvas
 Route::get('mods/images/{args}', function ($args)
 {

@@ -24,6 +24,7 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    @if(Auth::user()->type_user == 1)
       <ul class="navbar-nav mr-auto p-2">
         <li class="nav-item">
           <a href="{{ Route('admin-index') }}" class="nav-link text-white current mb-3"><i
@@ -47,9 +48,35 @@
         <li class="nav-item">
           <a href="{{ route('logout') }}" class="nav-link text-white link"><i class="fas fa-sign-out-alt fa-lg mr-3"></i>Sair</a>
 
+        </li>
+      </ul>
+    @else
+      <ul class="navbar-nav mr-auto p-2">
+        <li class="nav-item">
+          <a href="{{ Route('admin-index') }}" class="nav-link text-white current mb-3"><i
+              class="fas fa-home text-light fa-lg mr-3"></i>Inicio </a>
+
+        </li>
+        <li class="nav-item">
+          <a href="{{ Route('admin-create') }}" class="nav-link text-white link mb-3"><i
+              class="fas fa-address-card fa-lg mr-3"></i></i>Cadastros</a>
+
+        </li>
+        <li class="nav-item">
+          <a href="{{ Route('admin-listusers') }}" class="nav-link text-white link mb-3"> <i
+              class="fas fa-users fa-lg mr-3"></i></i></i>Usuarios</a>
+
+        </li>
+        <li class="nav-item">
+          <a href="" class="nav-link text-white link mb-3"><i class="fas fa-money-bill-wave fa-lg mr-3"></i>Mods
+            aprovados</a>
+        </li>
+        <li class="nav-item">
+          <a href="{{ route('logout') }}" class="nav-link text-white link"><i class="fas fa-sign-out-alt fa-lg mr-3"></i>Sair</a>
 
         </li>
       </ul>
+    @endif
     </div>
   </nav>
 
@@ -68,32 +95,57 @@
             <div class="borda-baixo pb-3 pt-3">
               <i class="fas fa-user text-light fa-lg mr-3"></i> <a href="" class="text-white">{{ Auth::user()->name }}</a>
             </div>
+            @if (Auth::user()->type_user == 1)
+              <ul class="navbar-nav flex-column mt-4 ">
+                <li class="nav-item">
+                  <a href="{{ Route('admin-index') }}" class="nav-link text-white current mb-3"><i
+                      class="fas fa-home text-light fa-lg mr-3"></i>Inicio </a>
 
-            <ul class="navbar-nav flex-column mt-4 ">
-              <li class="nav-item">
-                <a href="{{ Route('admin-index') }}" class="nav-link text-white current mb-3"><i
-                    class="fas fa-home text-light fa-lg mr-3"></i>Inicio </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{ Route('admin-create') }}" class="nav-link text-white link mb-3"><i
+                      class="fas fa-address-card fa-lg mr-3"></i></i>Cadastros</a>
 
-              </li>
-              <li class="nav-item">
-                <a href="{{ Route('admin-create') }}" class="nav-link text-white link mb-3"><i
-                    class="fas fa-address-card fa-lg mr-3"></i></i>Cadastros</a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{ Route('admin-listusers') }}" class="nav-link text-white link mb-3"> <i
+                      class="fas fa-users fa-lg mr-3"></i></i></i>Usuarios</a>
+                </li>
+                <li class="nav-item">
+                  <a href="" class="nav-link text-white link mb-3"><i class="fas fa-money-bill-wave fa-lg mr-3"></i>Mods
+                    aprovados</a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{ route('logout') }}" class="nav-link text-white link"><i class="fas fa-sign-out-alt fa-lg mr-3"></i>Sair</a>
+                </li>
 
-              </li>
-              <li class="nav-item">
-                <a href="{{ Route('admin-listusers') }}" class="nav-link text-white link mb-3"> <i
-                    class="fas fa-users fa-lg mr-3"></i></i></i>Usuarios</a>
+              </ul>
+            @else
+              <ul class="navbar-nav flex-column mt-4 ">
+                <li class="nav-item">
+                  <a href="{{ Route('admin-index') }}" class="nav-link text-white current mb-3"><i
+                      class="fas fa-home text-light fa-lg mr-3"></i>Inicio</a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{ Route('admin-create') }}" class="nav-link text-white link mb-3"><i
+                      class="fas fa-address-card fa-lg mr-3"></i></i>Cadastro mod</a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{ Route('admin-listusers') }}" class="nav-link text-white link mb-3"> <i
+                      class="fas fa-users fa-lg mr-3"></i> Favoritos</a>
+                </li>
+                <li class="nav-item">
+                  <a href="" class="nav-link text-white link mb-3"><i class="fas fa-money-bill-wave fa-lg mr-3"></i>Mods
+                    aprovados</a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{ route('logout') }}" class="nav-link text-white link"><i class="fas fa-sign-out-alt fa-lg mr-3"></i>Sair</a>
+                </li>
 
-              </li>
-              <li class="nav-item">
-                <a href="" class="nav-link text-white link mb-3"><i class="fas fa-money-bill-wave fa-lg mr-3"></i>Mods
-                  aprovados</a>
-              </li>
-              <li class="nav-item">
-                <a href="{{ route('logout') }}" class="nav-link text-white link"><i class="fas fa-sign-out-alt fa-lg mr-3"></i>Sair</a>
-              </li>
+              </ul>
+            @endif
+           
 
-            </ul>
           </div>
         </div>
 
@@ -115,72 +167,6 @@
   </script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
   @include('admin.admin-js')
-  <script>
-    var selDiv = "";
-	var storedFiles = [];
-	
-	$(document).ready(function() {
-		$("#files").on("change", handleFileSelect);
-		
-		selDiv = $("#selectedFiles"); 
-		$("#mod").on("submit", handleForm);
-		
-		$("body").on("click", ".selFile", removeFile);
-	});
-		
-	function handleFileSelect(e) {
-		var files = e.target.files;
-		var filesArr = Array.prototype.slice.call(files);
-		filesArr.forEach(function(f) {			
-
-			if(!f.type.match("image.*")) {
-				return;
-			}
-			storedFiles.push(f);
-			
-			var reader = new FileReader();
-			reader.onload = function (e) {
-				var html = "<div><img src=\"" + e.target.result + "\" data-file='"+f.name+"' class='selFile' title='Click to remove'>" + f.name + "<br clear=\"left\"/></div>";
-				selDiv.append(html);
-				
-			}
-			reader.readAsDataURL(f); 
-		});
-		
-	}
-		
-	function handleForm(e) {
-		// e.preventDefault();
-		var data = new FormData();
-		
-		for(var i=0, len=storedFiles.length; i<len; i++) {
-			data.append('files', storedFiles[i]);	
-		}
-		
-		// var xhr = new XMLHttpRequest();
-		// xhr.open('POST', "{{ Route('mods-create') }}", true);
-		
-		// xhr.onload = function(e) {
-		// 	if(this.status == 200) {
-		// 		console.log(e.currentTarget.responseText);	
-		// 		alert(e.currentTarget.responseText + ' items uploaded.');
-		// 	}
-		// }
-		
-		// xhr.send(data);
-	}
-		
-	function removeFile(e) {
-		var file = $(this).data("file");
-		for(var i=0;i<storedFiles.length;i++) {
-			if(storedFiles[i].name === file) {
-				storedFiles.splice(i,1);
-				break;
-			}
-		}
-		$(this).parent().remove();
-	}
-  </script>
 </body>
 
 </html>
