@@ -18,21 +18,15 @@
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label for="category">Categoria</label>
-                                <select id="category" class="form-control reset" name="category">
+                                <label for="category-select">Categoria</label>
+                                <select id="category-select" class="form-control reset" name="category">
                                     <option selected>Selecione</option>
-                                    @foreach ($category as $item)
-                                        <option value="{{ $item->id }}" {{ $loop->first ? 'selected' : '' }}>{{ $item->name }}</option>
-                                    @endforeach
                                 </select>
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="category">Tag</label>
-                                <select id="category" class="form-control reset" name="tag">
+                                <label for="tag-select">Tag</label>
+                                <select id="tag-select" class="form-control reset" name="tag">
                                     <option selected>Selecione</option>
-                                    @foreach ($tags as $item)
-                                        <option value="{{ $item->id }}" {{ $loop->first ? 'selected' : '' }}>{{ $item->name }}</option>
-                                    @endforeach
                                 </select>
                             </div>
                         </div>

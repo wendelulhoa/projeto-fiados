@@ -28,13 +28,20 @@ class AdminController extends Controller
     
     public function getStrutureCreate(){
         try{
+            return view('admin.create');
+        }catch(Exception $e){
+
+        } 
+    }
+
+    public function getCategoryAndTag(){
+        try{
             $category = CategoryMods::all();
             $tags     = Tags::all();
 
-            return view('admin.create', compact('category', 'tags'));
+            return ['category'=>$category, 'tags'=> $tags];
         }catch(Exception $e){
 
         }
-        
     }
 }

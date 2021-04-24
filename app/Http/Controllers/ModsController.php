@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comments;
 use App\Models\Mods;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ModsController extends Controller
 {
@@ -24,19 +27,26 @@ class ModsController extends Controller
             } else{
                 $path ='';
             }
-            // return json_encode([['path'=>$path]]);
-            Mods::create([
-                'name'       => $request['name'],
-                'description'=> $request['description'],
-                'images'     => json_encode([['path'=>$path]]),
-                'approved'   => false,
-                'tags'       => $request['tag'],
-                'link'       => $request['link'],
-                'category'   => $request['category']
-            ]);
+            
+            if($path != ''){
+                Mods::create([
+                    'name'       => $request['name'],
+                    'description'=> $request['description'],
+                    'images'     => json_encode([['path'=>$path]]),
+                    'approved'   => false,
+                    'tags'       => $request['tag'],
+                    'link'       => $request['link'],
+                    'category'   => $request['category'],
+                    'user_id'    => Auth::user()->id
+                ]);
+            }else{
+                Storage::delete($path);
+                return response(['error'=>'path vazio'], 400);
+            }
             
         }catch(Exception $e){
-            return ['error'=>$e];
+            Storage::delete($path);
+            return response(['error'=> $e], 400);
         }
     }
 
@@ -50,10 +60,14 @@ class ModsController extends Controller
 
     public function detail($id){
         try{
-            $mod = Mods::where('id', $id)->get();
-            return view('mods.detail', compact('mod'));
+            $mod      = Mods::where('id', $id)->get();
+            $comments = Comments::where(['id_mod'=> $id])
+                        ->join('users', 'comments.user_id', 'users.id')
+                         ->select('users.name', 'comments.*')->get(); 
+            // dd($comments);
+            return view('mods.detail', compact('mod', 'id', 'comments'));
         }catch(Exception $e){
-            return $e;
+            return response(['error'=>$e], 500);
         }
         
     }

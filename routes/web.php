@@ -34,10 +34,10 @@ Route::group(['prefix'=>'tags'], function(){
     Route::post('/create', 'TagsController@create')->name('tags-struture-create');
     Route::post('/edit', 'TagsController@edit')->name('tags-struture-edit');
 
-    /**/
+    /*rotas de controle*/
     Route::post('/create', 'TagsController@create')->name('tags-create');
-    Route::post('/edit', 'TagsController@edit')->name('tags-edit');
-    Route::post('/delete', 'TagsController@delete')->name('tags-delete');
+    Route::post('/edit/{id}', 'TagsController@edit')->name('tags-edit');
+    Route::delete('/delete/{id}', 'TagsController@delete')->name('tags-delete');
 });
 
 /*rotas categorias*/
@@ -70,8 +70,11 @@ Route::group(['prefix'=>'mods'], function(){
 
 Route::group(['prefix'=>'admin', 'middleware'=>'auth'], function(){
     Route::get('', 'AdminController@index')->name('admin-index');
+
     Route::get('/listusers', 'AdminController@listUsers')->name('admin-listusers');
     Route::get('/create', 'AdminController@getStrutureCreate')->name('admin-create');
+    Route::get('/edit/tag/{id}', 'TagsController@getStrutureTag')->name('admin-edit-tag');
+    Route::get('/getcategoryandtags', 'AdminController@getCategoryAndTag')->name('admin-category-and-tag');
 });
 
 // rota que acessa as fotos salvas
@@ -87,5 +90,24 @@ Route::get('mods/images/{args}', function ($args)
     }
     
 });
+
+/*Rotas comentarios*/
+Route::group(['prefix'=>'comments'], function(){
+    Route::post('/create', 'CommentController@create')->name('comments-create');
+    Route::get('/edit/{id}', 'CommentController@edit')->name('comments-edit');
+    Route::get('/delete', 'CommentController@delete')->name('comments-delete');
+});
+
+// /*Rotas likes*/
+// Route::group(['prefix'=>'likes'], function(){
+//     Route::get('/create', '');
+//     Route::get('/delete', '');
+//  });
+
+// /*Rotas estrelas*/
+// Route::group(['prefix'=>'stars'], function(){
+//     Route::get('/create', '');
+//     Route::get('/delete', '');
+// });
 
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');

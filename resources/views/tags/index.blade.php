@@ -17,8 +17,7 @@
                             <tr>
                                 <td>{{ $item->name }}</td>
                                 <td>{{ date_format($item->created_at ,'d/m/Y H:i:s') }}</td>
-                                <td><a href=""><i class="fas fa-edit"></i></i></a></td>
-                                <td><a href="" style="color: red"> <i class="fas fa-trash-alt"></i></a></td>
+                                <td><a href="{{ Route('admin-edit-tag', [$item->id]) }}"><i class="fas fa-edit"></i></i></a></td>
                             </tr>
                             @endforeach
 
