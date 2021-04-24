@@ -25,8 +25,26 @@
                 });
             }
           }); 
+    });
 
-        
+    $('#nav-mod-tab').click(function(){
+        $.ajax({
+            url:"{{  Route('admin-category-and-tag') }}",
+            method:'GET',
+            success: function(data){
+                $('#tag-select option').remove();
+                $('#category-select option').remove();
+                
+                for(var i= 0; i < data['category'].length ; i++){
+                    console.log(data['category'][i].id, data['category'][i].name)
+                    $('#category-select').append(`<option value="${data['category'][i].id}" selected>${data['category'][i].name}</option>`);
+                }
+
+                for(var i= 0; i < data['tags'].length ; i++){
+                    $('#tag-select').append(`<option value="${data['tags'][i].id}" selected>${data['tags'][i].name}</option>`);
+                }
+            }
+        });
     });
 
 </script>

@@ -12,7 +12,7 @@
                         </div>
                         <div class="form-group mx-sm-3 mb-2">
                             <label for="{{ $name ?? '' }}" class="sr-only">{{ $name ?? '' }}</label>
-                            <input type="text" name="{{ $id }}" class="form-control reset" id="{{ $id ?? '' }}" placeholder="{{ $placeholder }}" required>
+                            <input type="text" name="{{ $id }}" class="form-control reset" id="{{ $id ?? '' }}" value="{{ isset($content) && !empty($content) ? $content[0]->name : ''  }}" placeholder="{{ $placeholder }}" required>
                         </div>
                         <button type="submit" class="btn btn-primary mb-2">Salvar</button>
                     </form>

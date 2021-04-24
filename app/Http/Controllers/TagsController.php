@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Tags;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Route;
 
 class TagsController extends Controller
 {
@@ -27,18 +28,30 @@ class TagsController extends Controller
             return $e;
         }
     }
-
-    public function edit(Request $request){
+    
+    public function getStrutureTag($id){
         try{
-            Tags::where('id', '=', 1)->update(['name'=> 'wendel']);
+           $tags     = Tags::where(['id'=> $id])->get();
+           $category = [];
+           $route    = Route('tags-edit', [$id]);
+           return view('admin.create', compact('category', 'tags', 'route'));
+        }catch(Exception $e){
+
+        }
+
+    }
+
+    public function edit($id, Request $request){
+        try{
+            Tags::where('id', '=', $id)->update(['name'=> $request['tag']]);
         }catch(Exception $e){
 
         }
     }
 
-    public function delete(){
+    public function delete($id){
         try{
-            Tags::where('id', '=', 1)->delete();
+            Tags::where('id', '=', $id)->delete();
         }catch(Exception $e){
 
         }

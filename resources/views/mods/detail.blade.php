@@ -80,11 +80,16 @@
 
                                             <div class="tab-pane fade" id="nav-profile" role="tabpanel"
                                                 aria-labelledby="nav-profile-tab">
-                                                <form data-route="" >
+                                                <form data-route="{{ Route('comments-create') }}" >
                                                     <div class="form-row align-items-center">
+                                                        @foreach ($comments as $item)
+                                                            <p>{{ $item->message }}</p>
+                                                            <p>{{ $item->name }}</p>
+                                                        @endforeach
+                                                        
                                                         <div class="col-sm-12 my-1">
-                                                            <label class="sr-only" for="inlineFormInputName">Name</label>
-                                                            <input type="text" class="form-control" id="inlineFormInputName" placeholder="Adicione um comentario...">
+                                                            <label class="sr-only" for="message">Comentario</label>
+                                                            <input type="text" class="form-control reset" name="message" id="message" placeholder="Adicione um comentario...">
                                                         </div>
                                                         <div class="col-auto my-1">
                                                             <button type="submit" class="btn btn-primary">Enviar</button>

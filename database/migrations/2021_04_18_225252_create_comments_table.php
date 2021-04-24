@@ -17,6 +17,7 @@ class CreateCommentsTable extends Migration
             $table->id();
             $table->integer('id_mod')->nullable();
             $table->text('message')->nullable();
+            $table->integer('user_id')->nullable();
             $table->timestamps();
         });
     }
