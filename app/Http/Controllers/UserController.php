@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     public function index(){
-
+        return view('user.index');
     }
 
     public function create(Request $request){
@@ -29,4 +29,5 @@ class UserController extends Controller
             return redirect()->route('view-create');
         }
     }
+
 }

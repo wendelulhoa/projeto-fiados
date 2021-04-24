@@ -1,4 +1,4 @@
-@extends('admin.menu')
+@extends('layouts.menu')
 
 @section('content')
 
@@ -8,10 +8,10 @@
         <div class="row">
             <div class="col-xl-10 col-lg-8 col-md-8 col-sm-10  ml-auto">
                 <div class="row pt-md-2 mt-md-3 mb-5">
-                    @include('admin.cards', ['name'=>'Vendas', 'total'=>200, 'icon'=> '<i class="fas fa-money-bill-alt fa-3x text-success"></i>'])
-                    @include('admin.cards', ['name'=>'Mods', 'total'=>200, 'icon'=> '<i class="fas fa-3x fa-car"></i>'])
-                    @include('admin.cards', ['name'=>'Usuarios', 'total'=> 1000, 'icon'=>'<i class="fas fa-users fa-3x text-info"></i>'])
-                    @include('admin.cards', ['name'=>'Categorias', 'total'=> 20, 'icon'=>'<i class="fas fa-barcode fa-3x"></i>'])
+                    @include('layouts.cards', ['name'=>'Vendas', 'total'=>200, 'icon'=> '<i class="fas fa-money-bill-alt fa-3x text-success"></i>'])
+                    @include('layouts.cards', ['name'=>'Mods', 'total'=>200, 'icon'=> '<i class="fas fa-3x fa-car"></i>'])
+                    @include('layouts.cards', ['name'=>'Usuarios', 'total'=> 1000, 'icon'=>'<i class="fas fa-users fa-3x text-info"></i>'])
+                    @include('layouts.cards', ['name'=>'Categorias', 'total'=> 20, 'icon'=>'<i class="fas fa-barcode fa-3x"></i>'])
                 </div>
             </div>
         </div>
