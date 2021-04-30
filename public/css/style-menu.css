@@ -47,9 +47,3 @@
   .borda-arredondada{
     border-radius: 20px;
   }
-#selectedFiles img {
-		max-width: 200px;
-		max-height: 200px;
-		float: left;
-		margin-bottom:10px;
-	}

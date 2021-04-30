@@ -117,3 +117,7 @@ Route::group(['prefix'=>'comments'], function(){
 // });
 
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
+
+Route::get('template', function(){
+    return view('template.index');
+});
