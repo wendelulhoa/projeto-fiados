@@ -37,9 +37,6 @@
 		<!-- Rightsidebar css -->
 		<link href="{{ mix('/plugins/sidebar/sidebar.css') }}" rel="stylesheet">
 
-		<!---Icons css-->
-		<link href="{{ mix('/css/icons.css') }}" rel="stylesheet" />
-
 	</head>
 
 	<body class="app sidebar-mini rtl">
@@ -160,7 +157,7 @@
 								<!--Navbar -->
 								<div class="dropdown header-profile">
 									<a class="nav-link pr-0 leading-none d-flex pt-1" data-toggle="dropdown" href="#">
-										<span class="avatar avatar-md brround cover-image" data-image-src="../../assets/images/users/female/2.jpg"></span>
+										<span class="avatar avatar-md brround cover-image" data-image-src="http://localhost:8000/mods/images/YAzjRGqx7OUNLMk6YTgBc6E2EFfW96XXBHGCW3E8.jpg"></span>
 									</a>
 									<div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
 										<div class="drop-heading">
@@ -202,7 +199,7 @@
 					<ul class="side-menu toggle-menu">
 						<li><h3>Main</h3></li>
 						<li class="slide">
-							<a class="side-menu__item"  data-toggle="slide" href="#"><i class="side-menu__icon fe fe-airplay"></i><span class="side-menu__label">Dashboard</span><i class="angle fa fa-angle-right"></i></a>
+							<a class="side-menu__item"  data-toggle="slide" href="#"><img src="{{ mix('/images/gta5.png') }}" class="rounded-circle user_img" style="width: 30px; height: 30px;" ><span class="side-menu__label">Dashboard</span><i class="angle fa fa-angle-right"></i></a>
 							<ul class="slide-menu">
 								<li><a class="slide-item"  href="index.html"><span>Analytics Dashboard</span></a></li>
 								<li><a class="slide-item" href="index2.html"><span>E-Commerce Dashboard</span></a></li>
@@ -373,38 +370,21 @@
 
 					    <!-- page-header -->
 						<div class="page-header">
-							<h1 class="page-title">Blog</h1>
+							<h1 class="page-title">Mods</h1>
 							<div class="ml-auto">
 								<div class="input-group">
-									<a  class="btn btn-primary btn-icon text-white mr-2"  id="daterange-btn" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="Calendar">
-										<span>
-											<i class="fe fe-calendar"></i>
-										</span>
+									
+									<a href="#" class=" mr-2" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="GTA 5">
+										<img src="{{ mix('/images/gta5.png') }}" class="rounded-circle user_img" style="width: 60px; height: 60px;" >
 									</a>
-									<a href="#" class="btn btn-secondary btn-icon mr-2" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="Rating">
-										<span>
-											<i class="fe fe-star"></i>
-										</span>
+									<a href="#" class=" mr-2" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="EURO TRUCK SIMULATOR 2">
+										<img src="{{ mix('/images/ets2.png') }}" class="rounded-circle user_img" style="width: 60px; height: 60px;" >
 									</a>
-									<a href="#" class="btn btn-success btn-icon mr-2" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="Email">
-										<span>
-											<i class="fe fe-mail"></i>
-										</span>
+									<a href="#" class=" mr-2" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="GTA SA">
+										<img src="{{ mix('/images/gtasa.png') }}" class="rounded-circle user_img" style="width: 60px; height: 60px;" >
 									</a>
-									<a href="#" class="btn btn-warning btn-icon mr-2" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="Chat">
-										<span>
-											<i class="fe fe-message-square"></i>
-										</span>
-									</a>
-									<a href="#" class="btn btn-info btn-icon mr-2" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="Add New">
-										<span>
-											<i class="fe fe-plus"></i>
-										</span>
-									</a>
-									<a href="#" class="btn btn-danger btn-icon" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="Support">
-										<span>
-											<i class="fe fe-help-circle"></i>
-										</span>
+									<a href="#" class=" mr-2" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="GTA 4">
+										<img src="{{ mix('/images/gta4.ico') }}" class="rounded-circle user_img" style="width: 60px; height: 60px;" >
 									</a>
 								</div>
 							</div>

@@ -3,7 +3,7 @@
     .img-responsive {
         width: 100%;
         border-radius: 4px;
-        max-height: 175px;
+        height: 175px;
         object-fit: cover;
     }
 
@@ -30,7 +30,7 @@
         <div class="card-body">
             <div class="product">
                 <div class="text-center product-img">
-                    <img src="{{ Route('index') . '/'. $image[0]->path }}" alt="img" class="img-fluid">
+                    <img src="{{ Route('index') . '/'. $image[0]->path }}" alt="img" class="img-fluid img-responsive">
                 </div>
                 <div class=" text-center mt-4">
                     <div class="text-center text-warning">
