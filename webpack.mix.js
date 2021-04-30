@@ -14,6 +14,7 @@ const mix = require('laravel-mix');
 /*arquivos css*/
 mix.copy('resources/css/style.css', 'public/css')
     .copy('resources/images/logo.png', 'public/images')
+    .copy('resources/images/loader.svg', 'public/images')
     .copy('resources/css/style-menu.css', 'public/css')
     .copy('resources/css/style.css', 'public/css')
     .copy('resources/css/skin-modes.css', 'public/css')
