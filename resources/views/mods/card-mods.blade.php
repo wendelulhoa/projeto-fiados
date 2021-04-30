@@ -22,8 +22,46 @@
     }
 </style>
 @foreach ($mods as $key => $item)
+@php
+    $image = json_decode($item->images);
+@endphp
+<div class="col-sm-4 col-xl-4">
+    <div class="card item-card">
+        <div class="card-body">
+            <div class="product">
+                <div class="text-center product-img">
+                    <img src="{{ Route('index') . '/'. $image[0]->path }}" alt="img" class="img-fluid">
+                </div>
+                <div class=" text-center mt-4">
+                    <div class="text-center text-warning">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-half-o"></i>
+                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-star-o"></i>
+                    </div>
+                    <a href="#"><h5 class="mb-0 mt-2">{{$item->name}}</h5></a>
+                    <div class="price mt-3 h4 mb-0">
+                        <s class="h4 text-muted mr-4">$80.00</s>$59.00
+                    </div>
+                </div>
+                <div class="product-info">
+                    <a href="#" class="btn  btn-info btn-sm mt-1 mb-1 text-sm  text-white">
+                        <i class="fe fe-heart"></i>
+                    </a>
+                    <a href="#" class="btn btn-icon btn-sm btn-danger mt-1 text-sm  mb-1 text-white">
+                        <i class="fe fe-share-2"></i>
+                    </a>
+                    <a href="#" class="btn btn-icon btn-sm btn-warning mt-1 text-sm  mb-1 text-white">
+                        <i class="fe fe-shopping-cart"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-<div class="col-xl-3 col-lg-6 col-md-6 col-sm-8 p-2">
+{{-- <div class="col-xl-3 col-lg-6 col-md-6 col-sm-8 p-2">
     <div class="card cartao ">
         <div class="card-body">
             <div class="d-flex justify-content-between">
@@ -59,5 +97,5 @@
 
         </div>
     </div>
-</div>
+</div> --}}
 @endforeach
