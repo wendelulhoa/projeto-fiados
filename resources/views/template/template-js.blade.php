@@ -22,7 +22,7 @@
                                     <div>
                                         <span class="font-weight-bold"> ${data[i].message} </span>
                                         <div class="small text-muted d-flex">
-                                            ${data[i].created_at}
+                                            ${new Date(data[i].created_at)}
                                         </div>
                                     </div>
                                 </a>
