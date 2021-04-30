@@ -26,22 +26,13 @@
                     </form>
                 </div><!-- Search -->
                 <div class="dropdown d-md-flex header-message">
-                    <a class="nav-link icon" data-toggle="dropdown">
-                        <i class="far fa-bell"></i>
-                        <span class="nav-unread badge badge-danger badge-pill">3</span>
+                    <a class="nav-link icon" id="total-notifications" data-toggle="dropdown">
+                        
                     </a>
                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                         <a class="dropdown-item text-center" href="#">Notificações</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item d-flex pb-4" href="#">
-                            <span class="avatar mr-3 br-3 align-self-center avatar-md cover-image bg-primary-transparent text-primary"><i class="fe fe-mail"></i></span>
-                            <div>
-                                <span class="font-weight-bold"> Commented on your post </span>
-                                <div class="small text-muted d-flex">
-                                    3 hours ago
-                                </div>
-                            </div>
-                        </a>
+                        <div id="notifications-user"></div>
                         <div class="dropdown-divider"></div>
                         <div class="text-center dropdown-btn pb-3">
                             <div class="btn-list">

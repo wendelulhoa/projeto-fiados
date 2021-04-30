@@ -148,6 +148,7 @@
 
 		<!-- Custom js-->
 		<script src="{{ mix('/js/custom.js') }}"></script>
+		@include('template.template-js')
 
 	</body>
 </html>

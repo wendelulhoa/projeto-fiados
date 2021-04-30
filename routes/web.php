@@ -104,6 +104,12 @@ Route::group(['prefix'=>'comments'], function(){
     Route::get('/delete', 'CommentController@delete')->name('comments-delete');
 });
 
+Route::group(['prefix'=>'notification'], function(){
+    Route::post('/get', 'NotificationsController@getNotification')->name('notification-get');
+    // Route::get('/edit/{id}', 'CommentController@edit')->name('comments-edit');
+    // Route::get('/delete', 'CommentController@delete')->name('comments-delete');
+});
+
 // /*Rotas likes*/
 // Route::group(['prefix'=>'likes'], function(){
 //     Route::get('/create', '');

@@ -142,7 +142,7 @@ historicalBarChart = [
             .tickFormat(d3.format(',r'));
 
         chart.lines.dispatch.on("elementClick", function(evt) {
-            console.log(evt);
+
         });
 
         chart.yAxis
@@ -234,7 +234,3 @@ historicalBarChart = [
             }
         ];
     }
-
-
-
-
