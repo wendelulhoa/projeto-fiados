@@ -94,9 +94,25 @@
 				<!--Footer-->
 				<footer class="footer side-footer">
 					<div class="container">
-						<div class="row align-items-center flex-row-reverse">
+						<div class="row align-items-center">
+							<div class="social">
+								<ul class="text-center">
+									<li>
+										<a class="social-icon" href=""><i class="fab fa-facebook-square"></i></a>
+									</li>
+									<li>
+										<a class="social-icon" href=""><i class="fa fa-rss"></i></a>
+									</li>
+									<li>
+										<a class="social-icon" href=""><i class="fab fa-youtube"></i></a>
+									</li>
+									<li>
+										<a class="social-icon" href=""><i class="fab fa-instagram"></i></a>
+									</li>
+								</ul>
+							</div>
 							<div class="col-lg-12 col-sm-12   text-center">
-								Copyright © 2019 <a href="#">IndoUi</a>. Designed by <a href="https://www.spruko.com/">Spruko</a> All rights reserved.
+								Copyright © 2021 <a href="#">Ulhoa developer</a>. Designed by <a href="https://www.spruko.com/">Ulhoa</a> todos os direitos reservados.
 							</div>
 						</div>
 					</div>
