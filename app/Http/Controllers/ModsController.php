@@ -64,7 +64,6 @@ class ModsController extends Controller
             $comments = Comments::where(['id_mod'=> $id])
                         ->join('users', 'comments.user_id', 'users.id')
                          ->select('users.name', 'comments.*')->get(); 
-            // dd($comments);
             return view('mods.detail', compact('mod', 'id', 'comments'));
         }catch(Exception $e){
             return response(['error'=>$e], 500);

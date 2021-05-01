@@ -3,7 +3,7 @@
     <div class="container-fluid">
         <div class="d-flex">
             <a class="header-brand" href="{{ Route('index') }}">
-                <img src="{{ mix('images/logo.png') }}" class="header-brand-img main-logo" alt="IndoUi logo"> brmods
+                <img src="{{ mix('images/logo.png') }}" class="header-brand-img main-logo" alt="IndoUi logo"> Ulhoa mods
             </a><!-- logo-->
             <div class="app-sidebar__toggle" data-toggle="sidebar">
                 <a class="open-toggle"  href="#"><i class="fa fa-align-left"></i></a>
