@@ -4,16 +4,16 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta content="IndoUi – Bootstrap 4 Admin Dashboard HTML Template" name="description">
-		<meta content="Spruko Technologies Private Limited" name="author">
-		<meta name="keywords" content="admin, admin dashboard template, admin panel template, admin template, best bootstrap admin template, bootstrap 4 admin template, bootstrap 4 dashboard template, bootstrap admin template, bootstrap dashboard template, html admin template, html5 dashboard template, html5 admin template, modern admin template, simple admin template, template admin bootstrap 4"/>
+		<meta content="Ulhoa mods" name="description">
+		<meta content="Ulhoa developers" name="author">
+		<meta name="keywords" content="mods br, mods ets2, mods gta5, mods gta sa, mods 3d"/>
 
 		<!-- Favicon -->
 		<link rel="icon" href="../../assets/images/brand/favicon.ico" type="image/x-icon"/>
 		<link rel="shortcut icon" type="image/x-icon" href="../../assets/images/brand/favicon.ico" />
 
 		<!-- Title -->
-		<title>IndoUi – Bootstrap 4 Admin Dashboard HTML Template</title>
+		<title>Ulhoa mods</title>
 
 		<!--Bootstrap css-->
 		<link rel="stylesheet" href="{{ mix('/plugins/bootstrap/css/bootstrap.min.css') }}">
@@ -76,6 +76,9 @@
 									</a>
 									<a href="#" class=" mr-2" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="GTA 4">
 										<img src="{{ mix('/images/gta4.ico') }}" class="rounded-circle user_img" style="width: 60px; height: 60px;" >
+									</a>
+									<a href="#" class=" mr-2" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="Modelos 3d">
+										<img src="{{ mix('/images/model-3d.png') }}" class="rounded-circle user_img" style="width: 60px; height: 60px;" >
 									</a>
 								</div>
 							</div>

@@ -40,7 +40,7 @@
             </ul>
         </li>
         <li class="slide">
-            <a class="side-menu__item" data-toggle="slide" href="#"><img src="{{ mix('/images/ets2.png') }}" class="rounded-circle user_img mr-1" style="width: 30px; height: 30px;" ></i> <span class="side-menu__label">Euro truck</span><i class="angle fa fa-angle-right"></i></a>
+            <a class="side-menu__item" data-toggle="slide" href="#"><img src="{{ mix('/images/ets2.png') }}" class="rounded-circle user_img mr-1" style="width: 30px; height: 30px;" ></i> <span class="side-menu__label">Euro Truck Simulator 2</span><i class="angle fa fa-angle-right"></i></a>
             <ul class="slide-menu">
                 <li><a href="tables.html" class="slide-item"><i class="side-menu__icon fas fa-tools"></i> Ferramentas</a></li>
                 <li><a href="datatable.html" class="slide-item"><i class="side-menu__icon fas fa-truck-moving"></i> Caminhões</a></li>
@@ -58,6 +58,16 @@
                 <li><a href="datatable.html" class="slide-item"><i class="side-menu__icon fas fa-terminal"></i> Scripts</a></li>
                 <li><a href="datatable.html" class="slide-item"><i class="side-menu__icon fas fa-tshirt"></i> Jogador</a></li>
                 <li><a href="datatable.html" class="slide-item"><i class="side-menu__icon fas fa-map-marked-alt"></i> Mapas</a></li>
+                <li><a href="datatable.html" class="slide-item"><i class="side-menu__icon fas fa-bars"></i> Outros</a></li>
+            </ul>
+        </li>
+        <li class="slide">
+            <a class="side-menu__item" data-toggle="slide" href="#"><img src="{{ mix('/images/model-3d.png') }}" class="rounded-circle user_img mr-1" style="width: 30px; height: 30px;" ></i> <span class="side-menu__label">Modelos 3D</span><i class="angle fa fa-angle-right"></i></a>
+            <ul class="slide-menu">
+                <li><a href="datatable.html" class="slide-item"><i class="side-menu__icon fas fa-car"></i> Veículos</a></li>
+                <li><a href="datatable.html" class="slide-item"><i class="side-menu__icon fas fa-bomb"></i> Contruções</a></li>
+                <li><a href="datatable.html" class="slide-item"><i class="side-menu__icon fas fa-terminal"></i> Texturas</a></li>
+                <li><a href="datatable.html" class="slide-item"><i class="side-menu__icon fas fa-tshirt"></i> Personagens</a></li>
                 <li><a href="datatable.html" class="slide-item"><i class="side-menu__icon fas fa-bars"></i> Outros</a></li>
             </ul>
         </li>
