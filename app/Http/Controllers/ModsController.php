@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comments;
+use App\Models\Likes;
+use App\Models\LikeTotal;
 use App\Models\Mods;
 use Exception;
 use Illuminate\Http\Request;
@@ -70,10 +72,17 @@ class ModsController extends Controller
     public function detail($id){
         try{
             $mod      = Mods::where('id', $id)->get();
+            $user     = $mod[0]->user_id ?? 0;
             $comments = Comments::where(['id_mod'=> $id])
                         ->join('users', 'comments.user_id', 'users.id')
-                         ->select('users.name', 'comments.*')->get(); 
-            return view('mods.detail', compact('mod', 'id', 'comments'));
+                         ->select('users.name', 'comments.*')->get();
+            $likeSelect = false;
+            $totalLikes = LikeTotal::where(['id_mod'=> $id])->get() ?? [];
+
+            if(Auth::check()){
+               $likeSelect = count(Likes::where(['user_id'=> Auth::user()->id, 'id_mod'=> $id])->get()) > 0 ? true : false; 
+            }           
+            return view('mods.detail', compact('mod', 'id', 'comments', 'user', 'likeSelect', 'totalLikes'));
         }catch(Exception $e){
             return response(['error'=>$e], 500);
         }

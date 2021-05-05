@@ -9,6 +9,7 @@
                 method:'POST',
                 data: {
                     id: {{ $id ?? 0}},
+                    user: {{ $user ?? 0  }},
                     message: $('#message').val(),
                     "_token": "{{ csrf_token() }}"
                 },
@@ -28,6 +29,45 @@
                     $('.reset').val('');
                 }
             });
+        });
+
+        $('#like').click(function(){
+            if($(this).attr('data-selected') == 'false'){
+                $('#like').attr('data-selected', 'true');
+                $.ajax({
+                    url: "{{ Route('like-create') }}",
+                    method:'POST',
+                    data: {
+                        id: {{ $id ?? 0}},
+                        "_token": "{{ csrf_token() }}"
+                    },
+                    success: function(data){ 
+                        alert('sucesso')
+                        var qtdLikes = parseInt($('#qtdLikes').attr('data-qtd-like')) + 1;
+                        $('#qtdLikes').html(`${qtdLikes}`)
+                        $('#qtdLikes').attr('data-qtd-like', qtdLikes);
+                        $('.fa-thumbs-up').addClass('text-info')
+                    }
+                });
+            }else{
+                 $('#like').attr('data-selected', 'false');
+                $.ajax({
+                    url: "{{ Route('like-delete') }}",
+                    method:'DELETE',
+                    data: {
+                        id: {{ $id ?? 0}},
+                        "_token": "{{ csrf_token() }}"
+                    },
+                    success: function(data){
+                        alert('sucesso')
+                        var qtdLikes = parseInt($('#qtdLikes').attr('data-qtd-like')) - 1;
+                        $('#qtdLikes').html(`${qtdLikes}`);
+                        $('#qtdLikes').attr('data-qtd-like', qtdLikes);
+                        $('.fa-thumbs-up').removeClass('text-info')
+                    }
+                });
+            }
+            
         });
     @endif
     

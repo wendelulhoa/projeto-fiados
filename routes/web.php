@@ -111,11 +111,11 @@ Route::group(['prefix'=>'notification'], function(){
     // Route::get('/delete', 'CommentController@delete')->name('comments-delete');
 });
 
-// /*Rotas likes*/
-// Route::group(['prefix'=>'likes'], function(){
-//     Route::get('/create', '');
-//     Route::get('/delete', '');
-//  });
+/*Rotas likes*/
+Route::group(['prefix'=>'like'], function(){
+    Route::post('/create', 'LikeController@create')->name('like-create');
+    Route::delete('/delete', 'LikeController@delete')->name('like-delete');
+ });
 
 // /*Rotas estrelas*/
 // Route::group(['prefix'=>'stars'], function(){
