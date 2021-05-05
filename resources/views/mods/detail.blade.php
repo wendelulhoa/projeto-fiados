@@ -18,8 +18,8 @@
                                 @endforeach
                             </ol>
                             <div class="carousel-inner">
-                                @foreach ($images as $item)
-                                    <div class="carousel-item active">
+                                @foreach ($images as $key => $item)
+                                    <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
                                         <img src="{{ Route('index').'/'.$item->path ?? '' }}" class="d-block w-100" alt="...">
                                     </div>
                                 @endforeach

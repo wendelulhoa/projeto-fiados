@@ -22,17 +22,26 @@ class ModsController extends Controller
 
     public function create(Request $request){
         try{
-            if (isset($request['file'])){
-                $path = $request->file->store('mods/images');
+            $data         = $request->all();
+            $imagesDelete = [];
+            $path         = [];
+            
+
+            if (isset($request['files'])){
+               foreach($data['files'] as $key => $value){
+                    $imagePath      = $value->store('mods/images');
+                    $path[]         = ['path'=> $imagePath]; 
+                    $imagesDelete[] = $imagePath;
+               } 
             } else{
-                $path ='';
+                $path =[];
             }
             
-            if($path != ''){
+            if($path != []){
                 Mods::create([
                     'name'       => $request['name'],
                     'description'=> $request['description'],
-                    'images'     => json_encode([['path'=>$path]]),
+                    'images'     => json_encode($path),
                     'approved'   => false,
                     'tags'       => $request['tag'],
                     'link'       => $request['link'],
@@ -40,12 +49,12 @@ class ModsController extends Controller
                     'user_id'    => Auth::user()->id
                 ]);
             }else{
-                Storage::delete($path);
+                Storage::delete($imagesDelete);
                 return response(['error'=>'path vazio'], 400);
             }
             
         }catch(Exception $e){
-            Storage::delete($path);
+            Storage::delete($imagesDelete);
             return response(['error'=> $e], 400);
         }
     }

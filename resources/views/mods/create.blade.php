@@ -32,7 +32,7 @@
                         </div>
                         <div class="form-group">
 
-                                Files: <input type="file" class="reset" id="file" name="file" multiple><br />
+                                Files: <input type="file" class="reset" id="file" name="files[]" multiple><br />
 
                                 <div id="selectedFiles"></div>
                         </div>

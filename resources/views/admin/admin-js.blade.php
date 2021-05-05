@@ -11,7 +11,7 @@
             cancelButtonText:'cancelar'
           }).then((result)=>{
             if(result.isConfirmed){
-                $.ajax({
+               var ajax = $.ajax({
                     url: $(this).attr('data-route'),
                     method:'POST',
                     data: new FormData($(this)[0]),
@@ -23,6 +23,7 @@
                         $('.reset').val('');
                     }
                 });
+                
             }
           }); 
     });

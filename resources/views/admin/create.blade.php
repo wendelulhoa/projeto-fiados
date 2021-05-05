@@ -31,7 +31,6 @@
                         <div class="tab-pane fade" id="nav-mod" role="tabpanel" aria-labelledby="nav-mod-tab">
                             <div class="col-xs-12 col-lg-12">
                             @include('mods.create', ['name'=>'categoria', 'placeholder'=>'Digite uma categoria', 'id'=>'category', 'route'=> Route('category-create')])
-                            @include('mods.create', ['name'=>'categoria', 'placeholder'=>'Digite uma categoria', 'id'=>'category', 'route'=> Route('category-create')])
                             </div>
                     </div>
                 </div>

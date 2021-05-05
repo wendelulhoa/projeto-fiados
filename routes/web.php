@@ -56,6 +56,7 @@ Route::group(['prefix'=>'category/mods'], function(){
 route::get('teste', function(){
     
     $teste = Storage::allFiles('mods/images');
+    // return $teste;
     Storage::delete($teste);
 });
 /*rotas de mods*/

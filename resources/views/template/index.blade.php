@@ -36,7 +36,7 @@
 
 		<!-- Rightsidebar css -->
 		<link href="{{ mix('/plugins/sidebar/sidebar.css') }}" rel="stylesheet">
-
+		@yield('script-css')
 	</head>
 
 	<body class="app sidebar-mini rtl">
