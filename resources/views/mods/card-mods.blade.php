@@ -50,7 +50,7 @@
                         <i class="fas fa-star text-warning"></i>
                         <p class="pl-2 pr-2">5</p>
                         <i class="fas fa-thumbs-up text-info"></i>
-                        <p class="pl-2">10</p>
+                        <p class="pl-2">{{ $item->total ?? 0 }}</p>
                     </div>
                     <a href="{{ Route('mods-detail',['id'=>$item->id]) }}"><h5 class="mb-0 mt-2">{{$item->name}}</h5></a>
                 </div>

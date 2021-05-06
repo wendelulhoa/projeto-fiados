@@ -9,13 +9,14 @@ use App\Models\Mods;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class ModsController extends Controller
 {
     public function index(){
        try{
-            $mods = Mods::paginate(9) ?? [];
+            $mods = DB::table('mods')->leftJoin('like_total', 'mods.id', 'id_mod')->select('mods.*', 'like_total.total')->paginate(9) ?? [];
             return view('mods.mods', compact('mods'));
         }catch(Exception $e){
 
