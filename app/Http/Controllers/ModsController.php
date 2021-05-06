@@ -15,7 +15,7 @@ class ModsController extends Controller
 {
     public function index(){
        try{
-            $mods = Mods::all() ?? [];
+            $mods = Mods::paginate(9) ?? [];
             return view('mods.mods', compact('mods'));
         }catch(Exception $e){
 
