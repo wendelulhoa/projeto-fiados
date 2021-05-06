@@ -1,4 +1,4 @@
-@extends('layouts.menu')
+@extends('template.index')
 
 @section('content')
 
@@ -38,9 +38,95 @@
         </div>
     </div>
 </div>
+
+<!--Row-->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <div>
+                    <h3 class="card-title">Cadastros</h3>
+                </div>
+
+            </div>
+            <div class="card-body">
+                <form id="form-create">
+                    <div class="list-group">
+                        <div class="list-group-item py-3" data-acc-step>
+                            <h5 class="mb-0" data-acc-title>Categoria Jogo</h5>
+                            <div data-acc-content>
+                                <div class="my-3">
+                                    <div class="form-group">
+                                        <label>Name:</label>
+                                        <input type="text" name="name" class="form-control" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Email:</label>
+                                        <input type="text" name="email" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list-group-item py-3" data-acc-step>
+                            <h5 class="mb-0" data-acc-title>Tag</h5>
+                            <div data-acc-content>
+                                <div class="my-3">
+                                    <div class="form-group">
+                                        <label>Telephone:</label>
+                                        <input type="text" name="telephone" class="form-control" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Mobile:</label>
+                                        <input type="text" name="mobile" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list-group-item py-3" data-acc-step>
+                            <h5 class="mb-0 form-collapse" data-form="categoria" data-acc-title>Categoria</h5>
+                            <div class="categoria">
+                                <div class="my-3">
+                                    <div class="form-group">
+                                        <label>Telephone:</label>
+                                        <input type="text" name="telephone" class="form-control" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Mobile:</label>
+                                        <input type="text" name="mobile" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list-group-item py-3" data-acc-step>
+                            <h5 class="mb-0" data-acc-title>Mod</h5>
+                            <div data-acc-content>
+                                <div class="my-3">
+                                    <div class="form-group">
+                                        <label>Credit card:</label>
+                                        <input type="text" name="card" class="form-control">
+                                    </div>
+                                    <div class="form-group form-row">
+                                        <div class="col-sm-4">
+                                            <label>Expiry:</label>
+                                            <input type="text" name="expiry" class="form-control">
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <label>CVV:</label>
+                                            <input type="text" name="cvv" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
 
 
 @push('scripts-css')
-    @include('admin.card-mod-css')
+@include('admin.card-mod-css')
 @endpush

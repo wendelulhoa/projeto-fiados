@@ -29,5 +29,12 @@ class UserController extends Controller
             return redirect()->route('view-create');
         }
     }
+    public function getStrutureEdit(){
+        try{
+            return view('user.edit');
+        } catch(Exception $e){
+
+        }
+    }
 
 }

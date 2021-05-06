@@ -81,7 +81,9 @@ Route::group(['prefix'=>'admin', 'middleware'=>'auth'], function(){
 Route::group(['prefix'=>'user', 'middleware'=>'auth'], function(){
     Route::get('', 'UserController@index')->name('user-index');
 
-    Route::get('/create', 'UserController@getStrutureCreate')->name('User-create');
+    Route::get('/create', 'UserController@getStrutureCreate')->name('user-create');
+    Route::get('/edit', 'UserController@getStrutureEdit')->name('user-edit');
+    Route::get('/profile', 'UserController@getStrutureEdit')->name('user-profile');
 });
 
 // rota que acessa as fotos salvas

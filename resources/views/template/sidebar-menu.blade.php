@@ -4,16 +4,35 @@
     <ul class="side-menu toggle-menu">
         <li><h3>Principal</h3></li>
         <li>
-            <a class="side-menu__item" href="widgets.html"><i class="side-menu__icon fas fa-home"></i><span class="side-menu__label">Inicio</span></a>
+            <a class="side-menu__item" href="{{ Route('index') }}"><i class="side-menu__icon fas fa-home"></i><span class="side-menu__label">Inicio</span></a>
         </li>
-        <li class="slide">
-            <a class="side-menu__item"  data-toggle="slide" href="#"><i class="side-menu__icon fas fa-user-cog"></i><span class="side-menu__label">Admin</span><i class="angle fa fa-angle-right"></i></a>
-            <ul class="slide-menu">
-                <li><a class="slide-item"  href="{{ Route('admin-index') }}"><span>Inicio</span></a></li>
-                <li><a class="slide-item"  href="{{ Route('admin-create') }}"><span>Cadastro de mod</span></a></li>
-                <li><a class="slide-item"  href="index.html"><span>Mods aprovados</span></a></li>
-            </ul>
-        </li>
+        @guest
+             <li class="slide">
+                <a class="side-menu__item"  data-toggle="slide" href="#"><i class="side-menu__icon fas fa-user-shield"></i><span class="side-menu__label">Entrar</span><i class="angle fa fa-angle-right"></i></a>
+                <ul class="slide-menu">
+                    <li >
+                        <a class="slide-item" href="{{ route('login') }}"><i class="side-menu__icon fas fa-lock-open"></i></i>{{ __('Login') }}</a>
+                    </li>
+                    @if (Route::has('register'))
+                        <li >
+                            <a class="slide-item" href="{{ route('register') }}"><i class="side-menu__icon fas fa-id-card"></i>{{ __('Register') }}</a>
+                        </li>
+                    @endif
+                </ul>
+            </li>
+            @else
+            <li class="slide">
+                <a class="side-menu__item"  data-toggle="slide" href="#"><i class="side-menu__icon fas fa-user-cog"></i><span class="side-menu__label">Admin</span><i class="angle fa fa-angle-right"></i></a>
+                <ul class="slide-menu">
+                    <li><a class="slide-item"  href="{{ Route('admin-index') }}"><span>Inicio</span></a></li>
+                    <li><a class="slide-item"  href="{{ Route('admin-create') }}"><span>Cadastro de mod</span></a></li>
+                    <li><a class="slide-item"  href="index.html"><span>Mods aprovados</span></a></li>
+                    <li><a class="slide-item"  href="{{ Route('user-edit') }}"><span>Atualizar informações</span></a></li>
+                </ul>
+            </li>
+        @endguest
+        
+        
         <li><h3>Categorias</h3></li>
         <li class="slide">
             <a class="side-menu__item" data-toggle="slide" href="#"><img src="{{ mix('/images/gta5.png') }}" class="rounded-circle user_img mr-1" style="width: 30px; height: 30px;" ></i> <span class="side-menu__label">GTA 5</span><i class="angle fa fa-angle-right"></i></a>
