@@ -19,14 +19,16 @@ class CommentController extends Controller
                 'message'=> $request['message'],
                 'user_id'=> Auth::user()->id
             ]);
-
-            Notifications::create([
-                'type'=> 'C',
-                'message'=> Auth::user()->name . ' comentou no seu mod',
-                'link'=> '', 
-                'user_id'=> $request['user'], 
-                'active'=> true
-            ]);
+            if(intval($request['user']) != intval(Auth::user()->id)){
+                Notifications::create([
+                    'type'=> 'C',
+                    'message'=> Auth::user()->name . ' comentou no seu mod',
+                    'link'=> '', 
+                    'user_id'=> $request['user'], 
+                    'active'=> true
+                ]);
+            }
+            
             DB::commit();
         }catch(Exception $e){
             DB::rollback();
