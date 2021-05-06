@@ -83,7 +83,7 @@
                             </div>
                             <div class="tab-pane " id="tab6">
                                 <ul class="list-unstyled">
-                                    @foreach ($comments as $key as $item)
+                                    @foreach ($comments as $key => $item)
                                         <li class="media media-lg mt-0 pb-2 pt-2">
                                             <span class="avatar avatar-md brround cover-image mr-3" data-image-src="{{ mix('images/user.png') }}"></span>
                                             <div class="media-body ">

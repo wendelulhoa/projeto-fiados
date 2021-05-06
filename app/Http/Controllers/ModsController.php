@@ -75,7 +75,8 @@ class ModsController extends Controller
             $user     = $mod[0]->user_id ?? 0;
             $comments = Comments::where(['id_mod'=> $id])
                         ->join('users', 'comments.user_id', 'users.id')
-                         ->select('users.name', 'comments.*')->get();
+                         ->select('users.name', 'comments.*')
+                         ->orderBy('comments.id')->get();
             $likeSelect = false;
             $totalLikes = LikeTotal::where(['id_mod'=> $id])->get() ?? [];
 
