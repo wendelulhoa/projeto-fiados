@@ -28,7 +28,7 @@
           }); 
     });
 
-    $('#nav-mod-tab').click(function(){
+    function getCategorysAndTags(){
         $.ajax({
             url:"{{  Route('admin-category-and-tag') }}",
             method:'GET',
@@ -46,6 +46,21 @@
                 }
             }
         });
+    }
+
+    $('.form-collapse-tab').click(function(e){
+        e.preventDefault();
+        var classElement = $(this).attr('data-content');
+        
+        if($(`.${classElement}`).hasClass('active')){
+            $(`.${classElement}`).removeClass('d-block active');  
+        }else{
+            if($(`.${classElement}`).hasClass('4')){
+               getCategorysAndTags(); 
+            }
+            $(`.active`).removeClass('d-block active'); 
+            $(`.${classElement}`).addClass('d-block active');
+        }  
     });
 
 </script>
