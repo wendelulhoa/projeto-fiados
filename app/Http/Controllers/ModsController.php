@@ -18,7 +18,7 @@ class ModsController extends Controller
        try{
             // $mods = DB::table('mods')
             // ->leftJoin('like_total', 'like_total.id_mod','=', 'mods.id')->select('mods.*', 'like_total.total')->paginate(9) ?? [];
-            $mods = DB::table('mods')->paginate(36);
+            $mods = DB::table('mods')->paginate(9);
             dd($mods);
             return view('mods.mods', compact('mods'));
         }catch(Exception $e){
