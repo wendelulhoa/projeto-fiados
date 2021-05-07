@@ -16,7 +16,16 @@ class ModsController extends Controller
 {
     public function index(){
        try{
-            $mods = DB::table('mods')->leftJoin('like_total', 'mods.id', 'id_mod')->select('mods.*', 'like_total.total')->paginate(9) ?? [];
+            $mods = DB::table('mods')
+            ->leftJoin('like_total', 'mods.id','=', 'like_total.id_mod')->select('mods.*', 'like_total.total')->paginate(9) ?? [];
+            // $table2 = DB::table('t2')
+            //         ->rightJoin('t1', 't1.id', '=', 't2.t1_id');
+
+            // $table1 = DB::table('mods')
+            //         ->leftJoin('like_total', 'mods.id', '=', 'id_mod')
+            //         ->unionAll($table2)
+            //         ->get();
+            // dd($mods);
             return view('mods.mods', compact('mods'));
         }catch(Exception $e){
 
