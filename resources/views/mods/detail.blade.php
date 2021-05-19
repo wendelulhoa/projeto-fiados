@@ -50,8 +50,8 @@
 
                 <div class="product-gallery-data mb-0">
                     <h3 class="mb-3 font-weight-semibold">{{ $mod[0]->name ?? 'ocorreu um erro informe ao suporte, logo resolveremos.' }}</h3>
-                    <a class="btn  btn-default" id="like" data-selected="{{ $likeSelect ? 'true' : 'false' }}"><i class="fas fa-thumbs-up {{ $likeSelect ? 'text-info' : '' }}"></i> curtir <span class="badge badge-info" id="qtdLikes" data-qtd-like='{{ $totalLikes[0]->total ?? 0 }}'> {{ $totalLikes[0]->total ?? 0 }}</span></a>
-                    <a href="#" class="btn  btn-success"> <i class="fas fa-download fa-1x"></i> Download</a>
+                    <a class="btn  btn-default" id="like" data-selected="{{ $likeSelect ? 'true' : 'false' }}"><i class="fas fa-thumbs-up {{ $likeSelect ? 'text-info' : '' }}"></i> curtir <span class="badge badge-info" id="qtdLikes" data-qtd-like='{{ $totalLikes ?? 0 }}'> {{ $totalLikes ?? 0 }}</span></a>
+                    <a href="{{ $mod[0]->link ?? '' }}" class="btn  btn-success"> <i class="fas fa-download fa-1x"></i> Download</a>
                     <div class="product-gallery-rats">
                         <ul class="product-gallery-rating">
                             <li>

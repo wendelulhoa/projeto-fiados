@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Likes;
 use App\Models\LikeTotal;
+use App\Models\Mods;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,25 +15,26 @@ class LikeController extends Controller
     public function create(Request $request){
         try{
             DB::beginTransaction();
+            $likesExists = Likes::where([
+                                'id_mod'  => $request['id'], 
+                                'user_id' => Auth::user()->id
+                            ])->get();
+
+            if(count($likesExists) == 0){
+                $mod   = Mods::where('id', '=', $request['id']);
+                $total = $mod->get()[0]->total_likes;
+                $total = intval($total) + 1;
             
-            $likes = LikeTotal::where(['id_mod'=> $request['id']])->get()->first() ?? [];
-            if(empty($likes)){
-                $total = 1;
-                LikeTotal::create([
-                    'id_mod' => $request['id'],
-                    'total'  => $total
+                Mods::where(['id'=> $request['id']])->update(['total_likes'=> $total]);   
+
+                Likes::create([
+                    'id_mod'  => $request['id'], 
+                    'user_id' => Auth::user()->id
                 ]);
             }else{
-                $likes = LikeTotal::where(['id_mod'=> $request['id']])->get();
-                $total = $likes[0]->total + 1; 
-
-                LikeTotal::where('id_mod', '=', $request['id'])->update(['total'=> $total]);             
+                return response(['error'=> 'like já foi inserido'], 400);
             }
-
-            Likes::create([
-                'id_mod'  => $request['id'], 
-                'user_id' => Auth::user()->id
-            ]);
+            
 
             DB::commit();
         }catch(Exception $e){
@@ -48,9 +50,9 @@ class LikeController extends Controller
             
             if(count($likeUser) > 0){
                 $like->delete();
-                $likes = LikeTotal::where(['id_mod'=> $request['id']])->get();
-                $total = $likes[0]->total - 1;
-                LikeTotal::where('id_mod', '=', $request['id'])->update(['total'=> $total]); 
+                $likes = Mods::where(['id'=> $request['id']])->get();
+                $total = $likes[0]->total_likes - 1;
+                Mods::where('id', '=', $request['id'])->update(['total_likes'=> $total]); 
             }    
         }catch(Exception $e){
             return response(['error'=>$e], 400);

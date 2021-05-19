@@ -125,6 +125,8 @@ Route::group(['prefix'=>'like'], function(){
 //     Route::get('/delete', '');
 // });
 
+
+
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::get('template', function(){

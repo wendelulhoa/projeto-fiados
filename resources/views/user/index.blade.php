@@ -1,6 +1,7 @@
-@extends('layouts.menu')
+@extends('template.index')
 
 @section('content')
+
     {{-- CARDS SUPERIORES --}}
     <section>
         <div class="container-fluid">

@@ -24,9 +24,14 @@
             <li class="slide">
                 <a class="side-menu__item"  data-toggle="slide" href="#"><i class="side-menu__icon fas fa-user-cog"></i><span class="side-menu__label">Admin</span><i class="angle fa fa-angle-right"></i></a>
                 <ul class="slide-menu">
-                    <li><a class="slide-item"  href="{{ Route('admin-index') }}"><span>Inicio</span></a></li>
-                    <li><a class="slide-item"  href="{{ Route('admin-create') }}"><span>Cadastro de mod</span></a></li>
-                    <li><a class="slide-item"  href="index.html"><span>Mods aprovados</span></a></li>
+                    @if (Auth::user()->type_user == 1)
+                        <li><a class="slide-item"  href="{{ Route('admin-index') }}"><span>Inicio</span></a></li>
+                        <li><a class="slide-item"  href="{{ Route('admin-create') }}"><span>Cadastro de mod</span></a></li>
+                    @else
+                        <li><a class="slide-item"  href="{{ Route('user-index') }}"><span>Inicio</span></a></li>
+                        <li><a class="slide-item"  href="{{ Route('user-create') }}"><span>Cadastro de mod</span></a></li>
+                    @endif
+                    <li><a class="slide-item"  href=""><span>Mods aprovados</span></a></li>
                     <li><a class="slide-item"  href="{{ Route('user-edit') }}"><span>Atualizar informações</span></a></li>
                 </ul>
             </li>

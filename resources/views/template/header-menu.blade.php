@@ -11,9 +11,9 @@
             </div>
             <div class="d-flex order-lg-2 ml-auto header-right">
                 <div class="d-md-flex header-search" id="bs-example-navbar-collapse-1">
-                    <form class="navbar-form" role="search">
+                    <form class="navbar-form" action="{{ Route('index') }}" method="GET">
                         <div class="input-group ">
-                            <input type="text" class="form-control" placeholder="Search...">
+                            <input type="text" id="param" name="param" class="form-control" placeholder="Search...">
                             <span class="input-group-btn">
                                 <button type="reset" class="btn btn-default">
                                     <i class="fas fa-times"></i>

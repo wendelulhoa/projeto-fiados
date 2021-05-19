@@ -71,4 +71,7 @@
         });
     @endif
     
+    $('#search-mod').submit(function(){
+        alert('teste')
+    })
 </script>
