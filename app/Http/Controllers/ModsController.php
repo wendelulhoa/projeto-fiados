@@ -18,7 +18,7 @@ class ModsController extends Controller
        try{
             if(isset($request->param)){
                 $request->param = strtoupper($request->param);
-                $mods = Mods::where([['name', 'like','%'.$request->param.'%']])->orWhere([['description', 'like','%'.$request->param.'%']])->paginate(9) ?? [];
+                $mods = Mods::where([['name', 'like','_'.$request->param.'%']])->orWhere([['description', 'like','%'.$request->param.'%']])->paginate(9) ?? [];
             }else{
                 $mods = DB::table('mods')->paginate(9) ?? [];
            }
