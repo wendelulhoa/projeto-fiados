@@ -22,15 +22,15 @@ class ModsController extends Controller
 
             if(isset($request['category-game']) && !empty($request['category-game']) && empty($request['category-mod']) ){
                 $type = $categoryGame[$request['category-game'] - 1];
-                $mods = Mods::where(['category_game'=> $request['category-game'], 'approved'=> false])->paginate(9);
+                $mods = Mods::where(['category_game'=> $request['category-game']])->paginate(9);
             } else if (isset($request['category-mod']) && isset($request['category-game']) && !empty($request['category-mod'])){
                 $type = $categoryGame[$request['category-game'] - 1];
-                $mods = Mods::where(['category_game'=> $request['category-game'], 'category'=> $request['category-mod'], 'approved'=> false])->paginate(9);
+                $mods = Mods::where(['category_game'=> $request['category-game'], 'category'=> $request['category-mod']])->paginate(9);
             } else if (isset($request->param)) {
                 $request->param = strtoupper($request->param);
-                $mods           = Mods::where([['name', 'ilike', '%' . $request->param . '%'], ['approved'=> false]])->orWhere([['description', 'ilike', '%' . $request->param . '%'], ['approved'=> false]])->paginate(9) ?? [];
+                $mods           = Mods::where([['name', 'ilike', '%' . $request->param . '%']])->orWhere([['description', 'ilike', '%' . $request->param . '%']])->paginate(9) ?? [];
             } else {
-                $mods = DB::table('mods')->where(['approved'=> false])->paginate(9) ?? [];
+                $mods = DB::table('mods')->paginate(9) ?? [];
             }
 
             return view('mods.mods', compact('mods', 'type', 'categoryGame', 'categoryMod'));
