@@ -22,7 +22,7 @@
                                 <td>{{ $item->name }}</td>
                                 <td>{{ date_format($item->created_at ,'d/m/Y H:i:s') }}</td>
                                 <td><a href="{{ Route('mods-detail',['id'=>$item->id]) }}"><i class="fas fa-external-link-alt"></i></a></td>
-                                <td><input type="checkbox" class="status-mod" data-id="{{ $item->id }}" {{ $item->approved == true ? 'checked' : '' }} style="margin-left:30px"></td>
+                                <td>{!! $item->approved != true ? '<button class="btn btn-success">Aprovar</button>' : '<button class="btn btn-danger">Bloquear</button>' !!}</td>
                                 <td><a href=""><i class="fas fa-edit"></i></i></a></td>
                                 <td><a href="" style="color: red"> <i class="fas fa-trash-alt"></i></a></td>
                             </tr>
