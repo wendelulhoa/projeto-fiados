@@ -21,6 +21,7 @@ class CreateModsTable extends Migration
             $table->boolean('approved')->nullable();
             $table->json('tags')->nullable();
             $table->text('link')->nullable();
+            $table->integer('category_game')->nullable();
             $table->integer('category')->nullable();
             $table->integer('user_id')->nullable();
             $table->integer('total_likes')->nullable();

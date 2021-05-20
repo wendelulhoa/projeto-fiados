@@ -71,7 +71,8 @@
         });
     @endif
     
-    $('#search-mod').submit(function(){
-        alert('teste')
+
+    $('.jq-thumb').click(function(){
+        $('#carousel-mod').carousel(parseInt($(this).attr('data-index')))
     })
 </script>

@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\CategoryGames;
+use App\Models\CategoryMods;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -29,5 +31,15 @@ class DatabaseSeeder extends Seeder
             'type_user'=> 1,
             'remember_token' =>null
         ]);
+        $categoryGame = ['GTA V', 'GTA SA', ' ETS2', 'GTA IV', 'MODELOS 3D'];
+        $categoryMods = ['VEÍCULOS', 'CAMINHÕES', 'ÔNIBUS', 'ARMAS', 'SCRIPTS', 'JOGADOR', 'MAPAS', 'OUTROS', 'FERRAMENTAS', 'CONSTRUÇÕES', 'TEXTURA'];
+
+        foreach($categoryMods as $key => $value){
+            CategoryMods::create(['name'=> $value]);
+        }
+
+        foreach($categoryGame as $key => $value){
+            CategoryGames::create(['name'=> $value]);
+        }
     }
 }

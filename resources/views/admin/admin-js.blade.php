@@ -1,6 +1,11 @@
 
 <script type="text/javascript" defer>
     var filesAdd = [];
+    var categoryMod      = [];
+    var gtaCategory      = [1, 4, 5, 6, 7, 8, 9];
+    var etsCategory      = [2, 3, 7, 8, 9];
+    var Model3dCategory  = [1, 6, 8, 10, 11];
+
     $('#file').change(function(){
       $('#img-mods').html("");
       const total = $(this)[0].files.length;
@@ -27,6 +32,9 @@
     });
 
     $('form').on('submit',function(e){
+        if($(this).attr('id') == 'form-category'){
+            return;
+        }
         e.preventDefault()
         Swal.fire({
             title: 'Tem certeza que deseja salvar este registro?',
@@ -64,16 +72,29 @@
             method:'GET',
             success: function(data){
                 $('#tag-select option').remove();
+                $('#category-game-select option').remove();
                 $('#category-select option').remove();
+
+                categoryMod =  data['category'];
                 
-                for(var i= 0; i < data['category'].length ; i++){
-                    console.log(data['category'][i].id, data['category'][i].name)
-                    $('#category-select').append(`<option value="${data['category'][i].id}" selected>${data['category'][i].name}</option>`);
+                for(var i= 0; i < data['categoryGame'].length ; i++){
+                    $('#category-game-select').append(`<option value="${data['categoryGame'][i].id}" selected>${data['categoryGame'][i].name}</option>`);
+                }
+
+                $('#category-game-select').val(1).change();
+
+                for(var i= 0; i < gtaCategory.length ; i++){
+                    let category = categoryMod.find((e, key) => {
+                        if(e.id == gtaCategory[i]){
+                            $('#category-select').append(`<option value="${data['category'][i].id}" selected>${data['category'][i].name}</option>`);
+                        }
+                    });
                 }
 
                 for(var i= 0; i < data['tags'].length ; i++){
                     $('#tag-select').append(`<option value="${data['tags'][i].id}" selected>${data['tags'][i].name}</option>`);
                 }
+
             }
         });
     }
@@ -94,4 +115,66 @@
         }  
     });
 
+    $('#category-game-select').change(function(){
+        $('#category-select option').remove();
+        
+        switch(parseInt($(this).val())){
+            case 1:
+            case 2:
+            case 4:
+                for(var i= 0; i < gtaCategory.length ; i++){
+                    let category = categoryMod.find((e, key) => {
+                        if(e.id == gtaCategory[i]){
+                            $('#category-select').append(`<option value="${categoryMod[i].id}" selected>${categoryMod[i].name}</option>`);
+                        }
+                    });
+                }
+                break;
+            case 3:
+                for(var i= 0; i < etsCategory.length ; i++){
+                    let category = categoryMod.find((e, key) => {
+                        if(e.id == etsCategory[i]){
+                            $('#category-select').append(`<option value="${categoryMod[i].id}" selected>${categoryMod[i].name}</option>`);
+                        }
+                    });
+                }
+                break;
+            case 5:
+                for(var i= 0; i < Model3dCategory.length ; i++){
+                    let category = categoryMod.find((e, key) => {
+                        if(e.id == Model3dCategory[i]){
+                            $('#category-select').append(`<option value="${categoryMod[i].id}" selected>${categoryMod[i].name}</option>`);
+                        }
+                    });
+                }
+                break;
+        }
+    });
+
+    $('.status-mod').click(function(){
+        var id = $(this).attr('data-id');
+        Swal.fire({
+            title: 'Tem certeza que deseja aprovar ?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'confirmar',
+            cancelButtonText:'cancelar'
+          }).then((result)=>{
+            if(result.isConfirmed){
+               var ajax = $.ajax({
+                    url: "{{ Route('mods-approved') }}",
+                    method:'POST',
+                    data: {
+                        id   : $(this).attr('data-id'),
+                        type : $(this).is(':checked'),
+                        "_token": "{{ csrf_token() }}"
+                    },
+                    success: function(data){
+                        $(`#tr-${id}`).fadeOut();
+                    }
+                });
+                
+            }
+          }); 
+    });
 </script>

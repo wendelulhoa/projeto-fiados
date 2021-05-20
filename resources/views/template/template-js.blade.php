@@ -79,7 +79,21 @@
         @endif
     });
 
-
+    $('.category-game').click(function(){
+        $('#category-game-input').val($(this).attr('data-category-game'))
+        $('#form-category').submit();
+    });
     
+    $('.category-mod').click(function(){
+        $('#category-game-input').val($(this).attr('data-category-game'))
+        $('#category-mod-input').val($(this).attr('data-category-mod'))
+        $('#form-category').submit();
+    });
+    
+    $('#search-mod').click(function(){
+        if($('#param').val() != '' && $('#param').val()){
+            $('#form-search-mod').submit();
+        }
+    });
 
 </script>

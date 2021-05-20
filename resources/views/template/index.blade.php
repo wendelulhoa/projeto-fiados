@@ -58,30 +58,37 @@
                 <!-- app-content-->
 				<div class="app-content toggle-content">
 					<div class="side-app">
-
+						<form action="{{ Route('index') }}" method="post" id="form-category">
+							{{csrf_field()}}
+							<input type="text" value="" id="category-game-input" name="category-game" hidden>
+							<input type="text" value="" id="category-mod-input" name="category-mod" hidden>
+						</form>
 					    <!-- page-header -->
+						
 						<div class="page-header">
-							<h1 class="page-title">Mods</h1>
+						@if (Route::getCurrentRoute()->getName() != 'login' && Route::getCurrentRoute()->getName() != 'register')
+							<h1 class="page-title">{{ $type ?? 'Mods' }}</h1>
 							<div class="ml-auto">
 								<div class="input-group">
 									
-									<a href="#" class=" mr-2" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="GTA 5">
+									<a href="#" data-category-game="1" class=" mr-2 category-game" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="GTA 5">
 										<img src="{{ mix('/images/gta5.png') }}" class="rounded-circle user_img" style="width: 60px; height: 60px;" >
 									</a>
-									<a href="#" class=" mr-2" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="EURO TRUCK SIMULATOR 2">
-										<img src="{{ mix('/images/ets2.png') }}" class="rounded-circle user_img" style="width: 60px; height: 60px;" >
-									</a>
-									<a href="#" class=" mr-2" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="GTA SA">
+									<a href="#" data-category-game="2" class=" mr-2 category-game" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="GTA SA">
 										<img src="{{ mix('/images/gtasa.png') }}" class="rounded-circle user_img" style="width: 60px; height: 60px;" >
 									</a>
-									<a href="#" class=" mr-2" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="GTA 4">
+									<a href="#" data-category-game="3" class=" mr-2 category-game" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="EURO TRUCK SIMULATOR 2">
+										<img src="{{ mix('/images/ets2.png') }}" class="rounded-circle user_img" style="width: 60px; height: 60px;" >
+									</a>
+									<a href="#" data-category-game="4" class=" mr-2 category-game" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="GTA 4">
 										<img src="{{ mix('/images/gta4.ico') }}" class="rounded-circle user_img" style="width: 60px; height: 60px;" >
 									</a>
-									<a href="#" class=" mr-2" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="Modelos 3d">
+									<a href="#" data-category-game="5" class=" mr-2 category-game" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="Modelos 3d">
 										<img src="{{ mix('/images/model-3d.png') }}" class="rounded-circle user_img" style="width: 60px; height: 60px;" >
 									</a>
 								</div>
 							</div>
+						@endif
 						</div>
 						<!-- End page-header -->
 

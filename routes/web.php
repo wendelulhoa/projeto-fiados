@@ -24,7 +24,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/', 'ModsController@index')->name('index');
+Route::any('/', 'ModsController@index')->name('index');
 
 /*rotas de tags*/
 
@@ -62,7 +62,7 @@ route::get('teste', function(){
 /*rotas de mods*/
 Route::group(['prefix'=>'mods'], function(){
     Route::get('', 'ModsController@index')->name('mods-index');
-
+    Route::post('approved', 'ModsController@approvedMod')->name('mods-approved');
     Route::get('/detail/{id}', 'ModsController@detail')->name('mods-detail');
     Route::post('/create', 'ModsController@create')->name('mods-create');
     Route::post('/edit', 'ModsController@edit')->name('mods-edit');
@@ -71,6 +71,8 @@ Route::group(['prefix'=>'mods'], function(){
 
 Route::group(['prefix'=>'admin', 'middleware'=>'auth'], function(){
     Route::get('', 'AdminController@index')->name('admin-index');
+
+    Route::get('/mods/approved', 'AdminController@approved')->name('mod-approved');
 
     Route::get('/listusers', 'AdminController@listUsers')->name('admin-listusers');
     Route::get('/create', 'AdminController@getStrutureCreate')->name('admin-create');

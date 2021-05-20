@@ -11,10 +11,10 @@
             <div class="card-body single-productslide">
                 <div class="product-gallery border">
                     <div class="product-item text-center">
-                        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                        <div id="carousel-mod" class="carousel slide" data-ride="carousel">
                             <ol class="carousel-indicators">
                                 @foreach ($images as $key => $item)
-                                    <li data-target="#carouselExampleIndicators" data-slide-to="{{ $key }}" class="{{ $key == 0 ? 'active' : '' }}"></li>
+                                    <li data-target="#carousel-mod" data-slide-to="{{ $key }}" class="{{ $key == 0 ? 'active' : '' }}"></li>
                                 @endforeach
                             </ol>
                             <div class="carousel-inner">
@@ -25,12 +25,12 @@
                                 @endforeach
                                 
                             </div>
-                            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button"
+                            <a class="carousel-control-prev" href="#carousel-mod" role="button"
                                 data-slide="prev">
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                 <span class="sr-only">Previous</span>
                             </a>
-                            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button"
+                            <a class="carousel-control-next" href="#carousel-mod" role="button"
                                 data-slide="next">
                                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                 <span class="sr-only">Next</span>
@@ -41,7 +41,7 @@
                 <div class="row pt-3">
                     @foreach ($images as $item)
                         <div class="col-6 col-md-3">
-                            <a href="#" class="thumbnail">
+                            <a data-index="{{ $loop->index }}"  class="thumbnail jq-thumb">
                                 <img src="{{ Route('index').'/'.$item->path ?? '' }}" alt="thumb1" class="thumbimg">
                             </a>
                         </div>
@@ -108,7 +108,14 @@
                 <a href="#" class="btn  btn-success"> <i class="fas fa-download fa-1x"></i> Download</a>
             </div>
         </div>
+        
     </div>
+    <div class="col-lg-3">
+            @include('mods.card-mods', ['mods'=> $mods, 'type'=> 1])
+            
+	</div>
+			
+        
 
 </div>
     @section('script-js')

@@ -11,7 +11,7 @@
         </div>    
             <div class="form-group col-md-12">
                 <label for="category-game-select">Categoria do jogo</label>
-                <select id="category-game-select" class="form-control reset select2" name="category">
+                <select id="category-game-select" class="form-control reset select2" name="category-game">
                     <option selected>Selecione</option>
                 </select>
             </div>
@@ -33,7 +33,7 @@
         </div>
         <div class="form-row col-md-12">
             <textarea class="form-control mb- reset" id="text-area" name="description" rows="5"
-                placeholder="descrição..."></textarea>
+                placeholder="descrição..." required></textarea>
         </div>
     </div>
 <div class="row" id="img-mods">

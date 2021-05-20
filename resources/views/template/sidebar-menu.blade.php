@@ -31,7 +31,7 @@
                         <li><a class="slide-item"  href="{{ Route('user-index') }}"><span>Inicio</span></a></li>
                         <li><a class="slide-item"  href="{{ Route('user-create') }}"><span>Cadastro de mod</span></a></li>
                     @endif
-                    <li><a class="slide-item"  href=""><span>Mods aprovados</span></a></li>
+                    <li><a class="slide-item"  href="{{ Route('mod-approved') }}"><span>Mods aprovados</span></a></li>
                     <li><a class="slide-item"  href="{{ Route('user-edit') }}"><span>Atualizar informações</span></a></li>
                 </ul>
             </li>
@@ -42,57 +42,57 @@
         <li class="slide">
             <a class="side-menu__item" data-toggle="slide" href="#"><img src="{{ mix('/images/gta5.png') }}" class="rounded-circle user_img mr-1" style="width: 30px; height: 30px;" ></i> <span class="side-menu__label">GTA 5</span><i class="angle fa fa-angle-right"></i></a>
             <ul class="slide-menu">
-                <li><a href="tables.html" class="slide-item"><i class="side-menu__icon fas fa-tools"></i> Ferramentas</a></li>
-                <li><a href="datatable.html" class="slide-item"><i class="side-menu__icon fas fa-car"></i> Veículos</a></li>
-                <li><a href="datatable.html" class="slide-item"><i class="side-menu__icon fas fa-bomb"></i> Armas</a></li>
-                <li><a href="datatable.html" class="slide-item"><i class="side-menu__icon fas fa-terminal"></i> Scripts</a></li>
-                <li><a href="datatable.html" class="slide-item"><i class="side-menu__icon fas fa-tshirt"></i> Jogador</a></li>
-                <li><a href="datatable.html" class="slide-item"><i class="side-menu__icon fas fa-map-marked-alt"></i> Mapas</a></li>
-                <li><a href="datatable.html" class="slide-item"><i class="side-menu__icon fas fa-bars"></i> Outros</a></li>
+                <li><a href="#" class="slide-item category-mod" data-category-game="1" data-category-mod="9"><i class="side-menu__icon fas fa-tools"></i> Ferramentas</a></li>
+                <li><a href="#" class="slide-item category-mod" data-category-game="1" data-category-mod="1"><i class="side-menu__icon fas fa-car"></i> Veículos</a></li>
+                <li><a href="#" class="slide-item category-mod" data-category-game="1" data-category-mod="4" ><i class="side-menu__icon fas fa-bomb"></i> Armas</a></li>
+                <li><a href="#" class="slide-item category-mod" data-category-game="1" data-category-mod="5" ><i class="side-menu__icon fas fa-terminal"></i> Scripts</a></li>
+                <li><a href="#" class="slide-item category-mod" data-category-game="1" data-category-mod="6" ><i class="side-menu__icon fas fa-tshirt"></i> Jogador</a></li>
+                <li><a href="#" class="slide-item category-mod" data-category-game="1" data-category-mod="7" ><i class="side-menu__icon fas fa-map-marked-alt"></i> Mapas</a></li>
+                <li><a href="#" class="slide-item category-mod" data-category-game="1" data-category-mod="8" ><i class="side-menu__icon fas fa-bars"></i> Outros</a></li>
             </ul>
         </li>
         <li class="slide">
             <a class="side-menu__item" data-toggle="slide" href="#"><img src="{{ mix('/images/gtasa.png') }}" class="rounded-circle user_img mr-1" style="width: 30px; height: 30px;" ></i> <span class="side-menu__label">GTA SA</span><i class="angle fa fa-angle-right"></i></a>
             <ul class="slide-menu">
-                <li><a href="tables.html" class="slide-item"><i class="side-menu__icon fas fa-tools"></i> Ferramentas</a></li>
-                <li><a href="datatable.html" class="slide-item"><i class="side-menu__icon fas fa-car"></i> Veículos</a></li>
-                <li><a href="datatable.html" class="slide-item"><i class="side-menu__icon fas fa-bomb"></i> Armas</a></li>
-                <li><a href="datatable.html" class="slide-item"><i class="side-menu__icon fas fa-terminal"></i> Scripts</a></li>
-                <li><a href="datatable.html" class="slide-item"><i class="side-menu__icon fas fa-tshirt"></i> Jogador</a></li>
-                <li><a href="datatable.html" class="slide-item"><i class="side-menu__icon fas fa-map-marked-alt"></i> Mapas</a></li>
-                <li><a href="datatable.html" class="slide-item"><i class="side-menu__icon fas fa-bars"></i> Outros</a></li>
+                <li><a href="#" class="slide-item category-mod" data-category-game="2" data-category-mod="9"><i class="side-menu__icon fas fa-tools"></i> Ferramentas</a></li>
+                <li><a href="#" class="slide-item category-mod" data-category-game="2" data-category-mod="1"><i class="side-menu__icon fas fa-car"></i> Veículos</a></li>
+                <li><a href="#" class="slide-item category-mod" data-category-game="2" data-category-mod="4" ><i class="side-menu__icon fas fa-bomb"></i> Armas</a></li>
+                <li><a href="#" class="slide-item category-mod" data-category-game="2" data-category-mod="5" ><i class="side-menu__icon fas fa-terminal"></i> Scripts</a></li>
+                <li><a href="#" class="slide-item category-mod" data-category-game="2" data-category-mod="6" ><i class="side-menu__icon fas fa-tshirt"></i> Jogador</a></li>
+                <li><a href="#" class="slide-item category-mod" data-category-game="2" data-category-mod="7" ><i class="side-menu__icon fas fa-map-marked-alt"></i> Mapas</a></li>
+                <li><a href="#" class="slide-item category-mod" data-category-game="2" data-category-mod="8" ><i class="side-menu__icon fas fa-bars"></i> Outros</a></li>
             </ul>
         </li>
         <li class="slide">
             <a class="side-menu__item" data-toggle="slide" href="#"><img src="{{ mix('/images/ets2.png') }}" class="rounded-circle user_img mr-1" style="width: 30px; height: 30px;" ></i> <span class="side-menu__label">Euro Truck Simulator 2</span><i class="angle fa fa-angle-right"></i></a>
             <ul class="slide-menu">
-                <li><a href="tables.html" class="slide-item"><i class="side-menu__icon fas fa-tools"></i> Ferramentas</a></li>
-                <li><a href="datatable.html" class="slide-item"><i class="side-menu__icon fas fa-truck-moving"></i> Caminhões</a></li>
-                <li><a href="datatable.html" class="slide-item"><i class="side-menu__icon fas fa-bus-alt"></i> Ônibus</a></li>
-                <li><a href="datatable.html" class="slide-item"><i class="side-menu__icon fas fa-map-marked-alt"></i> Mapas</a></li>
-                <li><a href="datatable.html" class="slide-item"><i class="side-menu__icon fas fa-bars"></i> Outros</a></li>
+                <li><a href="#" class="slide-item category-mod" data-category-game="3" data-category-mod="9"><i class="side-menu__icon fas fa-tools"></i> Ferramentas</a></li>
+                <li><a href="#" class="slide-item category-mod" data-category-game="3" data-category-mod="2"><i class="side-menu__icon fas fa-truck-moving"></i> Caminhões</a></li>
+                <li><a href="#" class="slide-item category-mod" data-category-game="3" data-category-mod="3"><i class="side-menu__icon fas fa-bus-alt"></i> Ônibus</a></li>
+                <li><a href="#" class="slide-item category-mod" data-category-game="3" data-category-mod="7"><i class="side-menu__icon fas fa-map-marked-alt"></i> Mapas</a></li>
+                <li><a href="#" class="slide-item category-mod" data-category-game="3" data-category-mod="8"><i class="side-menu__icon fas fa-bars"></i> Outros</a></li>
             </ul>
         </li>
         <li class="slide">
             <a class="side-menu__item" data-toggle="slide" href="#"><img src="{{ mix('/images/gta4.ico') }}" class="rounded-circle user_img mr-1" style="width: 30px; height: 30px;" ></i> <span class="side-menu__label">GTA 4</span><i class="angle fa fa-angle-right"></i></a>
             <ul class="slide-menu">
-                <li><a href="tables.html" class="slide-item"><i class="side-menu__icon fas fa-tools"></i> Ferramentas</a></li>
-                <li><a href="datatable.html" class="slide-item"><i class="side-menu__icon fas fa-car"></i> Veículos</a></li>
-                <li><a href="datatable.html" class="slide-item"><i class="side-menu__icon fas fa-bomb"></i> Armas</a></li>
-                <li><a href="datatable.html" class="slide-item"><i class="side-menu__icon fas fa-terminal"></i> Scripts</a></li>
-                <li><a href="datatable.html" class="slide-item"><i class="side-menu__icon fas fa-tshirt"></i> Jogador</a></li>
-                <li><a href="datatable.html" class="slide-item"><i class="side-menu__icon fas fa-map-marked-alt"></i> Mapas</a></li>
-                <li><a href="datatable.html" class="slide-item"><i class="side-menu__icon fas fa-bars"></i> Outros</a></li>
+                <li><a href="#" class="slide-item category-mod" data-category-game="4" data-category-mod="9"><i class="side-menu__icon fas fa-tools"></i> Ferramentas</a></li>
+                <li><a href="#" class="slide-item category-mod" data-category-game="4" data-category-mod="1"><i class="side-menu__icon fas fa-car"></i> Veículos</a></li>
+                <li><a href="#" class="slide-item category-mod" data-category-game="4" data-category-mod="4" ><i class="side-menu__icon fas fa-bomb"></i> Armas</a></li>
+                <li><a href="#" class="slide-item category-mod" data-category-game="4" data-category-mod="5" ><i class="side-menu__icon fas fa-terminal"></i> Scripts</a></li>
+                <li><a href="#" class="slide-item category-mod" data-category-game="4" data-category-mod="6" ><i class="side-menu__icon fas fa-tshirt"></i> Jogador</a></li>
+                <li><a href="#" class="slide-item category-mod" data-category-game="4" data-category-mod="7" ><i class="side-menu__icon fas fa-map-marked-alt"></i> Mapas</a></li>
+                <li><a href="#" class="slide-item category-mod" data-category-game="4" data-category-mod="8" ><i class="side-menu__icon fas fa-bars"></i> Outros</a></li>
             </ul>
         </li>
         <li class="slide">
             <a class="side-menu__item" data-toggle="slide" href="#"><img src="{{ mix('/images/model-3d.png') }}" class="rounded-circle user_img mr-1" style="width: 30px; height: 30px;" ></i> <span class="side-menu__label">Modelos 3D</span><i class="angle fa fa-angle-right"></i></a>
             <ul class="slide-menu">
-                <li><a href="datatable.html" class="slide-item"><i class="side-menu__icon fas fa-car"></i> Veículos</a></li>
-                <li><a href="datatable.html" class="slide-item"><i class="side-menu__icon fas fa-bomb"></i> Contruções</a></li>
-                <li><a href="datatable.html" class="slide-item"><i class="side-menu__icon fas fa-terminal"></i> Texturas</a></li>
-                <li><a href="datatable.html" class="slide-item"><i class="side-menu__icon fas fa-tshirt"></i> Personagens</a></li>
-                <li><a href="datatable.html" class="slide-item"><i class="side-menu__icon fas fa-bars"></i> Outros</a></li>
+                <li><a href="#" class="slide-item category-mod" data-category-game="5" data-category-mod="1"><i class="side-menu__icon fas fa-car"></i> Veículos</a></li>
+                <li><a href="#" class="slide-item category-mod" data-category-game="5" data-category-mod="1"><i class="side-menu__icon fas fa-bomb"></i> Contruções</a></li>
+                <li><a href="#" class="slide-item category-mod" data-category-game="5" data-category-mod="1"><i class="side-menu__icon fas fa-terminal"></i> Texturas</a></li>
+                <li><a href="#" class="slide-item category-mod" data-category-game="5" data-category-mod="1"><i class="side-menu__icon fas fa-tshirt"></i> Personagens</a></li>
+                <li><a href="#" class="slide-item category-mod" data-category-game="5" data-category-mod="1"><i class="side-menu__icon fas fa-bars"></i> Outros</a></li>
             </ul>
         </li>
     </ul>
