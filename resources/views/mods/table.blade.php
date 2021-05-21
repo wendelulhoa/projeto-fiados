@@ -3,7 +3,7 @@
         <div class="card">
             <div class="card-header border-0">
                 <div>
-                    <h3 class="card-title">Mods não aprovados</h3>
+                    <h3 class="card-title">{{ Route::getCurrentRoute()->getName() != 'mod-approved' ? 'Mods não aprovados' : 'Mods aprovados' }}</h3>
                 </div>
             </div>
             <div class="table-responsive">
@@ -22,7 +22,7 @@
                                 <td>{{ $item->name }}</td>
                                 <td>{{ date_format($item->created_at ,'d/m/Y H:i:s') }}</td>
                                 <td><a href="{{ Route('mods-detail',['id'=>$item->id]) }}"><i class="fas fa-external-link-alt"></i></a></td>
-                                <td>{!! $item->approved != true ? '<button class="btn btn-success">Aprovar</button>' : '<button class="btn btn-danger">Bloquear</button>' !!}</td>
+                                <td>{!! $item->approved != true ? '<button class="btn btn-success btn-sm status-mod" data-id="'.$item->id.'" data-type="false">Aprovar</button>' : '<button class="btn btn-danger btn-sm status-mod" id="status-mod" data-id="'.$item->id.'" data-type="true">Bloquear</button>' !!}</td>
                                 <td><a href=""><i class="fas fa-edit"></i></i></a></td>
                                 <td><a href="" style="color: red"> <i class="fas fa-trash-alt"></i></a></td>
                             </tr>

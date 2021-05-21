@@ -154,7 +154,7 @@
     $('.status-mod').click(function(){
         var id = $(this).attr('data-id');
         Swal.fire({
-            title: 'Tem certeza que deseja aprovar ?',
+            title: `Tem certeza que deseja ${$(this).attr('data-type') == 'true' ? 'aprovar' : 'bloquear' }?`,
             icon: 'question',
             showCancelButton: true,
             confirmButtonText: 'confirmar',
@@ -166,7 +166,7 @@
                     method:'POST',
                     data: {
                         id   : $(this).attr('data-id'),
-                        type : $(this).is(':checked'),
+                        type : $(this).attr('data-type') == 'true' ? true : false,
                         "_token": "{{ csrf_token() }}"
                     },
                     success: function(data){

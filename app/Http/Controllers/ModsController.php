@@ -139,7 +139,7 @@ class ModsController extends Controller
 
     public function approvedMod(Request $request){
       try {
-            if(isset($request->type) && !$request->type){
+            if(isset($request->type) && $request->type){
                 Mods::where('id', '=', $request->id)->update(['approved'=> false]);
             }else {
                 Mods::where('id', '=', $request->id)->update(['approved'=> true]);
