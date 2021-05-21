@@ -13,7 +13,7 @@
                             <th>Nome mod</th>
                             <th>data criação</th>
                             <th>Link</th>
-                            <th colspan="3">aprovar</th>
+                            <th colspan="3">status</th>
                         </tr>
                     </thead>
                     <tbody>

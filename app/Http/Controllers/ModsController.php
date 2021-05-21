@@ -30,7 +30,7 @@ class ModsController extends Controller
                 $request->param = strtoupper($request->param);
                 $mods           = Mods::where([['name', 'ilike', '%' . $request->param . '%']])->orWhere([['description', 'ilike', '%' . $request->param . '%']])->paginate(9) ?? [];
             } else {
-                $mods = DB::table('mods')->paginate(9) ?? [];
+                $mods = DB::table('mods')->where('approved','=','true')->paginate(9) ?? [];
             }
 
             return view('mods.mods', compact('mods', 'type', 'categoryGame', 'categoryMod'));
@@ -139,7 +139,7 @@ class ModsController extends Controller
 
     public function approvedMod(Request $request){
       try {
-            if(isset($request->type) && $request->type){
+            if(isset($request->type) && $request->type == 'true'){
                 Mods::where('id', '=', $request->id)->update(['approved'=> false]);
             }else {
                 Mods::where('id', '=', $request->id)->update(['approved'=> true]);

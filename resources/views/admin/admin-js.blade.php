@@ -154,7 +154,7 @@
     $('.status-mod').click(function(){
         var id = $(this).attr('data-id');
         Swal.fire({
-            title: `Tem certeza que deseja ${$(this).attr('data-type') == 'true' ? 'aprovar' : 'bloquear' }?`,
+            title: `Tem certeza que deseja ${$(this).attr('data-type') != 'true' ? 'aprovar' : 'bloquear' }?`,
             icon: 'question',
             showCancelButton: true,
             confirmButtonText: 'confirmar',
