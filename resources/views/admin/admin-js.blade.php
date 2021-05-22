@@ -57,8 +57,12 @@
                     contentType: false,
                     processData: false,
                     success: function(data){
+                        alert('cadastrado com sucesso')
                         $('.reset').val('');
                         $('#img-mods').html("");
+                    },
+                    error: function(data){
+                        alert('ocorreu um erro')
                     }
                 });
                 

@@ -102,9 +102,11 @@ class ModsController extends Controller
                 ]);
             } else {
                 Storage::delete($imagesDelete);
+                DB::rollBack();
                 return response(['error' => 'path vazio'], 400);
             }
             DB::commit();
+            return response(['success' => 'cadastrado com sucesso'], 200);
         } catch (Exception $e) {
             DB::rollBack();
             Storage::delete($imagesDelete);
