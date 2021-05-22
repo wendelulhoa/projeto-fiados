@@ -233,6 +233,9 @@ $quantImages = count($images) ?? 0;
     .mt-100 {
         margin-top: 100px
     }
+    .product-gallery .product-item img {
+        height: 450px;
+    }
 </style>
 @endsection
 
