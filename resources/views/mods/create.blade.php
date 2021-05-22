@@ -29,11 +29,11 @@
             </div>
         <div class="form-group col-md-12">
             <label for="">Imagem da tela principal</label><br />
-            principal: <input type="file" class="reset" id="file" name="principal-img"><br />
+            principal: <input type="file" class="reset img-mod" id="img-principal" name="principal-img"><br />
         </div>
         <div class="form-group col-md-12">
             <label for="">pressione ctrl para selecionar varias imagens</label><br />
-            Images: <input type="file" class="reset" id="file" name="files[]" multiple><br />
+            Images: <input type="file" class="reset img-mod" id="file" name="files[]" multiple><br />
         </div>
         <div class="form-row col-md-12">
             <textarea class="form-control mb- reset" id="description-not-send"  value="" rows="5"

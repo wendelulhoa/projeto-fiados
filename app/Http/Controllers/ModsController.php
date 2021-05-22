@@ -48,15 +48,27 @@ class ModsController extends Controller
             $path         = [];
         
             if (isset($request['files']) && isset($request['principal-img'])) {
-                
+                $id = Auth()->user()->id;
                 foreach ($data['files'] as $key => $value) {
-                    $imagePath      = $value->store('mods/images');
-                    $path[]         = ['path' => $imagePath];
-                    $imagesDelete[] = $imagePath;
+                
+                    // returns \Intervention\Image\Image - OK
+                    $resize         = Image::make($value)
+                                    ->resize(1080, null, function ($constraint) { $constraint->aspectRatio(); } )
+                                    ->encode('png',80);
+                    
+                    // calculate md5 hash of encoded image
+                    $hash           = md5($resize->__toString());
+                    $rand           = rand(5, 20); 
+                    
+                    // use hash as a name
+                    $secondaryImg   = "images/mods-principal/{$id}-{$hash}{$rand}.png";
+
+                    Storage::put($secondaryImg, $resize);
+
+                    $path[]         = ['path' => $secondaryImg];
+                    $imagesDelete[] = $secondaryImg;
                 }
 
-                $id = Auth()->user()->id;
-                
                 // returns \Intervention\Image\Image - OK
                 $resize         = Image::make($request['principal-img'])
                                 ->resize(512, null, function ($constraint) { $constraint->aspectRatio(); } )
@@ -64,9 +76,10 @@ class ModsController extends Controller
                 
                 // calculate md5 hash of encoded image
                 $hash           = md5($resize->__toString());
+                $rand           = rand(5, 20); 
                 
                 // use hash as a name
-                $principalImage = "images/mods-principal/{$id}-{$hash}.png";
+                $principalImage = "images/mods-principal/{$id}-{$hash}{$rand}.png";
 
                 Storage::put($principalImage, $resize);
             } else {

@@ -6,8 +6,9 @@
     var etsCategory      = [2, 3, 7, 8, 9];
     var Model3dCategory  = [1, 6, 8, 10, 11];
 
-    $('#file').change(function(){
+    $('.img-mod').change(function(){
       $('#img-mods').html("");
+      const element = $(this);
       const total = $(this)[0].files.length;
       var imgs    = [];
 
@@ -21,6 +22,7 @@
                 <div class="col-6 col-md-3">
                     <a class="member"> <img src="${fileReader.result}" alt="thumb1" class="thumbimg">
                         <div class="memmbername">
+                        ${element.attr('id') == 'img-principal' ? 'Principal' : '' }
                         </div>
                     </a>
                 </div>
