@@ -26,13 +26,10 @@
     }
 </style>
 @foreach ($mods as $key => $item)
-@php
-    $image = json_decode($item->images);
-@endphp
 @if (isset($type) && $type == 1)
     <div class="owl-item" style="width: 250.006px; margin-right: 25px; margin-top: 30px"><div class="item">
         <div class="memberblock mb-0">
-            <a href="{{ Route('mods-detail',['id'=>$item->id]) }}" class="member"> <img src="{{ Route('index') . '/'. $image[0]->path }}" alt="">
+            <a href="{{ Route('mods-detail',['id'=>$item->id]) }}" class="member"> <img src="{{ Route('index') . '/'. $item->principal_image }}" alt="">
                 <p class="text-center">{{$item->name}}</p>
                 <div class="memmbername row ml-auto">
                     <p class="text-warning mb-0">
@@ -54,7 +51,7 @@
                 <div class="product">
                     <div class="text-center product-img">
                     <a href="{{ Route('mods-detail',['id'=>$item->id]) }}">
-                        <img src="{{ Route('index') . '/'. $image[0]->path }}" alt="img" class="img-fluid img-responsive">
+                        <img src="{{ Route('index') . '/'. $item->principal_image }}" alt="img" class="img-fluid img-responsive">
                     </a>
                     </div>
                     <div class=" text-center mt-4" style="text-overflow: ellipsis;">

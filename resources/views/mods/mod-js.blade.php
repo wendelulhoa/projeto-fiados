@@ -2,7 +2,7 @@
 <script type="text/javascript" defer>
     @if(Auth::check())
         $('#submit-message').on('click', function(e){
-            var image = "{{ Route('index') . mix('images/user.png') }}";
+            var image = "{{ auth()->user()->image != null ? Route('index').'/'.'images/'.auth()->user()->image : mix('images/user.png') }}";
             var name = "{{ Auth::user()->name ?? ''}}";
             $.ajax({
                 url: "{{ Route('comments-create') }}",

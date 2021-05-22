@@ -47,7 +47,7 @@
                     <!--Navbar -->
                     <div class="dropdown header-profile">
                         <a class="nav-link pr-0 leading-none d-flex pt-1" data-toggle="dropdown" href="#">
-                            <span class="avatar avatar-md brround cover-image" data-image-src="{{ mix('images/user.png') }}"></span>
+                            <span class="avatar avatar-md brround cover-image" data-image-src="{{ auth()->user()->image != null ? Route('index').'/'.'images/'.auth()->user()->image : mix('images/user.png') }}"></span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                             <div class="drop-heading">

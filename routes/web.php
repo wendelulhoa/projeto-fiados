@@ -83,6 +83,10 @@ Route::group(['prefix'=>'admin', 'middleware'=>'auth'], function(){
 Route::group(['prefix'=>'user', 'middleware'=>'auth'], function(){
     Route::get('', 'UserController@index')->name('user-index');
 
+    Route::post('update/image', 'UserController@updateImage')->name('user-image-update');
+    
+    Route::post('update/password', 'UserController@updatePassword')->name('user-password-update');
+
     Route::get('/create', 'UserController@getStrutureCreate')->name('user-create');
     Route::get('/edit', 'UserController@getStrutureEdit')->name('user-edit');
     Route::get('/profile', 'UserController@getStrutureEdit')->name('user-profile');
@@ -92,6 +96,32 @@ Route::group(['prefix'=>'user', 'middleware'=>'auth'], function(){
 Route::get('mods/images/{args}', function ($args)
 {
     $file = Storage::disk('local')->get("mods/images/$args");
+    if(strpos($args, 'pdf')){
+        return response()->make($file,200,[ 'Content-Type' => 'application/pdf']);
+    }else if(strpos($args, 'jpeg')){
+        return response()->make($file,200,[ 'Content-Type' => 'image/jpeg']);
+    }else {
+        return response()->make($file,200,[ 'Content-Type' => 'image/png']);
+    }
+    
+});
+
+Route::get('/images/{path}/{args}', function ($path, $args)
+{
+    $file = Storage::disk('local')->get("images/$path/$args");
+    if(strpos($args, 'pdf')){
+        return response()->make($file,200,[ 'Content-Type' => 'application/pdf']);
+    }else if(strpos($args, 'jpeg')){
+        return response()->make($file,200,[ 'Content-Type' => 'image/jpeg']);
+    }else {
+        return response()->make($file,200,[ 'Content-Type' => 'image/png']);
+    }
+    
+});
+
+Route::get('/images/user/img/perfil/{args}', function ($args)
+{
+    $file = Storage::disk('local')->get("user/img/perfil/$args");
     if(strpos($args, 'pdf')){
         return response()->make($file,200,[ 'Content-Type' => 'application/pdf']);
     }else if(strpos($args, 'jpeg')){
@@ -131,6 +161,6 @@ Route::group(['prefix'=>'like'], function(){
 
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 
-Route::get('template', function(){
-    return view('template.index');
+Route::group(['prefix'=> 'gtav'], function(){
+    
 });

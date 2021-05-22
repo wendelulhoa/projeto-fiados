@@ -17,6 +17,7 @@ class CreateModsTable extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->text('description')->nullable();
+            $table->text('principal_image')->nullable();
             $table->json('images')->nullable();
             $table->boolean('approved')->nullable();
             $table->json('tags')->nullable();

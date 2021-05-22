@@ -10,27 +10,28 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class ModsController extends Controller
 {
     public function index(Request $request)
     {
         try {
-            $type = null;
+            $type         = null;
             $categoryGame = ['GTA V', 'GTA SA', ' ETS2', 'GTA IV', 'MODELOS 3D'];
             $categoryMod  = ['VEÍCULOS', 'CAMINHÕES', 'ÔNIBUS', 'ARMAS', 'SCRIPTS', 'JOGADOR', 'MAPAS', 'OUTROS', 'FERRAMENTAS', 'CONSTRUÇÕES', 'TEXTURA'];
 
-            if(isset($request['category-game']) && !empty($request['category-game']) && empty($request['category-mod']) ){
+            if (isset($request['category-game']) && !empty($request['category-game']) && empty($request['category-mod'])) {
                 $type = $categoryGame[$request['category-game'] - 1];
-                $mods = Mods::where(['category_game'=> $request['category-game']])->paginate(9);
-            } else if (isset($request['category-mod']) && isset($request['category-game']) && !empty($request['category-mod'])){
+                $mods = Mods::where(['category_game' => $request['category-game']])->paginate(9);
+            } else if (isset($request['category-mod']) && isset($request['category-game']) && !empty($request['category-mod'])) {
                 $type = $categoryGame[$request['category-game'] - 1];
-                $mods = Mods::where(['category_game'=> $request['category-game'], 'category'=> $request['category-mod']])->paginate(9);
+                $mods = Mods::where(['category_game' => $request['category-game'], 'category' => $request['category-mod']])->paginate(9);
             } else if (isset($request->param)) {
                 $request->param = strtoupper($request->param);
                 $mods           = Mods::where([['name', 'ilike', '%' . $request->param . '%']])->orWhere([['description', 'ilike', '%' . $request->param . '%']])->paginate(9) ?? [];
             } else {
-                $mods = DB::table('mods')->where('approved','=','true')->paginate(9) ?? [];
+                $mods = DB::table('mods')->where('approved', '=', 'true')->paginate(9) ?? [];
             }
 
             return view('mods.mods', compact('mods', 'type', 'categoryGame', 'categoryMod'));
@@ -45,29 +46,46 @@ class ModsController extends Controller
             $data         = $request->all();
             $imagesDelete = [];
             $path         = [];
-
-            if (isset($request['files'])) {
+        
+            if (isset($request['files']) && isset($request['principal-img'])) {
+                
                 foreach ($data['files'] as $key => $value) {
                     $imagePath      = $value->store('mods/images');
                     $path[]         = ['path' => $imagePath];
                     $imagesDelete[] = $imagePath;
                 }
+
+                $id = Auth()->user()->id;
+                
+                // returns \Intervention\Image\Image - OK
+                $resize         = Image::make($request['principal-img'])
+                                ->resize(512, null, function ($constraint) { $constraint->aspectRatio(); } )
+                                ->encode('png',80);
+                
+                // calculate md5 hash of encoded image
+                $hash           = md5($resize->__toString());
+                
+                // use hash as a name
+                $principalImage = "images/mods-principal/{$id}-{$hash}.png";
+
+                Storage::put($principalImage, $resize);
             } else {
                 $path = [];
             }
             DB::beginTransaction();
             if ($path != []) {
                 Mods::create([
-                    'name'          => $request['name'],
-                    'description'   => $request['description'],
-                    'images'        => json_encode($path),
-                    'approved'      => false,
-                    'tags'          => $request['tag'],
-                    'link'          => $request['link'],
-                    'category_game' => $request['category-game'],
-                    'category'      => $request['category'],
-                    'user_id'       => Auth::user()->id,
-                    'total_likes'   => 0,
+                    'name'            => $request['name'],
+                    'description'     => $request['description'],
+                    'principal_image' => $principalImage,
+                    'images'          => json_encode($path),
+                    'approved'        => false,
+                    'tags'            => $request['tag'],
+                    'link'            => $request['link'],
+                    'category_game'   => $request['category-game'],
+                    'category'        => $request['category'],
+                    'user_id'         => Auth::user()->id,
+                    'total_likes'     => 0,
                 ]);
             } else {
                 Storage::delete($imagesDelete);
@@ -112,11 +130,11 @@ class ModsController extends Controller
             $user     = $mod[0]->user_id ?? 0;
             $comments = Comments::where(['id_mod' => $id])
                 ->join('users', 'comments.user_id', 'users.id')
-                ->select('users.name', 'comments.*')
+                ->select('users.name', 'users.image', 'comments.*')
                 ->orderBy('comments.id')->get();
             $likeSelect = false;
             $totalLikes = $mod[0]->total_likes ?? 0;
-            $mods = Mods::where([['id','<>',$mod[0]['id']], ['category', $mod[0]['category']]])->paginate(5) ?? [];
+            $mods       = Mods::where([['id', '<>', $mod[0]['id']], ['category', $mod[0]['category']]])->paginate(5) ?? [];
 
             if (Auth::check()) {
                 $likeSelect = count(Likes::where(['user_id' => Auth::user()->id, 'id_mod' => $id])->get()) > 0 ? true : false;
@@ -137,15 +155,16 @@ class ModsController extends Controller
         }
     }
 
-    public function approvedMod(Request $request){
-      try {
-            if(isset($request->type) && $request->type == 'true'){
-                Mods::where('id', '=', $request->id)->update(['approved'=> false]);
-            }else {
-                Mods::where('id', '=', $request->id)->update(['approved'=> true]);
+    public function approvedMod(Request $request)
+    {
+        try {
+            if (isset($request->type) && $request->type == 'true') {
+                Mods::where('id', '=', $request->id)->update(['approved' => false]);
+            } else {
+                Mods::where('id', '=', $request->id)->update(['approved' => true]);
             }
         } catch (Exception $e) {
 
-        }  
+        }
     }
 }

@@ -21,6 +21,8 @@ class DatabaseSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => Hash::make('123456'), // password
             'type_user'=> 1,
+            'active'=> true,
+            'image'=> null,
             'remember_token' =>null
         ]);
         User::create([
@@ -29,8 +31,11 @@ class DatabaseSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => Hash::make('Ulhoa0503'), // password
             'type_user'=> 1,
+            'active'=> true,
+            'image'=> null,
             'remember_token' =>null
         ]);
+        
         $categoryGame = ['GTA V', 'GTA SA', ' ETS2', 'GTA IV', 'MODELOS 3D'];
         $categoryMods = ['VEÍCULOS', 'CAMINHÕES', 'ÔNIBUS', 'ARMAS', 'SCRIPTS', 'JOGADOR', 'MAPAS', 'OUTROS', 'FERRAMENTAS', 'CONSTRUÇÕES', 'TEXTURA'];
 

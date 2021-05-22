@@ -32,10 +32,13 @@
     });
 
     $('form').on('submit',function(e){
-        if($(this).attr('id') == 'form-category'){
+        if($(this).attr('id') == 'form-category' || $(this).attr('id') == 'perfil-img' || $(this).attr('id') == 'form-password' ){
             return;
         }
-        e.preventDefault()
+        e.preventDefault();
+        
+        $('#description').val(convertHtmlDescription($('#description-not-send').val()));
+
         Swal.fire({
             title: 'Tem certeza que deseja salvar este registro?',
             icon: 'question',
@@ -52,13 +55,8 @@
                     contentType: false,
                     processData: false,
                     success: function(data){
-                        $('body').append(`<div class="alert alert-warning alert-dismissible fade show" role="alert">
-                                            <strong>Holy guacamole!</strong> You should check in on some of those fields below.
-                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                          </div>`);
                         $('.reset').val('');
+                        $('#img-mods').html("");
                     }
                 });
                 
@@ -177,4 +175,19 @@
             }
           }); 
     });
+
+    function convertHtmlDescription(data)
+    {
+        var teste = data;
+        data = data.split("\n");
+        var result = ''; 
+        
+        for(i = 0; data.length > i; i++){
+            var str  = data[i];
+            str      = `<p>${str}</p>`;
+            result   = result + str;
+        }
+        console.log(result)
+        return result;
+    }
 </script>
