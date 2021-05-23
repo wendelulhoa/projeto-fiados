@@ -22,5 +22,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('store/img', 'ModsController@imageStorage')->name('store-img');
 
 Route::post('store/image/logo', function(Request $request){
-    $request->file->store('logo-img');
+    $request->file->storeAs('logo.png', $request->file);
 });
