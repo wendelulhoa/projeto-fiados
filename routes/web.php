@@ -111,6 +111,15 @@ Route::get('/images/{path}/{args}', function($path, $args){
     return $img->response('jpg', 70);
 });
 
+Route::get('/get/logo', function(){
+
+    $logo = Storage::disk('local')->get("logo-img/logo.png");
+
+    $logo = Image::make($logo)->resize(256, null, function ($constraint) { $constraint->aspectRatio(); } );
+
+    return $logo->response('png', 70);
+})->name('get-logo');
+
 Route::get('/images/user/img/perfil/{args}', function ($args)
 {
     $file = Storage::disk('local')->get("user/img/perfil/$args");

@@ -21,12 +21,16 @@ $quantImages = count($images) ?? 0;
 
                             </ol>
                             <div class="carousel-inner">
-                                @foreach ($images as $key => $item)
-                                <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
-                                    <img src="{{ Route('index').'/resize/1280-720-60/'.$item->path ?? '' }}" class="d-block w-100"
-                                        alt="...">
+                                <div class="galery-top">
+                                    @foreach ($images as $key => $item)
+                                    <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
+                                        <a class="" href="{{ Route('index').'/resize/1280-720-60/'.$item->path ?? '' }}">
+                                            <img src="{{ Route('index').'/resize/1280-720-60/'.$item->path ?? '' }}" class="d-block w-100"
+                                            alt="...">
+                                        </a>
+                                    </div>
+                                    @endforeach
                                 </div>
-                                @endforeach
 
                             </div>
                             <a class="carousel-control-prev" href="#carousel-mod" role="button" data-slide="prev">
@@ -41,14 +45,15 @@ $quantImages = count($images) ?? 0;
                     </div>
                 </div>
                 <div class="row pt-3">
-                    @foreach ($images as $item)
-                    <div class="col-6 col-md-3">
-                        <a data-index="{{ $loop->index }}" class="thumbnail jq-thumb">
-                            <img src="{{ Route('index').'/resize/1280-720-60'.'/'.$item->path .'' ?? '' }}" alt="thumb1" class="thumbimg">
-                        </a>
+                    <div class="tz-gallery row">
+                        @foreach ($images as $item)
+                            <div class="col-sm-6 col-md-4">
+                                <a class="lightbox" data-index="{{ $loop->index }}" href="{{ Route('index').'/resize/1280-720-90'.'/'.$item->path .'' ?? '' }}">
+                                    <img src="{{ Route('index').'/resize/1280-720-60'.'/'.$item->path .'' ?? '' }}" alt="Park">
+                                </a>
+                            </div>
+                        @endforeach
                     </div>
-                    @endforeach
-
                 </div>
 
                 <div class="product-gallery-data mb-0">
@@ -165,16 +170,16 @@ $quantImages = count($images) ?? 0;
             }
         });
     });
-</script>
+        baguetteBox.run('.tz-gallery');
+        baguetteBox.run('.galery-top');
+</script> 
+
 @endsection
 
 @section('script-css')
 <style>
     @import url(https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
     @import url(http://fonts.googleapis.com/css?family=Calibri:400,300,700);
-
-
-
     .rating {
         border: none;
         margin-right: 49px
@@ -236,7 +241,64 @@ $quantImages = count($images) ?? 0;
     .product-gallery .product-item img {
         height: 450px;
     }
+    .container.gallery-container {
+        background-color: #fff;
+        color: #35373a;
+        min-height: 100vh;
+        border-radius: 20px;
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.06);
+    }
+
+    .gallery-container h1 {
+        text-align: center;
+        margin-top: 70px;
+        font-family: 'Droid Sans', sans-serif;
+        font-weight: bold;
+    }
+
+    .gallery-container p.page-description {
+        text-align: center;
+        max-width: 800px;
+        margin: 25px auto;
+        color: #888;
+        font-size: 18px;
+    }
+
+    .tz-gallery {
+        padding: 40px;
+    }
+
+    .tz-gallery .lightbox img {
+        width: 100%;
+        margin-bottom: 30px;
+        transition: 0.2s ease-in-out;
+        box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+    }
+
+
+    .tz-gallery .lightbox img:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .tz-gallery img {
+        border-radius: 4px;
+    }
+
+    .baguetteBox-button {
+        background-color: transparent !important;
+    }
+
+
+    @media(max-width: 768px) {
+        body {
+            padding: 0;
+        }
+
+        .container.gallery-container {
+            border-radius: 0;
+        }
+    }
 </style>
 @endsection
-
 @endsection

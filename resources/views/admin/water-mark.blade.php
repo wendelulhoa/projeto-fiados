@@ -20,7 +20,7 @@
                             <div class="row pt-3">
                                 <div class="col-2 col-md-2">
                                     <a class="thumbnail jq-thumb">
-                                        <img src=""
+                                        <img src="{{ Route('index') . '/get/logo' }}"
                                             alt="thumb1" class="thumbimg" id="img-modify">
                                     </a>
                                 </div>
