@@ -24,8 +24,8 @@ $quantImages = count($images) ?? 0;
                                 <div class="galery-top">
                                     @foreach ($images as $key => $item)
                                     <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
-                                        <a class="" href="{{ Route('index').'/resize/1280-720-60/'.$item->path ?? '' }}">
-                                            <img src="{{ Route('index').'/resize/1280-720-60/'.$item->path ?? '' }}" class="d-block w-100"
+                                        <a class="" href="{{ Route('index').'/resize/1280-720-90/'.$item->path ?? '' }}">
+                                            <img src="{{ Route('index').'/resize/1280-720-70/'.$item->path ?? '' }}" class="d-block w-100"
                                             alt="...">
                                         </a>
                                     </div>
@@ -298,6 +298,9 @@ $quantImages = count($images) ?? 0;
         .container.gallery-container {
             border-radius: 0;
         }
+    }
+    #baguetteBox-overlay .full-image img {
+        max-width: 70% !important;
     }
 </style>
 @endsection
