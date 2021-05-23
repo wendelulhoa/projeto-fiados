@@ -23,7 +23,7 @@ $quantImages = count($images) ?? 0;
                             <div class="carousel-inner">
                                 @foreach ($images as $key => $item)
                                 <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
-                                    <img src="{{ Route('index').'/'.$item->path ?? '' }}" class="d-block w-100"
+                                    <img src="{{ Route('index').'/resize/1280-720-60/'.$item->path ?? '' }}" class="d-block w-100"
                                         alt="...">
                                 </div>
                                 @endforeach
@@ -44,7 +44,7 @@ $quantImages = count($images) ?? 0;
                     @foreach ($images as $item)
                     <div class="col-6 col-md-3">
                         <a data-index="{{ $loop->index }}" class="thumbnail jq-thumb">
-                            <img src="{{ Route('index').'/'.$item->path ?? '' }}" alt="thumb1" class="thumbimg">
+                            <img src="{{ Route('index').'/resize/1280-720-60'.'/'.$item->path .'' ?? '' }}" alt="thumb1" class="thumbimg">
                         </a>
                     </div>
                     @endforeach

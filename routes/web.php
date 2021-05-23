@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\ImageManagerStatic as Image;
 
 /*
 |--------------------------------------------------------------------------
@@ -92,19 +93,6 @@ Route::group(['prefix'=>'user', 'middleware'=>'auth'], function(){
     Route::get('/profile', 'UserController@getStrutureEdit')->name('user-profile');
 });
 
-// rota que acessa as fotos salvas
-Route::get('mods/images/{args}', function ($args)
-{
-    $file = Storage::disk('local')->get("mods/images/$args");
-    if(strpos($args, 'pdf')){
-        return response()->make($file,200,[ 'Content-Type' => 'application/pdf']);
-    }else if(strpos($args, 'jpeg')){
-        return response()->make($file,200,[ 'Content-Type' => 'image/jpeg']);
-    }else {
-        return response()->make($file,200,[ 'Content-Type' => 'image/png']);
-    }
-    
-});
 
 Route::get('/images/{path}/{args}', function ($path, $args)
 {
@@ -164,3 +152,11 @@ Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 Route::group(['prefix'=> 'gtav'], function(){
     
 });
+
+Route::get('resize/{resize}/mods/images/{args}', function($resize,$args){
+    $resize = explode('-', $resize);
+
+    $file = Storage::disk('local')->get("/mods/images/{$args}");
+    $img = Image::make($file)->resize($resize[0], $resize[1]);
+    return $img->response('jpg', $resize[2]);
+})->name('resize-image');

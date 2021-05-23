@@ -50,21 +50,7 @@ class ModsController extends Controller
             if (isset($request['files']) && isset($request['principal-img'])) {
                 $id = Auth()->user()->id;
                 foreach ($data['files'] as $key => $value) {
-                
-                    // returns \Intervention\Image\Image - OK
-                    $resize         = Image::make($value)
-                                    ->resize(1080, null, function ($constraint) { $constraint->aspectRatio(); } )
-                                    ->encode('png',80);
-                    
-                    // calculate md5 hash of encoded image
-                    $hash           = md5($resize->__toString());
-                    $rand           = rand(5, 20); 
-                    
-                    // use hash as a name
-                    $secondaryImg   = "images/mods-principal/{$id}-{$hash}{$rand}.png";
-
-                    Storage::put($secondaryImg, $resize);
-
+                    $secondaryImg   = $value->store('mods/images');
                     $path[]         = ['path' => $secondaryImg];
                     $imagesDelete[] = $secondaryImg;
                 }
@@ -72,7 +58,7 @@ class ModsController extends Controller
                 // returns \Intervention\Image\Image - OK
                 $resize         = Image::make($request['principal-img'])
                                 ->resize(512, null, function ($constraint) { $constraint->aspectRatio(); } )
-                                ->encode('png',80);
+                                ->encode('png', 70);
                 
                 // calculate md5 hash of encoded image
                 $hash           = md5($resize->__toString());
