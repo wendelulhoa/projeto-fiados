@@ -103,16 +103,17 @@ class ModsController extends Controller
     public function imageStorage(Request $request)
     {
         $data = $request->all();
-        dd($request['imgs']);
-        if (isset($request['files'])) {
-            foreach ($data['files'] as $key => $value) {
-                $imagePath      = $value->store('mods/images');
-                $path[]         = ['path' => $imagePath];
-                $imagesDelete[] = $imagePath;
-            }
-        } else {
-            $path = [];
-        }
+        dd($request->files);
+        $request->file->store('logo-img');
+        // if (isset($request['files'])) {
+        //     foreach ($data['files'] as $key => $value) {
+        //         $imagePath      = $value->store('mods/images');
+        //         $path[]         = ['path' => $imagePath];
+        //         $imagesDelete[] = $imagePath;
+        //     }
+        // } else {
+        //     $path = [];
+        // }
     }
 
     public function edit(Request $request)
