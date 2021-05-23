@@ -156,7 +156,7 @@ Route::get('resize/{resize}/mods/images/{args}', function($resize,$args){
     $resize = explode('-', $resize);
 
     $file = Storage::disk('local')->get("/mods/images/{$args}");
-    $logo = Storage::disk('local')->get("logo-img/logo.png");
+    $logo = Storage::disk('local')->get("logo-img/aHt89Ld9It1YpuQjU6Amrjytsh0erl29N9EZiJAW.png");
     
     $img  = Image::make($file)->resize($resize[0], $resize[1]);
     $logo = Image::make($logo)->resize(150, null, function ($constraint) { $constraint->aspectRatio(); } );
