@@ -27,11 +27,13 @@
                     @if (Auth::user()->type_user == 1)
                         <li><a class="slide-item"  href="{{ Route('admin-index') }}"><span>Inicio</span></a></li>
                         <li><a class="slide-item"  href="{{ Route('admin-create') }}"><span>Cadastro de mod</span></a></li>
+                        <li><a class="slide-item"  href="{{ Route('mod-approved') }}"><span>Mods aprovados</span></a></li>
+                        <li><a class="slide-item"  href="{{ Route('mod-approved') }}"><span>Mods não aprovados</span></a></li>
+                        <li><a class="slide-item"  href="{{ Route('water-mark') }}"><span>Inserir marca D'água</span></a></li>
                     @else
                         <li><a class="slide-item"  href="{{ Route('user-index') }}"><span>Inicio</span></a></li>
                         <li><a class="slide-item"  href="{{ Route('user-create') }}"><span>Cadastro de mod</span></a></li>
                     @endif
-                    <li><a class="slide-item"  href="{{ Route('mod-approved') }}"><span>Mods aprovados</span></a></li>
                     <li><a class="slide-item"  href="{{ Route('user-edit') }}"><span>Atualizar informações</span></a></li>
                 </ul>
             </li>

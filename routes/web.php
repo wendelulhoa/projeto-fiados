@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
@@ -97,7 +98,7 @@ Route::group(['prefix'=>'user', 'middleware'=>'auth'], function(){
 Route::get('/images/{path}/{args}', function($path, $args){
 
     $file = Storage::disk('local')->get("images/$path/$args");
-    $logo = Storage::disk('local')->get("logo-img/aHt89Ld9It1YpuQjU6Amrjytsh0erl29N9EZiJAW.png");
+    $logo = Storage::disk('local')->get("logo-img/logo.png");
     
     $img  = Image::make($file);
     $logo = Image::make($logo)->resize(80, null, function ($constraint) { $constraint->aspectRatio(); } );
@@ -156,7 +157,7 @@ Route::get('resize/{resize}/mods/images/{args}', function($resize,$args){
     $resize = explode('-', $resize);
 
     $file = Storage::disk('local')->get("/mods/images/{$args}");
-    $logo = Storage::disk('local')->get("logo-img/aHt89Ld9It1YpuQjU6Amrjytsh0erl29N9EZiJAW.png");
+    $logo = Storage::disk('local')->get("logo-img/logo.png");
     
     $img  = Image::make($file)->resize($resize[0], $resize[1]);
     $logo = Image::make($logo)->resize(150, null, function ($constraint) { $constraint->aspectRatio(); } );
@@ -164,3 +165,5 @@ Route::get('resize/{resize}/mods/images/{args}', function($resize,$args){
 
     return $img->response('jpg', $resize[2]);
 })->name('resize-image');
+
+Route::any('watermark', 'AdminController@waterMark')->name('water-mark');
