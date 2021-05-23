@@ -50,6 +50,19 @@
             cancelButtonText:'cancelar'
           }).then((result)=>{
             if(result.isConfirmed){
+                $('#global-loader').html(`
+                    <div class="row" style="width: 100%;">
+                        <div class="col">
+                            <div class="col-6 ml-auto mr-auto">
+                                <img src="{{ mix('/images/pac-man.svg') }}" alt="loader">
+                                <div class="progress d-flex">
+                                    <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 1%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `);
+                
                 $('#global-loader').removeClass('global-hide');
                 $('#global-loader').addClass('global-see');
 
