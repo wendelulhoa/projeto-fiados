@@ -94,6 +94,7 @@
                                                 </div>
                                             </div>
                                         `);  
+                                        console.log(((100 * i + 1) / total))
                                     }
                                 });
                             }
