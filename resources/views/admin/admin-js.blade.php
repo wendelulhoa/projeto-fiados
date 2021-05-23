@@ -66,9 +66,10 @@
                         @if(Route::current()->getName() == 'admin-create')
                             const total = $('#files')[0].files.length;
                             const imgs  = $('#files')[0].files;
+                            var key     = 0;
 
                             for(var i = 0; i < total ; i++){
-                                var files = imgs[i];
+                                var files        = imgs[i];
                                 var fd = new FormData();
                                 
                                 fd.append('file', files);
@@ -82,31 +83,34 @@
                                     contentType: false,
                                     type: 'POST',
                                     success: function(data) {
+                                        key++;
                                         $('#global-loader').html(`
                                             <div class="row" style="width: 100%;">
                                                 <div class="col">
                                                     <div class="col-6 ml-auto mr-auto">
                                                     <img src="{{ mix('/images/pac-man.svg') }}" alt="loader">
                                                         <div class="progress d-flex">
-                                                            <div class="progress-bar progress-bar-striped" role="progressbar" style="width: ${((100 * i + 1) / total)}%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                                                            <div class="progress-bar progress-bar-striped" role="progressbar" style="width: ${parseInt(((100 * key) / total))}%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         `);  
-                                        console.log(((100 * i + 1) / total))
+
+                                        if(key == total){
+                                            $('#global-loader').removeClass('global-see');
+                                            $('#global-loader').addClass('global-hide');
+                                            alert('cadastrado com sucesso')
+                                            $('.reset').val('');
+                                            $('#img-mods').html("");
+                                        }
                                     }
                                 });
                             }
-
-                            
-                            // alert('cadastrado com sucesso')
-                            // $('.reset').val('');
-                            // $('#img-mods').html("");
                         @else
-                            // alert('cadastrado com sucesso')
-                            // $('.reset').val('');
-                            // $('#img-mods').html("");
+                            alert('cadastrado com sucesso')
+                            $('.reset').val('');
+                            $('#img-mods').html("");
                         @endif
                    
                         
