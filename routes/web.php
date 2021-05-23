@@ -94,17 +94,16 @@ Route::group(['prefix'=>'user', 'middleware'=>'auth'], function(){
 });
 
 
-Route::get('/images/{path}/{args}', function ($path, $args)
-{
+Route::get('/images/{path}/{args}', function($path, $args){
+
     $file = Storage::disk('local')->get("images/$path/$args");
-    if(strpos($args, 'pdf')){
-        return response()->make($file,200,[ 'Content-Type' => 'application/pdf']);
-    }else if(strpos($args, 'jpeg')){
-        return response()->make($file,200,[ 'Content-Type' => 'image/jpeg']);
-    }else {
-        return response()->make($file,200,[ 'Content-Type' => 'image/png']);
-    }
+    $logo = Storage::disk('local')->get("logo-img/logo.png");
     
+    $img  = Image::make($file);
+    $logo = Image::make($logo)->resize(80, null, function ($constraint) { $constraint->aspectRatio(); } );
+    $img->insert($logo, 'bottom-right', 56, 1);
+
+    return $img->response('jpg', 70);
 });
 
 Route::get('/images/user/img/perfil/{args}', function ($args)
@@ -157,6 +156,11 @@ Route::get('resize/{resize}/mods/images/{args}', function($resize,$args){
     $resize = explode('-', $resize);
 
     $file = Storage::disk('local')->get("/mods/images/{$args}");
-    $img = Image::make($file)->resize($resize[0], $resize[1]);
+    $logo = Storage::disk('local')->get("logo-img/logo.png");
+    
+    $img  = Image::make($file)->resize($resize[0], $resize[1]);
+    $logo = Image::make($logo)->resize(150, null, function ($constraint) { $constraint->aspectRatio(); } );
+    $img->insert($logo, 'bottom-right', 10, 10);
+
     return $img->response('jpg', $resize[2]);
 })->name('resize-image');
