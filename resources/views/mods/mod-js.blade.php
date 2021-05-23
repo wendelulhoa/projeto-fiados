@@ -42,7 +42,7 @@
                         "_token": "{{ csrf_token() }}"
                     },
                     success: function(data){ 
-                        alert('sucesso')
+                        toastr.success("Obrigado por contribuir.") 
                         var qtdLikes = parseInt($('#qtdLikes').attr('data-qtd-like')) + 1;
                         $('#qtdLikes').html(`${qtdLikes}`)
                         $('#qtdLikes').attr('data-qtd-like', qtdLikes);
@@ -59,7 +59,6 @@
                         "_token": "{{ csrf_token() }}"
                     },
                     success: function(data){
-                        alert('sucesso')
                         var qtdLikes = parseInt($('#qtdLikes').attr('data-qtd-like')) - 1;
                         $('#qtdLikes').html(`${qtdLikes}`);
                         $('#qtdLikes').attr('data-qtd-like', qtdLikes);

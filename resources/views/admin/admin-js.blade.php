@@ -62,7 +62,7 @@
                         </div>
                     </div>
                 `);
-                
+
                 $('#global-loader').removeClass('global-hide');
                 $('#global-loader').addClass('global-see');
 
@@ -114,15 +114,18 @@
                                         if(key == total){
                                             $('#global-loader').removeClass('global-see');
                                             $('#global-loader').addClass('global-hide');
-                                            alert('cadastrado com sucesso')
+                                            toastr.success("Cadastrado com sucesso")
                                             $('.reset').val('');
                                             $('#img-mods').html("");
                                         }
+                                    },
+                                    error : function(){
+                                       toastr.error("ocorreu um erro.") 
                                     }
                                 });
                             }
                         @else
-                            alert('cadastrado com sucesso')
+                            toastr.success("Cadastrado com sucesso")
                             $('.reset').val('');
                             $('#img-mods').html("");
                         @endif
@@ -131,7 +134,7 @@
                         
                     },
                     error: function(data){
-                        alert('ocorreu um erro')
+                         toastr.error("ocorreu um erro.")
                     }
                 });
                 

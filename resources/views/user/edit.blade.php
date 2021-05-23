@@ -93,15 +93,15 @@
                                             <div class="col-xl-12 col-lg-12 col-md-12">
                                                 <div class="form-group">
                                                     <label>Senha antiga</label>
-                                                    <input type="password" class="form-control password" name="password_old">
+                                                    <input type="password" class="form-control password reset" name="password_old">
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Nova senha</label>
-                                                    <input type="password" class="form-control password" id="password-new" name="password">
+                                                    <input type="password" class="form-control password reset" id="password-new" name="password">
                                                 </div>
                                                 <div class="form-group mb-0">
                                                     <label>Confirmar senha</label>
-                                                    <input type="password" class="form-control password" id="password-verify">
+                                                    <input type="password" class="form-control password reset" id="password-verify">
                                                 </div>
                                             </div>
                                         </div>
@@ -123,10 +123,10 @@
     $('.password').on('focusout', function(){
         $('.button-password').attr('disabled', true);
        if($(this).attr('id') == 'password-verify'){
-           if($(this).val() == $('#password-new').val()){
+           if($(this).val() == $('#password-new').val() && $(this).val().length > 7){
                $('.button-password').attr('disabled', false);
            }else{
-               alert('as senhas não correspondem')
+               toastr.error('Ops! as senhas não correspondem.')
            }
        }
     })
@@ -138,7 +138,11 @@
             method:'POST',
             data: $(this).serialize(),
             success: function(data){
+                toastr.success("Senha alterada com sucesso.") 
                 $('.reset').val('');
+            },
+            error: function(){
+               toastr.error('Ops! verifique se as senhas então corretas e tente novamente.') 
             }
         });
     });
