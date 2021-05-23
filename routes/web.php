@@ -64,8 +64,12 @@ route::get('teste', function(){
 /*rotas de mods*/
 Route::group(['prefix'=>'mods'], function(){
     Route::get('', 'ModsController@index')->name('mods-index');
+
     Route::post('approved', 'ModsController@approvedMod')->name('mods-approved');
     Route::get('/detail/{id}', 'ModsController@detail')->name('mods-detail');
+    
+    Route::post('/store/images', 'ModsController@imageStorage')->name('mods-store-images');
+
     Route::post('/create', 'ModsController@create')->name('mods-create');
     Route::post('/edit', 'ModsController@edit')->name('mods-edit');
     Route::post('/delete', 'ModsController@delete')->name('mods-delete');

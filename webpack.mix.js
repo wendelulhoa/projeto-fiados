@@ -14,6 +14,7 @@ const mix = require('laravel-mix');
 /*arquivos css*/
 mix.copy('resources/css/style.css', 'public/css')
     .copy('resources/images/logo.png', 'public/images')
+    .copy('resources/images/pac-man.svg', 'public/images')
     .copy('resources/images/loader.svg', 'public/images')
     .copy('resources/images/gta4.ico', 'public/images')
     .copy('resources/images/ets2.png', 'public/images')

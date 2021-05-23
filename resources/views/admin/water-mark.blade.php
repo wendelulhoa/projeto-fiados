@@ -20,7 +20,7 @@
                             <div class="row pt-3">
                                 <div class="col-2 col-md-2">
                                     <a class="thumbnail jq-thumb">
-                                        <img src="{{ auth()->user()->image != null ? Route('index').'/'.'images/'.auth()->user()->image : mix('images/user.png') }}"
+                                        <img src=""
                                             alt="thumb1" class="thumbimg" id="img-modify">
                                     </a>
                                 </div>
@@ -40,4 +40,17 @@
 @section('script-js')
 @include('admin.admin-js')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script>
+    $('#input-avatar').change(function(){
+        var files = $(this)[0].files[0];
+        filesAdd.push(files)
+
+        const fileReader = new FileReader();
+        fileReader.onloadend = function(){
+           $('#img-modify').attr('src', fileReader.result)
+        };
+        
+        fileReader.readAsDataURL(files)
+    })
+</script>
 @endsection

@@ -11,11 +11,12 @@
       const element = $(this);
       const total = $(this)[0].files.length;
       var imgs    = [];
+      var files = $(this)[0].files[0];
 
       for(var i = 0; i < total ; i++){
         var files = $(this)[0].files[i];
         filesAdd.push(files)
-
+        
         const fileReader = new FileReader();
         fileReader.onloadend = function(){
            $('#img-mods').append(`
@@ -49,6 +50,9 @@
             cancelButtonText:'cancelar'
           }).then((result)=>{
             if(result.isConfirmed){
+                $('#global-loader').removeClass('global-hide');
+                $('#global-loader').addClass('global-see');
+
                var ajax = $.ajax({
                     url: $(this).attr('data-route'),
                     method:'POST',
@@ -57,9 +61,56 @@
                     contentType: false,
                     processData: false,
                     success: function(data){
-                        alert('cadastrado com sucesso')
-                        $('.reset').val('');
-                        $('#img-mods').html("");
+                        $('#global-loader').removeClass('global-hide');
+                        $('#global-loader').addClass('global-see');
+                        @if(Route::current()->getName() == 'admin-create')
+                            const total = $('#files')[0].files.length;
+                            const imgs  = $('#files')[0].files;
+
+                            for(var i = 0; i < total ; i++){
+                                var files = imgs[i];
+                                var fd = new FormData();
+                                
+                                fd.append('file', files);
+                                fd.append("_token", "{{ csrf_token() }}");
+                                fd.append("id", data.id);
+
+                                $.ajax({
+                                    url: "{{ Route('mods-store-images') }}",
+                                    data: fd,
+                                    processData: false,
+                                    contentType: false,
+                                    type: 'POST',
+                                    success: function(data) {
+                                        $('#global-loader').html(`
+                                            <div class="row" style="width: 100%;">
+                                                <div class="col">
+                                                    <div class="col-6 ml-auto mr-auto">
+                                                    <img src="{{ mix('/images/pac-man.svg') }}" alt="loader">
+                                                        <div class="progress d-flex">
+                                                            <div class="progress-bar progress-bar-striped" role="progressbar" style="width: ${((100 * i + 1) / total)}%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        `);  
+                                    }
+                                });
+                            }
+
+                            $('#global-loader').removeClass('global-see');
+                            $('#global-loader').addClass('global-hide');
+                            // alert('cadastrado com sucesso')
+                            // $('.reset').val('');
+                            // $('#img-mods').html("");
+                        @else
+                            // alert('cadastrado com sucesso')
+                            // $('.reset').val('');
+                            // $('#img-mods').html("");
+                        @endif
+                   
+                        
+                        
                     },
                     error: function(data){
                         alert('ocorreu um erro')
@@ -111,13 +162,17 @@
         if($(`.${classElement}`).hasClass('active')){
             $(`.${classElement}`).removeClass('d-block active');  
         }else{
-            if($(`.${classElement}`).hasClass('4')){
-               getCategorysAndTags(); 
-            }
             $(`.active`).removeClass('d-block active'); 
             $(`.${classElement}`).addClass('d-block active');
         }  
     });
+
+    @if(Route::current()->getName() == 'admin-create')
+        $(document).ready(function(){
+            getCategorysAndTags(); 
+        });
+    @endif
+
 
     $('#category-game-select').change(function(){
         $('#category-select option').remove();
@@ -193,7 +248,6 @@
             str      = `<p>${str}</p>`;
             result   = result + str;
         }
-        console.log(result)
         return result;
     }
 </script>

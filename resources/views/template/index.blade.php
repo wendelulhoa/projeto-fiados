@@ -36,14 +36,38 @@
 
 		<!-- Rightsidebar css -->
 		<link href="{{ mix('/plugins/sidebar/sidebar.css') }}" rel="stylesheet">
+		<style>
+			#global-loader{
+				background: rgba(10,23,55,0.5);
+				
+			}
+			#global-loader img {
+				position: inherit !important;
+			}
+			.global-hide{
+				display: none;
+			}
+			.global-see{
+				display: block !important;
+			}
+		</style>
 		@yield('script-css')
 	</head>
 
 	<body class="app sidebar-mini rtl">
 
 		<!--Global-Loader-->
-		<div id="global-loader">
-			<img src="{{ mix('/images/loader.svg') }}" alt="loader">
+		<div id="global-loader" class="global-hide" style="padding-top: 200px">
+            <div class="row" style="width: 100%;">
+                <div class="col">
+                    <div class="col-6 ml-auto mr-auto">
+					<img src="{{ mix('/images/pac-man.svg') }}" alt="loader">
+						<div class="progress d-flex">
+							<div class="progress-bar progress-bar-striped" role="progressbar" style="width: 10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+						</div>
+                    </div>
+                </div>
+            </div>
 		</div>
 
 		<div class="page">

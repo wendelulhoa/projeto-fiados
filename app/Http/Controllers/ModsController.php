@@ -43,17 +43,12 @@ class ModsController extends Controller
     public function create(Request $request)
     {
         try {
-            $data         = $request->all();
-            $imagesDelete = [];
-            $path         = [];
+            $data           = $request->all();
+            $imagesDelete   = [];
+            $principalImage = [];
         
-            if (isset($request['files']) && isset($request['principal-img'])) {
+            if (isset($request['principal-img'])) {
                 $id = Auth()->user()->id;
-                foreach ($data['files'] as $key => $value) {
-                    $secondaryImg   = $value->store('mods/images');
-                    $path[]         = ['path' => $secondaryImg];
-                    $imagesDelete[] = $secondaryImg;
-                }
 
                 // returns \Intervention\Image\Image - OK
                 $resize         = Image::make($request['principal-img'])
@@ -69,30 +64,31 @@ class ModsController extends Controller
 
                 Storage::put($principalImage, $resize);
             } else {
-                $path = [];
+                $principalImage = [];
             }
+
             DB::beginTransaction();
-            if ($path != []) {
-                Mods::create([
-                    'name'            => $request['name'],
-                    'description'     => $request['description'],
-                    'principal_image' => $principalImage,
-                    'images'          => json_encode($path),
-                    'approved'        => false,
-                    'tags'            => $request['tag'],
-                    'link'            => $request['link'],
-                    'category_game'   => $request['category-game'],
-                    'category'        => $request['category'],
-                    'user_id'         => Auth::user()->id,
-                    'total_likes'     => 0,
-                ]);
+            if ($principalImage != []) {
+                $idMod = Mods::create([
+                        'name'            => $request['name'],
+                        'description'     => $request['description'],
+                        'principal_image' => $principalImage,
+                        'images'          => json_encode([]),
+                        'approved'        => false,
+                        'tags'            => $request['tag'],
+                        'link'            => $request['link'],
+                        'category_game'   => $request['category-game'],
+                        'category'        => $request['category'],
+                        'user_id'         => Auth::user()->id,
+                        'total_likes'     => 0,
+                ])->id;
             } else {
                 Storage::delete($imagesDelete);
                 DB::rollBack();
                 return response(['error' => 'path vazio'], 400);
             }
             DB::commit();
-            return response(['success' => 'cadastrado com sucesso'], 200);
+            return response(['id' => $idMod], 200);
         } catch (Exception $e) {
             DB::rollBack();
             Storage::delete($imagesDelete);
@@ -102,18 +98,33 @@ class ModsController extends Controller
 
     public function imageStorage(Request $request)
     {
-        $data = $request->all();
-        dd($request->files);
-        $request->file->store('logo-img');
-        // if (isset($request['files'])) {
-        //     foreach ($data['files'] as $key => $value) {
-        //         $imagePath      = $value->store('mods/images');
-        //         $path[]         = ['path' => $imagePath];
-        //         $imagesDelete[] = $imagePath;
-        //     }
-        // } else {
-        //     $path = [];
-        // }
+        try{
+            $data = $request->all();
+            $query= Mods::where('id', '=', $request->id);
+            $path = json_decode($query->get()[0]->images);
+            $pathImage = [];
+
+            
+            if(!empty($path)){
+                foreach($path as $value){
+                   $pathImage[]= ['path'=>$value->path];
+                }
+                $secondary      = $request->file->store('mods/images');
+                $pathImage[]    = ['path'=>$secondary];
+            }else{
+                $secondary      = $request->file->store('mods/images');
+                $pathImage[]    = ['path'=>$secondary];
+            }
+            
+            $imagesDelete[] = $secondary;
+
+            $query->update(['images' => json_encode($pathImage)]);
+            return response(['success'=> true], 200);
+        }catch(Exception $e){
+            dd($e);
+            Storage::delete($imagesDelete);
+            return response(['error'=> true], 400);
+        }
     }
 
     public function edit(Request $request)
