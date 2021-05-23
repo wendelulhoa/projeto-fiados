@@ -66,7 +66,6 @@
 						
 							<div class="progress-bar progress-bar-striped" role="progressbar" style="width: 1%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
 						</div>
-						<strong><span>aa</span> de 1 arquivos salvos</strong>
                     </div>
                 </div>
             </div>
