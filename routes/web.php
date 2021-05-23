@@ -58,8 +58,10 @@ Route::group(['prefix'=>'category/mods'], function(){
 route::get('teste', function(){
     
     $teste = Storage::allFiles('mods/images');
-    // return $teste;
+    $test2 = Storage::allFiles('images/mods-principal');
+    
     Storage::delete($teste);
+    Storage::delete($test2);
 });
 /*rotas de mods*/
 Route::group(['prefix'=>'mods'], function(){
@@ -174,7 +176,7 @@ Route::get('resize/{resize}/mods/images/{args}', function($resize,$args){
     
     $img  = Image::make($file)->resize($resize[0], $resize[1]);
     $logo = Image::make($logo)->resize(150, null, function ($constraint) { $constraint->aspectRatio(); } );
-    $img->insert($logo, 'bottom-right', 10, 10);
+    // $img->insert($logo, 'bottom-right', 10, 10);
 
     return $img->response('jpg', $resize[2]);
 })->name('resize-image');

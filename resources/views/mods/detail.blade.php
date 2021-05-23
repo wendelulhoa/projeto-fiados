@@ -9,49 +9,23 @@ $quantImages = count($images) ?? 0;
     <div class="col-lg-12 col-xl-9">
         <div class="card">
             <div class="card-body single-productslide">
-                <div class="product-gallery border">
-                    <div class="product-item text-center">
-                        <div id="carousel-mod" class="carousel slide" data-ride="carousel">
-                            <ol class="carousel-indicators">
-                                @foreach ($images as $key => $item)
-
-                                <li data-target="#carousel-mod" data-slide-to="{{ $key }}"
-                                    class="{{ $key == 0 ? 'active' : '' }}"></li>
-                                @endforeach
-
-                            </ol>
-                            <div class="carousel-inner">
-                                <div class="galery-top">
-                                    @foreach ($images as $key => $item)
-                                    <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
-                                        <a class="" href="{{ Route('index').'/resize/1280-720-90/'.$item->path ?? '' }}">
-                                            <img src="{{ Route('index').'/resize/1280-720-70/'.$item->path ?? '' }}" class="d-block w-100"
-                                            alt="...">
-                                        </a>
-                                    </div>
-                                    @endforeach
-                                </div>
-
-                            </div>
-                            <a class="carousel-control-prev" href="#carousel-mod" role="button" data-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="sr-only">Previous</span>
-                            </a>
-                            <a class="carousel-control-next" href="#carousel-mod" role="button" data-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="sr-only">Next</span>
-                            </a>
-                        </div>
+                <div class="tz-gallery row">
+                <div class="product-gallery">
+                    <div class="text-center">
+                        <a class="lightbox" style="margin-bottom: 10px;" href="{{ Route('index').'/resize/1280-720-90'.'/'.$images[0]->path .'' ?? '' }}">
+                            <img src="{{ Route('index').'/resize/1280-720-90'.'/'. $images[0]->path ?? '' }}" alt="img">
+                        </a>  
                     </div>
                 </div>
                 <div class="row pt-3">
-                    <div class="tz-gallery row">
                         @foreach ($images as $item)
-                            <div class="col-sm-6 col-md-4">
-                                <a class="lightbox" data-index="{{ $loop->index }}" href="{{ Route('index').'/resize/1280-720-90'.'/'.$item->path .'' ?? '' }}">
-                                    <img src="{{ Route('index').'/resize/1280-720-60'.'/'.$item->path .'' ?? '' }}" alt="Park">
-                                </a>
-                            </div>
+                            @if ($images[0]->path != $item->path)
+                                <div class="col-sm-6 col-md-4">
+                                    <a class="lightbox" href="{{ Route('index').'/resize/1280-720-90'.'/'.$item->path .'' ?? '' }}">
+                                        <img src="{{ Route('index').'/resize/1280-720-60'.'/'.$item->path .'' ?? '' }}" alt="Park">
+                                    </a>
+                                </div>
+                            @endif
                         @endforeach
                     </div>
                 </div>
@@ -239,7 +213,7 @@ $quantImages = count($images) ?? 0;
         margin-top: 100px
     }
     .product-gallery .product-item img {
-        height: 450px;
+        height: 370px;
     }
     .container.gallery-container {
         background-color: #fff;
@@ -270,7 +244,7 @@ $quantImages = count($images) ?? 0;
 
     .tz-gallery .lightbox img {
         width: 100%;
-        margin-bottom: 30px;
+        margin-bottom: 12px;
         transition: 0.2s ease-in-out;
         box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
     }
