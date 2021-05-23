@@ -98,8 +98,7 @@
                                 });
                             }
 
-                            $('#global-loader').removeClass('global-see');
-                            $('#global-loader').addClass('global-hide');
+                            
                             // alert('cadastrado com sucesso')
                             // $('.reset').val('');
                             // $('#img-mods').html("");
