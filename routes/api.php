@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,3 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('store/img', 'ModsController@imageStorage')->name('store-img');
+
+Route::post('store/image/logo', function(Request $request){
+    $request->file->store('logo-img');
+});
