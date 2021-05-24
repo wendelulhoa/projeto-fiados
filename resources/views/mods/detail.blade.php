@@ -159,7 +159,7 @@ $quantImages = count($images) ?? 0;
                     },
                     success: function(data){ 
                         toastr.success("Obrigado por contribuir.") 
-                        var qtdStars = parseInt($('#qtdStars').attr('data-qtd-like')) + value;
+                        var qtdStars = parseInt($('#qtdStars').attr('data-qtd-like')) + parseInt(value);
 
                         $('#qtdStars').html(`${parseInt(qtdStars)}`);
                         $('#qtdStars').attr('data-qtd-like', parseInt(qtdStars));
