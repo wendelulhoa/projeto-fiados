@@ -152,7 +152,7 @@ class ModsController extends Controller
             $totalLikes = $mod[0]->total_likes ?? 0;
             $totalStars = $mod[0]->total_stars ?? 0;
             $mods       = Mods::where([['id', '<>', $mod[0]['id']], ['category', $mod[0]['category']]])->paginate(5) ?? [];
-
+            $star       = [];
             if (Auth::check()) {
                 $star       = Stars::where(['user_id' => Auth::user()->id, 'id_mod' => $id])->get();
                 $likeSelect = count(Likes::where(['user_id' => Auth::user()->id, 'id_mod' => $id])->get()) > 0 ? true : false;
@@ -161,7 +161,7 @@ class ModsController extends Controller
 
             return view('mods.detail', compact('mod', 'id', 'comments', 'user', 'likeSelect', 'starSelect', 'totalLikes', 'totalStars', 'mods', 'star'));
         } catch (Exception $e) {
-            return response(['error' => $e], 500);
+            abort(500);
         }
 
     }
