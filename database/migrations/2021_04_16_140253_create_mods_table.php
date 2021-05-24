@@ -28,6 +28,7 @@ class CreateModsTable extends Migration
             $table->integer('total_likes')->nullable();
             $table->float('total_stars')->nullable();
             $table->integer('total_users_stars')->nullable();
+            $table->integer('total_downloads')->nullable();
             $table->timestamps();
         });
     }

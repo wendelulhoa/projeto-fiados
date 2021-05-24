@@ -145,6 +145,7 @@ Route::group(['prefix'=>'comments'], function(){
 
 Route::group(['prefix'=>'notification'], function(){
     Route::post('/get', 'NotificationsController@getNotification')->name('notification-get');
+    Route::get('', 'NotificationsController@index')->name('notification-index');
     // Route::get('/edit/{id}', 'CommentController@edit')->name('comments-edit');
     // Route::get('/delete', 'CommentController@delete')->name('comments-delete');
 });
@@ -166,6 +167,26 @@ Route::group(['prefix'=>'stars'], function(){
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::group(['prefix'=> 'gtav'], function(){
+    
+});
+
+Route::group(['prefix'=> 'gtaiv'], function(){
+    
+});
+
+Route::group(['prefix'=> 'gtasa'], function(){
+    
+});
+
+Route::group(['prefix'=> 'ets2'], function(){
+    
+});
+
+Route::group(['prefix'=> 'assetocorsa'], function(){
+    
+});
+
+Route::group(['prefix'=> 'models3d'], function(){
     
 });
 

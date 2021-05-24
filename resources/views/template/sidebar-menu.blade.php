@@ -36,6 +36,7 @@
                         <li><a class="slide-item"  href="{{ Route('mod-approved') }}"><span>Mods aprovados</span></a></li>
                         <li><a class="slide-item"  href="{{ Route('mod-not-approved') }}"><span>Mods não aprovados</span></a></li>
                     @endif
+                    <li><a class="slide-item"  href="{{ Route('notification-index') }}"><span>Notificações</span></a></li>
                     <li><a class="slide-item"  href="{{ Route('user-edit') }}"><span>Atualizar informações</span></a></li>
                 </ul>
             </li>

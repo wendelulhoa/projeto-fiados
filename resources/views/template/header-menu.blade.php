@@ -33,13 +33,13 @@
                             
                         </a>
                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                            <a class="dropdown-item text-center" href="#">Notificações</a>
+                            <a class="dropdown-item text-center" href="{{ Route('notification-index') }}">Notificações</a>
                             <div class="dropdown-divider"></div>
                             <div id="notifications-user"></div>
                             <div class="dropdown-divider"></div>
                             <div class="text-center dropdown-btn pb-3">
                                 <div class="btn-list">
-                                    <a href="#" class=" btn btn-success btn-sm"><i class="fe fe-eye mr-1"></i>Visualizar todas</a>
+                                    <a href="{{ Route('notification-index') }}" class=" btn btn-success btn-sm"><i class="fe fe-eye mr-1"></i>Visualizar todas</a>
                                 </div>
                             </div>
                         </div>
@@ -63,11 +63,11 @@
                             <a class="dropdown-item" href="{{ route('logout') }}"><i class="dropdown-icon fe fe-power"></i> Sair</a>
                         </div>
                     </div>
-                    <div class="dropdown d-md-flex Sidebar-setting">
+                    {{-- <div class="dropdown d-md-flex Sidebar-setting">
                         <a href="#" class="nav-link icon" data-toggle="sidebar-right" data-target=".sidebar-right">
                             <i class="fas fa-bars"></i>
                         </a>
-                    </div>
+                    </div> --}}
                 @endguest
             </div>
         </div>

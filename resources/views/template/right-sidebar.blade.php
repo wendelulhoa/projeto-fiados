@@ -23,7 +23,7 @@
                             <li>
                                 <div class="d-flex bd-highlight">
                                     <div class="img_cont">
-                                        <img src="../../assets/images/users/male/3.jpg" class="rounded-circle user_img" alt="img">
+                                        <img src="" class="rounded-circle user_img" alt="img">
                                         <span class="online_icon"></span>
                                     </div>
                                     <div class="user_info">

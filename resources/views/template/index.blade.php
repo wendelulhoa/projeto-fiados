@@ -8,9 +8,6 @@
 		<meta content="Ulhoa developers" name="author">
 		<meta name="keywords" content="mods br, mods ets2, mods gta5, mods gta sa, mods 3d"/>
 
-		<!-- Favicon -->
-		<link rel="icon" href="../../assets/images/brand/favicon.ico" type="image/x-icon"/>
-		<link rel="shortcut icon" type="image/x-icon" href="../../assets/images/brand/favicon.ico" />
 
 		<!-- Title -->
 		<title>Ulhoa mods</title>
@@ -22,6 +19,7 @@
 		<link href="{{ mix('/css/style.css') }}" rel="stylesheet" />
 		<link href="{{ mix('/css/dark-style.css') }}" rel="stylesheet" />
 		<link href="{{ mix('/css/skin-modes.css') }}" rel="stylesheet">
+		<link href="{{ mix('/css/icons.css') }}" rel="stylesheet">
 
 		<!-- P-scrollbar css-->
 		<link href="{{ mix('/plugins/p-scrollbar/p-scrollbar.css') }}" rel="stylesheet" />
@@ -165,12 +163,6 @@
 
 		<!-- Chart Circle js-->
 		<script src="{{ mix('/js/circle-progress.min.js') }}"></script>
-
-		<!-- Star Rating js-->
-		<script src="{{ mix('/plugins/rating/jquery.rating-stars.js') }}"></script>
-
-		<!--Moment js-->
-		<script src="{{ mix('/plugins/moment/moment.min.js') }}"></script>
 
 		<!-- Daterangepicker js-->
 		<script src="{{ mix('/plugins/bootstrap-daterangepicker/daterangepicker.js') }}"></script>

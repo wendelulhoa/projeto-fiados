@@ -40,7 +40,8 @@ mix.copy('resources/plugins/sidemenu/sidemenu.css', 'public/plugins/sidemenu/sid
 mix.copy('resources/js/jquery-3.4.1.min.js', 'public/js')
     .copy('resources/js/jquery.sparkline.min.js', 'public/js')
     .copy('resources/js/circle-progress.min.js', 'public/js')
-    .copy('resources/js/custom.js', 'public/js');
+    .copy('resources/js/custom.js', 'public/js')
+    .copy('resources/iconfonts/', 'public/iconfonts');
 
 /*Plugins js*/
 mix.copy('resources/plugins/bootstrap/js/popper.min.js', 'public/plugins/bootstrap/js/popper.min.js')
