@@ -7,17 +7,17 @@
         </div>
         <div class="form-group col-md-12">
             <label for="">link mod</label>
-            <input type="text" name="link" class="form-control reset" id="" placeholder="link do mod">
+            <input type="text" name="link" class="form-control reset" id="" placeholder="link do mod" required>
         </div>    
             <div class="form-group col-md-12">
                 <label for="category-game-select">Categoria do jogo</label>
-                <select id="category-game-select" class="form-control reset select2" name="category-game">
+                <select id="category-game-select" class="form-control reset select2" name="category-game" required>
                     <option selected>Selecione</option>
                 </select>
             </div>
             <div class="form-group col-md-12">
                 <label for="category-select">Categoria</label>
-                <select id="category-select" class="form-control reset select2" name="category">
+                <select id="category-select" class="form-control reset select2" name="category" required>
                     <option selected>Selecione</option>
                 </select>
             </div>

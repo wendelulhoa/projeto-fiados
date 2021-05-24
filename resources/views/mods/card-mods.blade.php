@@ -36,7 +36,7 @@
                         <i class="fas fa-download fa-1x text-success"></i>
                         <p class="pl-2 pr-2">100</p>
                         <i class="fas fa-star text-warning"></i>
-                        <p class="pl-2 pr-2">5</p>
+                        <p class="pl-2 pr-2">{{ $item->total_users_stars == 0 ? $item->total_stars : $item->total_stars / $item->total_users_stars }}</p>
                         <i class="fas fa-thumbs-up text-info"></i>
                         <p class="pl-2">{{ $item->total_likes ?? 0 }}</p>
                     </p>
@@ -59,7 +59,7 @@
                             <i class="fas fa-download fa-1x text-success"></i>
                             <p class="pl-2 pr-2">100</p>
                             <i class="fas fa-star text-warning"></i>
-                            <p class="pl-2 pr-2">{{ $item->total_stars ?? 0 }}</p>
+                            <p class="pl-2 pr-2">{{ $item->total_users_stars == 0 ? $item->total_stars : $item->total_stars / $item->total_users_stars}}</p>
                             <i class="fas fa-thumbs-up text-info"></i>
                             <p class="pl-2">{{ $item->total_likes ?? 0 }}</p>
                         </div>

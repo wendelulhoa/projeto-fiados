@@ -8,6 +8,7 @@ use App\Models\Mods;
 use App\Models\Tags;
 use App\Models\User;
 use Exception;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Request;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManagerStatic as Image;
@@ -57,11 +58,29 @@ class AdminController extends Controller
 
     public function approved(){
         try {
-            $mods = Mods::where('approved', 'true')->paginate(6) ?? [];
+            if(Auth::user()->type_user == 0){
+                $mods = Mods::where(['approved'=> true, 'user_id'=> Auth::user()->id])->paginate(6) ?? [];
+            }else{
+                $mods = Mods::where('approved', 'true')->paginate(6) ?? [];
+            }
 
             return view('admin.approved', ['mods'=>$mods]);
         } catch (Exception $e) {
+            abort(500);
+        }
+    }
+    
+    public function notApproved(){
+        try {
+            if(Auth::user()->type_user == 0){
+                $mods = Mods::where(['approved'=> false, 'user_id'=> Auth::user()->id])->paginate(6) ?? [];
+            }else{
+                $mods = Mods::where(['approved'=> false])->paginate(6) ?? [];
+            }
 
+            return view('admin.not-approved', ['mods'=>$mods]);
+        } catch (Exception $e) {
+            abort(500);
         }
     }
 

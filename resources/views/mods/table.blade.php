@@ -22,7 +22,11 @@
                                 <td>{{ $item->name }}</td>
                                 <td>{{ date_format($item->created_at ,'d/m/Y H:i:s') }}</td>
                                 <td><a href="{{ Route('mods-detail',['id'=>$item->id]) }}"><i class="fas fa-external-link-alt"></i></a></td>
-                                <td>{!! $item->approved != true ? '<button class="btn btn-success btn-sm status-mod" data-id="'.$item->id.'" data-type="false">Aprovar</button>' : '<button class="btn btn-danger btn-sm status-mod" id="status-mod" data-id="'.$item->id.'" data-type="true">Bloquear</button>' !!}</td>
+                                @if ($item->approved != true && Auth::user()->type_user != 0)
+                                    <td>{!! $item->approved != true && Auth::user()->type_user != 0 ? '<button class="btn btn-success btn-sm status-mod" data-id="'.$item->id.'" data-type="false">Aprovar</button>' : '<button class="btn btn-danger btn-sm status-mod" id="status-mod" data-id="'.$item->id.'" data-type="true">Bloquear</button>' !!} </td>
+                                @else
+                                    <td>{{ Auth::user()->type_user == 0 && $item->approved ? 'Aprovado' : 'Não aprovado' }}</td>
+                                @endif
                                 <td><a href=""><i class="fas fa-edit"></i></i></a></td>
                                 <td><a href="" style="color: red"> <i class="fas fa-trash-alt"></i></a></td>
                             </tr>

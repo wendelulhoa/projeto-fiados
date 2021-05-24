@@ -59,9 +59,10 @@ class ModsController extends Controller
                 // calculate md5 hash of encoded image
                 $hash           = md5($resize->__toString());
                 $rand           = rand(5, 20); 
+                $extension      = $request['principal-img']->extension();
                 
                 // use hash as a name
-                $principalImage = "images/mods-principal/{$id}-{$hash}{$rand}.png";
+                $principalImage = "images/mods-principal/{$id}-{$hash}{$rand}.{$extension}";
 
                 Storage::put($principalImage, $resize);
             } else {
@@ -82,7 +83,8 @@ class ModsController extends Controller
                         'category'        => $request['category'],
                         'user_id'         => Auth::user()->id,
                         'total_likes'     => 0,
-                        'total_stars'     => 0
+                        'total_stars'     => 0,
+                        'total_users_stars'=> 0
                 ])->id;
             } else {
                 Storage::delete($imagesDelete);
@@ -150,7 +152,7 @@ class ModsController extends Controller
             $likeSelect = false;
             $starSelect = false;
             $totalLikes = $mod[0]->total_likes ?? 0;
-            $totalStars = $mod[0]->total_stars ?? 0;
+            $totalStars = $mod[0]->total_users_stars == 0 ? $mod[0]->total_stars : $mod[0]->total_stars / $mod[0]->total_users_stars;
             $mods       = Mods::where([['id', '<>', $mod[0]['id']], ['category', $mod[0]['category']]])->paginate(5) ?? [];
             $star       = [];
             if (Auth::check()) {

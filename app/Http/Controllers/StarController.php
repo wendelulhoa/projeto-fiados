@@ -22,14 +22,16 @@ class StarController extends Controller
 
             if (count($starsExists) == 0) {
                 $mod   = Mods::where('id', '=', $request['id']);
-                $total = $mod->get()[0]->total_stars;
-                $total = intval($total) + $request['total'];
+                $mod   = $mod->get();
+                $totalUsers = $mod[0]->total_users_stars + 1;
+                $total      = $mod[0]->total_stars;
+                $total = floatval($total) + floatval($request['total']);
 
-                Mods::where(['id' => $request['id']])->update(['total_stars' => intval($total)]);
+                Mods::where(['id' => $request['id']])->update(['total_stars' => floatval($total), 'total_users_stars' => $totalUsers]);
 
                 Stars::create([
                     'id_mod'  => $request['id'],
-                    'stars'  => $request['total'],
+                    'stars'  => floatval($request['total']),
                     'user_id' => Auth::user()->id,
                 ]);
             } else {

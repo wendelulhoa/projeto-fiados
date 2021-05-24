@@ -9,7 +9,6 @@
     @include('layouts.cards', ['name'=>'Categorias', 'total'=> 20, 'icon'=>'<i class="fas fa-barcode"></i>'])
 </div>
 
-@include('mods.table',compact('mods'))
 @section('script-js')
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     @include('admin.admin-js')

@@ -40,41 +40,41 @@ $quantImages = count($images) ?? 0;
                     <a href="{{ $mod[0]->link ?? '' }}" class="btn  btn-success"> <i class="fas fa-download fa-1x"></i>
                         Download</a>
                     <a class="btn btn-default" ><i class="fa fa-star text-warning"></i>Estrelas <span
-                            class="badge badge-warning" id="qtdStars" data-qtd-like='{{ $totalStars ?? 0 }}'>
+                            class="badge badge-warning" id="qtdStars" data-qtd-stars='{{ $totalStars ?? 0 }}' data-users="{{ $mod[0]->total_users_stars ?? 0 }}">
                             {{ $totalStars ?? 0 }}</span></a>
                     <div class="product-gallery-rats">
                         <ul class="product-gallery-rating">
                             <li>
                                 Avaliar
                                 <fieldset class="rating" id="star" data-selected="{{ $starSelect ? 'true' : 'false' }}"> 
-                                <input type="radio" id="star5" name="rating" value="5" {{ $starSelect ? 'disabled' : '' }}  {{ isset($star[0]->stars) && count($star[0]->stars) > 0 &&$star[0]->stars == 5 ? 'checked' : ''  ?? ''}}/>
+                                <input type="radio" id="star5" name="rating" value="5" {{ $starSelect ? 'disabled' : '' }}  {{ isset($star[0]->stars) &&$star[0]->stars == 5 ? 'checked' : ''  ?? ''}}/>
                                 <label class="full" for="star5" title="Awesome - 5 stars"></label> 
                                 
-                                <input type="radio" id="star4half" name="rating" value="4.5" {{ $starSelect ? 'disabled' : '' }} {{ isset($star[0]->stars) && count($star[0]->stars) > 0 &&$star[0]->stars == 4.5 ? 'checked' : '' }}/>
+                                <input type="radio" id="star4half" name="rating" value="4.5" {{ $starSelect ? 'disabled' : '' }} {{ isset($star[0]->stars) &&$star[0]->stars == 4.5 ? 'checked' : '' }}/>
                                 <label class="half" for="star4half" title="Pretty good - 4.5 stars"></label> 
                                 
-                                <input type="radio" id="star4" name="rating" value="4" {{ $starSelect ? 'disabled' : '' }} {{ isset($star[0]->stars) && count($star[0]->stars) > 0 &&$star[0]->stars == 4 ? 'checked' : '' }}/>
+                                <input type="radio" id="star4" name="rating" value="4" {{ $starSelect ? 'disabled' : '' }} {{ isset($star[0]->stars) &&$star[0]->stars == 4 ? 'checked' : '' }}/>
                                 <label class="full" for="star4" title="Pretty good - 4 stars"></label>
                                 
-                                <input type="radio" id="star3half" name="rating" value="3.5" {{ $starSelect ? 'disabled' : '' }} {{ isset($star[0]->stars) && count($star[0]->stars) > 0 &&$star[0]->stars == 3.5 ? 'checked' : '' }} />
+                                <input type="radio" id="star3half" name="rating" value="3.5" {{ $starSelect ? 'disabled' : '' }} {{ isset($star[0]->stars) &&$star[0]->stars == 3.5 ? 'checked' : '' }} />
                                 <label class="half" for="star3half" title="Meh - 3.5 stars"></label> 
                                 
-                                <input type="radio" id="star3" name="rating" value="3" {{ $starSelect ? 'disabled' : '' }} {{ isset($star[0]->stars) && count($star[0]->stars) > 0 &&$star[0]->stars == 3 ? 'checked' : '' }} />
+                                <input type="radio" id="star3" name="rating" value="3" {{ $starSelect ? 'disabled' : '' }} {{ isset($star[0]->stars) &&$star[0]->stars == 3 ? 'checked' : '' }} />
                                 <label class="full" for="star3" title="Meh - 3 stars"></label>
                                 
-                                <input type="radio" id="star2half" name="rating" value="2.5" {{ $starSelect ? 'disabled' : '' }} {{ isset($star[0]->stars) && count($star[0]->stars) > 0 &&$star[0]->stars == 2.5 ? 'checked' : '' }} />
+                                <input type="radio" id="star2half" name="rating" value="2.5" {{ $starSelect ? 'disabled' : '' }} {{ isset($star[0]->stars) &&$star[0]->stars == 2.5 ? 'checked' : '' }} />
                                 <label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
                                 
                                 <input type="radio" id="star2" name="rating" value="2" />
-                                <label class="full" for="star2" title="Kinda bad - 2 stars" {{ $starSelect ? 'disabled' : '' }} {{ isset($star[0]->stars) && count($star[0]->stars) > 0 &&$star[0]->stars == 2 ? 'checked' : '' }} ></label> 
+                                <label class="full" for="star2" title="Kinda bad - 2 stars" {{ $starSelect ? 'disabled' : '' }} {{ isset($star[0]->stars) &&$star[0]->stars == 2 ? 'checked' : '' }} ></label> 
                                 
-                                <input type="radio" id="star1half" name="rating" value="1.5" {{ $starSelect ? 'disabled' : '' }} {{ isset($star[0]->stars) && count($star[0]->stars) > 0 &&$star[0]->stars == 1.5 ? 'checked' : '' }} />
+                                <input type="radio" id="star1half" name="rating" value="1.5" {{ $starSelect ? 'disabled' : '' }} {{ isset($star[0]->stars) &&$star[0]->stars == 1.5 ? 'checked' : '' }} />
                                 <label class="half" for="star1half" title="Meh - 1.5 stars"></label>
                                 
-                                <input type="radio" id="star1" name="rating" value="1" {{ $starSelect ? 'disabled' : '' }} {{ isset($star[0]->stars) && count($star[0]->stars) > 0 &&$star[0]->stars == 1 ? 'checked' : '' }}/>
+                                <input type="radio" id="star1" name="rating" value="1" {{ $starSelect ? 'disabled' : '' }} {{ isset($star[0]->stars) &&$star[0]->stars == 1 ? 'checked' : '' }}/>
                                 <label class="full"for="star1" title="Sucks big time - 1 star"></label> 
                                     
-                                <input type="radio" id="starhalf" name="rating" value="0.5" {{ $starSelect ? 'disabled' : '' }} {{ isset($star[0]->stars) && count($star[0]->stars) > 0 &&$star[0]->stars == 0.5 ? 'checked' : '' }}/>
+                                <input type="radio" id="starhalf" name="rating" value="0.5" {{ $starSelect ? 'disabled' : '' }} {{ isset($star[0]->stars) &&$star[0]->stars == 0.5 ? 'checked' : '' }}/>
                                 
                                 <label class="half"for="starhalf" title="Sucks big time - 0.5 stars"></label> 
                                 <input type="radio" class="reset-option" name="rating" value="reset" />
@@ -146,7 +146,6 @@ $quantImages = count($images) ?? 0;
         $("input[type='radio']").click(function () {
             var value = $("input[type='radio']:checked").val();
             $("input[type='radio']").attr('disabled', true);
-
             if($('#star').attr('data-selected') == 'false'){
                 $('#star').attr('data-selected', 'true');
                 $.ajax({
@@ -158,12 +157,7 @@ $quantImages = count($images) ?? 0;
                         total : value
                     },
                     success: function(data){ 
-                        toastr.success("Obrigado por contribuir.") 
-                        var qtdStars = parseInt($('#qtdStars').attr('data-qtd-like')) + parseInt(value);
-
-                        $('#qtdStars').html(`${parseInt(qtdStars)}`);
-                        $('#qtdStars').attr('data-qtd-like', parseInt(qtdStars));
-                        $('.fa-thumbs-up').addClass('text-info');
+                        toastr.success("Obrigado por contribuir.");
                     }
                 });
             } 

@@ -14,6 +14,15 @@
       var files = $(this)[0].files[0];
 
       for(var i = 0; i < total ; i++){
+          var type = $(this)[0].files[i].type;
+          if(type != "image/jpeg" && type != "image/png"){
+            toastr.error("formatos permitidos jpg, png, bmp.");
+            $('#files').val('')
+            return ;
+          }
+      }
+
+      for(var i = 0; i < total ; i++){
         var files = $(this)[0].files[i];
         filesAdd.push(files)
         
@@ -76,7 +85,7 @@
                     success: function(data){
                         $('#global-loader').removeClass('global-hide');
                         $('#global-loader').addClass('global-see');
-                        @if(Route::current()->getName() == 'admin-create')
+                        @if(Route::current()->getName() == 'admin-create' || Route::current()->getName() == 'user-create')
                             const total = $('#files')[0].files.length;
                             const imgs  = $('#files')[0].files;
                             var key     = 0;
@@ -188,7 +197,7 @@
         }  
     });
 
-    @if(Route::current()->getName() == 'admin-create')
+    @if(Route::current()->getName() == 'admin-create' || Route::current()->getName() == 'user-create')
         $(document).ready(function(){
             getCategorysAndTags(); 
         });

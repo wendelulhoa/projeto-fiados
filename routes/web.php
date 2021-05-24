@@ -81,6 +81,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>'auth'], function(){
     Route::get('', 'AdminController@index')->name('admin-index');
 
     Route::get('/mods/approved', 'AdminController@approved')->name('mod-approved');
+    Route::get('/mods/not/approved', 'AdminController@notApproved')->name('mod-not-approved');
 
     Route::get('/listusers', 'AdminController@listUsers')->name('admin-listusers');
     Route::get('/create', 'AdminController@getStrutureCreate')->name('admin-create');
