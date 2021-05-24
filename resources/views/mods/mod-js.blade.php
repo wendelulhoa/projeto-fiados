@@ -14,7 +14,7 @@
                     "_token": "{{ csrf_token() }}"
                 },
                 success: function(data){
-                    alert('sucesso')
+                    toastr.success("Obrigado por contribuir.");
                     
                     $('.list-unstyled').append(`
                         <li class="media media-lg mt-0 pb-2 pt-2">

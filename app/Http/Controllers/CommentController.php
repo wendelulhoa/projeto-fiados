@@ -27,6 +27,7 @@ class CommentController extends Controller
                     'message' => $request['message'],
                     'link'    => '',
                     'user_id' => $request['user'],
+                    'id_mod'  => $request['id'],
                     'active'  => true,
                 ]);
             }
