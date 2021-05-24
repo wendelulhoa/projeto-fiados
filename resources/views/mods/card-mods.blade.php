@@ -55,16 +55,11 @@
                     </a>
                     </div>
                     <div class=" text-center mt-4" style="text-overflow: ellipsis;">
-                        <div class="text-center text-warning">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
                         <div class="row pt-3 ml-auto" style="padding-left: 50px">
                             <i class="fas fa-download fa-1x text-success"></i>
                             <p class="pl-2 pr-2">100</p>
                             <i class="fas fa-star text-warning"></i>
-                            <p class="pl-2 pr-2">5</p>
+                            <p class="pl-2 pr-2">{{ $item->total_stars ?? 0 }}</p>
                             <i class="fas fa-thumbs-up text-info"></i>
                             <p class="pl-2">{{ $item->total_likes ?? 0 }}</p>
                         </div>

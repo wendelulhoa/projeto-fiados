@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Comments;
 use App\Models\Likes;
 use App\Models\Mods;
+use App\Models\Stars;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -81,6 +82,7 @@ class ModsController extends Controller
                         'category'        => $request['category'],
                         'user_id'         => Auth::user()->id,
                         'total_likes'     => 0,
+                        'total_stars'     => 0
                 ])->id;
             } else {
                 Storage::delete($imagesDelete);
@@ -146,13 +148,18 @@ class ModsController extends Controller
                 ->select('users.name', 'users.image', 'comments.*')
                 ->orderBy('comments.id')->get();
             $likeSelect = false;
+            $starSelect = false;
             $totalLikes = $mod[0]->total_likes ?? 0;
+            $totalStars = $mod[0]->total_stars ?? 0;
             $mods       = Mods::where([['id', '<>', $mod[0]['id']], ['category', $mod[0]['category']]])->paginate(5) ?? [];
 
             if (Auth::check()) {
+                $star       = Stars::where(['user_id' => Auth::user()->id, 'id_mod' => $id])->get();
                 $likeSelect = count(Likes::where(['user_id' => Auth::user()->id, 'id_mod' => $id])->get()) > 0 ? true : false;
+                $starSelect = count($star) > 0 ? true : false;
             }
-            return view('mods.detail', compact('mod', 'id', 'comments', 'user', 'likeSelect', 'totalLikes', 'mods'));
+
+            return view('mods.detail', compact('mod', 'id', 'comments', 'user', 'likeSelect', 'starSelect', 'totalLikes', 'totalStars', 'mods', 'star'));
         } catch (Exception $e) {
             return response(['error' => $e], 500);
         }

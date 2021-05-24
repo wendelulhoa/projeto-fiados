@@ -13,7 +13,7 @@ class CreateCategoryGamesTable extends Migration
      */
     public function up()
     {
-        Schema::create('category_games', function (Blueprint $table) {
+       Schema::create('category_games', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable()->unique();
             $table->timestamps();
@@ -27,6 +27,6 @@ class CreateCategoryGamesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('category_game');
+        Schema::dropIfExists('category_games');
     }
 }

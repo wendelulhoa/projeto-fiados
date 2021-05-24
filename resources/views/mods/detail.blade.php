@@ -39,36 +39,46 @@ $quantImages = count($images) ?? 0;
                             {{ $totalLikes ?? 0 }}</span></a>
                     <a href="{{ $mod[0]->link ?? '' }}" class="btn  btn-success"> <i class="fas fa-download fa-1x"></i>
                         Download</a>
-                    <button type="button" class="btn btn-default"><i class="fa fa-star text-warning"></i>Estrelas <span
-                            class="badge badge-warning">
-                            {{ $totalLikes ?? 0 }}</span></button>
+                    <a class="btn btn-default" ><i class="fa fa-star text-warning"></i>Estrelas <span
+                            class="badge badge-warning" id="qtdStars" data-qtd-like='{{ $totalStars ?? 0 }}'>
+                            {{ $totalStars ?? 0 }}</span></a>
                     <div class="product-gallery-rats">
                         <ul class="product-gallery-rating">
                             <li>
                                 Avaliar
-                                <fieldset class="rating"> <input type="radio" id="star5" name="rating"
-                                        value="5" /><label class="full" for="star5"
-                                        title="Awesome - 5 stars"></label> <input type="radio" id="star4half"
-                                        name="rating" value="4.5" /><label class="half" for="star4half"
-                                        title="Pretty good - 4.5 stars"></label> <input type="radio" id="star4"
-                                        name="rating" value="4" /><label class="full" for="star4"
-                                        title="Pretty good - 4 stars"></label>
-                                    <input type="radio" id="star3half" name="rating" value="3.5" /><label
-                                        class="half" for="star3half" title="Meh - 3.5 stars"></label> <input
-                                        type="radio" id="star3" name="rating" value="3" /><label class="full"
-                                        for="star3" title="Meh - 3 stars"></label>
-                                    <input type="radio" id="star2half" name="rating" value="2.5" /><label
-                                        class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
-                                    <input type="radio" id="star2" name="rating" value="2" /><label class="full"
-                                        for="star2" title="Kinda bad - 2 stars"></label> <input type="radio"
-                                        id="star1half" name="rating" value="1.5" /><label class="half"
-                                        for="star1half" title="Meh - 1.5 stars"></label>
-                                    <input type="radio" id="star1" name="rating" value="1" /><label class="full"
-                                        for="star1" title="Sucks big time - 1 star"></label> <input type="radio"
-                                        id="starhalf" name="rating" value="0.5" /><label class="half"
-                                        for="starhalf" title="Sucks big time - 0.5 stars"></label> <input
-                                        type="radio" class="reset-option" name="rating" value="reset" />
-                                        
+                                <fieldset class="rating" id="star" data-selected="{{ $starSelect ? 'true' : 'false' }}"> 
+                                <input type="radio" id="star5" name="rating" value="5" {{ $starSelect ? 'disabled' : '' }}  {{ isset($star[0]->stars) && $star[0]->stars == 5 ? 'checked' : ''  ?? ''}}/>
+                                <label class="full" for="star5" title="Awesome - 5 stars"></label> 
+                                
+                                <input type="radio" id="star4half" name="rating" value="4.5" {{ $starSelect ? 'disabled' : '' }} {{ isset($star[0]->stars) && $star[0]->stars == 4.5 ? 'checked' : '' }}/>
+                                <label class="half" for="star4half" title="Pretty good - 4.5 stars"></label> 
+                                
+                                <input type="radio" id="star4" name="rating" value="4" {{ $starSelect ? 'disabled' : '' }} {{ isset($star[0]->stars) && $star[0]->stars == 4 ? 'checked' : '' }}/>
+                                <label class="full" for="star4" title="Pretty good - 4 stars"></label>
+                                
+                                <input type="radio" id="star3half" name="rating" value="3.5" {{ $starSelect ? 'disabled' : '' }} {{ isset($star[0]->stars) && $star[0]->stars == 3.5 ? 'checked' : '' }} />
+                                <label class="half" for="star3half" title="Meh - 3.5 stars"></label> 
+                                
+                                <input type="radio" id="star3" name="rating" value="3" {{ $starSelect ? 'disabled' : '' }} {{ isset($star[0]->stars) && $star[0]->stars == 3 ? 'checked' : '' }} />
+                                <label class="full" for="star3" title="Meh - 3 stars"></label>
+                                
+                                <input type="radio" id="star2half" name="rating" value="2.5" {{ $starSelect ? 'disabled' : '' }} {{ isset($star[0]->stars) && $star[0]->stars == 2.5 ? 'checked' : '' }} />
+                                <label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
+                                
+                                <input type="radio" id="star2" name="rating" value="2" />
+                                <label class="full" for="star2" title="Kinda bad - 2 stars" {{ $starSelect ? 'disabled' : '' }} {{ isset($star[0]->stars) && $star[0]->stars == 2 ? 'checked' : '' }} ></label> 
+                                
+                                <input type="radio" id="star1half" name="rating" value="1.5" {{ $starSelect ? 'disabled' : '' }} {{ isset($star[0]->stars) && $star[0]->stars == 1.5 ? 'checked' : '' }} />
+                                <label class="half" for="star1half" title="Meh - 1.5 stars"></label>
+                                
+                                <input type="radio" id="star1" name="rating" value="1" {{ $starSelect ? 'disabled' : '' }} {{ isset($star[0]->stars) && $star[0]->stars == 1 ? 'checked' : '' }}/>
+                                <label class="full"for="star1" title="Sucks big time - 1 star"></label> 
+                                    
+                                <input type="radio" id="starhalf" name="rating" value="0.5" {{ $starSelect ? 'disabled' : '' }} {{ isset($star[0]->stars) && $star[0]->stars == 0.5 ? 'checked' : '' }}/>
+                                
+                                <label class="half"for="starhalf" title="Sucks big time - 0.5 stars"></label> 
+                                <input type="radio" class="reset-option" name="rating" value="reset" />
+                                    
                                 </fieldset>
                             </li>
                         </ul>
@@ -135,13 +145,28 @@ $quantImages = count($images) ?? 0;
     $(document).ready(function () {
         $("input[type='radio']").click(function () {
             var value = $("input[type='radio']:checked").val();
-            if (value < 3) { 
-                $('.myratings').css('color', 'red'); 
-                $(".myratings").text(value); 
-            } else { 
-                $('.myratings').css('color', 'green'); 
-                $(".myratings").text(value); 
-            }
+            $("input[type='radio']").attr('disabled', true);
+
+            if($('#star').attr('data-selected') == 'false'){
+                $('#star').attr('data-selected', 'true');
+                $.ajax({
+                    url: "{{ Route('star-create') }}",
+                    method:'POST',
+                    data: {
+                        id: {{ $id ?? 0}},
+                        "_token": "{{ csrf_token() }}",
+                        total : value
+                    },
+                    success: function(data){ 
+                        toastr.success("Obrigado por contribuir.") 
+                        var qtdStars = parseInt($('#qtdStars').attr('data-qtd-like')) + value;
+
+                        $('#qtdStars').html(`${qtdStars}`);
+                        $('#qtdStars').attr('data-qtd-like', qtdStars);
+                        $('.fa-thumbs-up').addClass('text-info');
+                    }
+                });
+            } 
         });
     });
         baguetteBox.run('.tz-gallery');

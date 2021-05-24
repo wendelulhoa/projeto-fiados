@@ -154,11 +154,11 @@ Route::group(['prefix'=>'like'], function(){
     Route::delete('/delete', 'LikeController@delete')->name('like-delete');
  });
 
-// /*Rotas estrelas*/
-// Route::group(['prefix'=>'stars'], function(){
-//     Route::get('/create', '');
-//     Route::get('/delete', '');
-// });
+/*Rotas estrelas*/
+Route::group(['prefix'=>'stars'], function(){
+    Route::post('/create', 'StarController@create')->name('star-create');
+    Route::delete('/delete', 'StarController@delete')->name('star-delete');
+});
 
 
 
