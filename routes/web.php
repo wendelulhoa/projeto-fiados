@@ -70,14 +70,14 @@ Route::group(['prefix'=>'mods'], function(){
     Route::post('approved', 'ModsController@approvedMod')->name('mods-approved');
     Route::get('/detail/{id}', 'ModsController@detail')->name('mods-detail');
     
-    Route::post('/store/images', 'ModsController@imageStorage')->name('mods-store-images');
+    Route::post('/store/images', 'ModsController@imageStorage')->middleware('auth')->name('mods-store-images');
 
-    Route::post('/create', 'ModsController@create')->name('mods-create');
-    Route::post('/edit', 'ModsController@edit')->name('mods-edit');
-    Route::post('/delete', 'ModsController@delete')->name('mods-delete');
+    Route::post('/create', 'ModsController@create')->middleware('auth')->name('mods-create');
+    Route::post('/edit', 'ModsController@edit')->middleware('auth')->name('mods-edit');
+    Route::post('/delete', 'ModsController@delete')->middleware('auth')->name('mods-delete');
 });
 
-Route::group(['prefix'=>'admin', 'middleware'=>'auth'], function(){
+Route::group(['prefix'=>'admin', 'middleware'=>['auth', 'verified']], function(){
     Route::get('', 'AdminController@index')->name('admin-index');
 
     Route::get('/mods/approved', 'AdminController@approved')->name('mod-approved');
@@ -89,7 +89,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>'auth'], function(){
     Route::get('/getcategoryandtags', 'AdminController@getCategoryAndTag')->name('admin-category-and-tag');
 });
 
-Route::group(['prefix'=>'user', 'middleware'=>'auth'], function(){
+Route::group(['prefix'=>'user', 'middleware'=>['auth', 'verified']], function(){
     Route::get('', 'UserController@index')->name('user-index');
 
     Route::post('update/image', 'UserController@updateImage')->name('user-image-update');
@@ -194,13 +194,14 @@ Route::get('resize/{resize}/mods/images/{args}', function($resize,$args){
     $resize = explode('-', $resize);
 
     $file = Storage::disk('local')->get("/mods/images/{$args}");
-    $logo = Storage::disk('local')->get("logo-img/logo.png");
+    // $logo = Storage::disk('local')->get("logo-img/logo.png");
     
     $img  = Image::make($file)->resize($resize[0], $resize[1]);
-    $logo = Image::make($logo)->resize(150, null, function ($constraint) { $constraint->aspectRatio(); } );
-    $img->insert($logo, 'bottom-right', 10, 10);
+    // $logo = Image::make($logo)->resize(150, null, function ($constraint) { $constraint->aspectRatio(); } );
+    // $img->insert($logo, 'bottom-right', 10, 10);
 
     return $img->response('jpg', $resize[2]);
 })->name('resize-image');
 
 Route::any('watermark', 'AdminController@waterMark')->name('water-mark');
+Auth::routes(['verify' => true]);

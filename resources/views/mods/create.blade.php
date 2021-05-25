@@ -9,6 +9,10 @@
             <label for="">link mod</label>
             <input type="text" name="link" class="form-control reset" id="" placeholder="link do mod" required>
         </div>    
+        <div class="form-group col-md-12">
+            <label for="">link video <small>(opcional)</small></label>
+            <input type="text" name="link-video" class="form-control reset" id="" placeholder="link do mod" required>
+        </div>    
             <div class="form-group col-md-12">
                 <label for="category-game-select">Categoria do jogo</label>
                 <select id="category-game-select" class="form-control reset select2" name="category-game" required>
