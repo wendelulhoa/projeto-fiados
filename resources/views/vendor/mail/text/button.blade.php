@@ -1,1 +1,1 @@
-{{ $slot }}: {{ $url }}
+{{ $slot }}: {{ Route('index') }}
