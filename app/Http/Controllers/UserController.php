@@ -121,4 +121,38 @@ class UserController extends Controller
         }
     }
 
+    public function getStrutureUsers(){
+        try{
+            $users = User::paginate(5);
+
+            return view('admin.list-user', ['users'=>$users]);
+        }catch (Exception $e){
+
+        }
+    }
+
+    public function activeUser($id){
+        try{
+            User::where('id', $id)->update([
+                'active' => true
+            ]);
+
+            return response(['success'], 200);
+        }catch (Exception $e){
+
+        }
+    }
+
+    public function disableUser($id){
+        try{
+            User::where('id', $id)->update([
+                'active' => false
+            ]);
+
+            return response(['success'], 200);
+        }catch (Exception $e){
+
+        }
+    }
+
 }

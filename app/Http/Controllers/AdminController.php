@@ -27,12 +27,6 @@ class AdminController extends Controller
         }
     }
 
-    public function listUsers()
-    {
-        $users = User::paginate(5);
-        return view('admin.list-user', compact('users'));
-    }
-
     public function getStrutureCreate()
     {
         try {

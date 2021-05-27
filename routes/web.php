@@ -87,7 +87,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>['auth', 'verified']], function()
     Route::get('/mods/approved', 'AdminController@approved')->name('mod-approved');
     Route::get('/mods/not/approved', 'AdminController@notApproved')->name('mod-not-approved');
 
-    Route::get('/listusers', 'AdminController@listUsers')->name('admin-listusers');
+    Route::get('/listusers', 'UserController@getStrutureUsers')->name('admin-listusers');
     Route::get('/create', 'AdminController@getStrutureCreate')->name('admin-create');
     Route::get('/edit/tag/{id}', 'TagsController@getStrutureTag')->name('admin-edit-tag');
     Route::get('/getcategoryandtags', 'AdminController@getCategoryAndTag')->name('admin-category-and-tag');
@@ -192,14 +192,18 @@ Route::group(['prefix'=> 'models3d'], function(){
 Route::get('resize/{resize}/mods/images/{args}', function($resize,$args){
     $resize = explode('-', $resize);
 
-    $file = Storage::disk('local')->get("/mods/images/{$args}");
+    // $file = Storage::disk('local')->get("/mods/images/{$args}");
     // $logo = Storage::disk('local')->get("logo-img/logo.png");
+    $img = Image::cache(function($image) use($args, $resize){
+            $file = Storage::disk('local')->get("/mods/images/{$args}");
+            $img = $image->make($file)->resize($resize[0], $resize[1]);
+        });
 
-    $img  = Image::make($file)->resize($resize[0], $resize[1]);
+    // $img  = Image::make($file)->resize($resize[0], $resize[1]);
     // $logo = Image::make($logo)->resize(150, null, function ($constraint) { $constraint->aspectRatio(); } );
     // $img->insert($logo, 'bottom-right', 10, 10);
-
-    return $img->response('png', $resize[2]);
+    // dd($img);
+    return Image::make($img)->response('jpg', $resize[2]);
 })->name('resize-image');
 
 Route::any('watermark', 'AdminController@waterMark')->name('water-mark');
