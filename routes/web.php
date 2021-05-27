@@ -107,15 +107,13 @@ Route::group(['prefix'=>'user', 'middleware'=>['auth', 'verified']], function(){
 
 
 Route::get('/images/{path}/{args}', function($path, $args){
-
-    $file = Storage::disk('local')->get("images/$path/$args");
-    $logo = Storage::disk('local')->get("logo-img/logo.png");
     
-    $img  = Image::make($file);
-    $logo = Image::make($logo)->resize(80, null, function ($constraint) { $constraint->aspectRatio(); } );
-    $img->insert($logo, 'bottom-right', 56, 1);
+    $img = Image::cache(function($image) use($args, $path){
+            $file = Storage::disk('local')->get("images/$path/$args");
+            $img = $image->make($file);
+        },24000, true );
 
-    return $img->response('jpg', 70);
+    return Image::make($img)->response('jpg', 80);
 });
 
 Route::get('/get/logo', function(){
@@ -129,10 +127,12 @@ Route::get('/get/logo', function(){
 
 Route::get('/images/user/img/perfil/{args}', function ($args)
 {
-    $file = Storage::disk('local')->get("user/img/perfil/$args");
-    $file = Image::make($file)->resize(256, null, function ($constraint) { $constraint->aspectRatio(); } );
+    $img = Image::cache(function($image) use($args){
+            $file = Storage::disk('local')->get("user/img/perfil/$args");
+            $img = $image->make($file)->resize(256, null, function ($constraint) { $constraint->aspectRatio(); } );
+        },24000, true );
 
-    return $file->response('jpg', 60);
+    return Image::make($img)->response('jpg', 60);
 });
 
 /*Rotas comentarios*/
@@ -192,17 +192,11 @@ Route::group(['prefix'=> 'models3d'], function(){
 Route::get('resize/{resize}/mods/images/{args}', function($resize,$args){
     $resize = explode('-', $resize);
 
-    // $file = Storage::disk('local')->get("/mods/images/{$args}");
-    // $logo = Storage::disk('local')->get("logo-img/logo.png");
     $img = Image::cache(function($image) use($args, $resize){
             $file = Storage::disk('local')->get("/mods/images/{$args}");
             $img = $image->make($file)->resize($resize[0], $resize[1]);
-        });
+        },24000, true );
 
-    // $img  = Image::make($file)->resize($resize[0], $resize[1]);
-    // $logo = Image::make($logo)->resize(150, null, function ($constraint) { $constraint->aspectRatio(); } );
-    // $img->insert($logo, 'bottom-right', 10, 10);
-    // dd($img);
     return Image::make($img)->response('jpg', $resize[2]);
 })->name('resize-image');
 
