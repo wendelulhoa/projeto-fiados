@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Comments;
-use App\Models\Likes;
-use App\Models\Mods;
-use App\Models\Stars;
 use Exception;
+use App\Models\Mods;
+use App\Models\Likes;
+use App\Models\Stars;
+use App\Models\Comments;
+use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManagerStatic as Image;
 
@@ -125,7 +126,6 @@ class ModsController extends Controller
             $query->update(['images' => json_encode($pathImage)]);
             return response(['success'=> true], 200);
         }catch(Exception $e){
-            dd($e);
             Storage::delete($imagesDelete);
             return response(['error'=> true], 400);
         }
@@ -162,10 +162,12 @@ class ModsController extends Controller
                 ->join('users', 'comments.user_id', 'users.id')
                 ->select('users.name', 'users.image', 'comments.*')
                 ->orderBy('comments.id')->get();
+           
             $likeSelect = false;
             $starSelect = false;
             $totalLikes = $mod[0]->total_likes ?? 0;
             $totalStars = $mod[0]->total_users_stars == 0 ? $mod[0]->total_stars : $mod[0]->total_stars / $mod[0]->total_users_stars;
+           
             $mods       = Mods::where([['id', '<>', $mod[0]['id']], ['category', $mod[0]['category']]])->paginate(5) ?? [];
             $star       = [];
             if (Auth::check()) {
@@ -181,11 +183,33 @@ class ModsController extends Controller
 
     }
 
-    public function delete()
+    public function delete($id)
     {
         try {
-            Mods::where('id', '=', 1)->delete();
+            DB::beginTransaction();
+            $mod      = Mods::where('id', $id)->get();
+            $user     = $mod[0]->user_id ?? 0;
+            $images   = json_decode($mod[0]->images);
+            $comments = Comments::where(['id_mod' => $id])
+                ->join('users', 'comments.user_id', 'users.id')
+                ->select('users.name', 'users.image', 'comments.*')
+                ->orderBy('comments.id')->get();
+            /*apaga os comentarios*/ 
+            foreach($comments as $value){
+                $value->delete();
+            }
+
+            /*apaga as fotos*/
+            foreach($images as $value){
+                Storage::delete($value->path);
+            }
+
+            Storage::delete($mod[0]->principal_image);
+            
+            Mods::where('id', '=', $id)->delete();
+            DB::commit();
         } catch (Exception $e) {
+            DB::rollBack();
 
         }
     }
@@ -199,6 +223,29 @@ class ModsController extends Controller
                 Mods::where('id', '=', $request->id)->update(['approved' => true]);
             }
         } catch (Exception $e) {
+
+        }
+    }
+
+    public function deleteImage(Request $request,$id){
+        try {
+            DB::beginTransaction();
+            $mod      = Mods::where('id', $id)->get();
+            $images   = json_decode($mod[0]->images) ?? []; 
+            
+            foreach($images as $key => $value){
+                if($request->path == $value->path){
+                    unset($images[$key]);
+                    Storage::delete($value->path);
+                }else{
+                   $pathImages[] = ['path'=>$value->path]; 
+                }
+            }
+
+            Mods::where('id', '=', $id)->update(['images'=> json_encode($pathImages)]);
+            DB::commit();
+        } catch (Exception $e) {
+            DB::rollBack();
 
         }
     }

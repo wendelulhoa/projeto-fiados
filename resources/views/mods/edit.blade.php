@@ -12,7 +12,7 @@
                 </div>
             </div>
             <div class="pt-4">
-                @include('mods.create', ['title'=> $mod[0]->name, 'linkMod'=> $mod[0]->link, 'images'=> $mod[0]->images, 'route'=> Route('category-create')])
+                @include('mods.create', ['id' => $mod[0]->id ,'title'=> $mod[0]->name, 'linkMod'=> $mod[0]->link, 'images'=> $mod[0]->images, 'route'=> Route('category-create')])
             </div>
         </div>
     </div>
@@ -26,6 +26,20 @@
         $('#category-game-select').val('{{ $mod[0]->category_game ??  0 }}').change()
         $('#category-select').val('{{ $mod[0]->category ??  0  }}').change()
         $('#description-not-send').val("{!!  str_replace(['<p>', '</p>', '"'], ['', '\n', ''], $mod[0]->description) ?? ''  !!}")
+    });
+
+    $('.delete').click(function(){
+        $.ajax({
+            url: " {{ Route('mods-images-delete',['id'=> $mod[0]->id ]) }} ",
+            method: 'delete',
+            data:{
+                "_token": "{{ csrf_token() }}",
+                path: $(this).attr('data-path')
+            },
+            success: function(){
+                alert('success')
+            }
+        })
     })
 </script>
 @include('admin.admin-js')

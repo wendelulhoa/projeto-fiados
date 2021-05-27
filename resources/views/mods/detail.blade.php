@@ -22,7 +22,7 @@ $quantImages = count($images) ?? 0;
                             @if ($images[0]->path != $item->path)
                                 <div class="col-sm-3 col-md-3">
                                     <a class="lightbox" href="{{ Route('index').'/resize/1280-720-90'.'/'.$item->path .'' ?? '' }}">
-                                        <img  src="{{ Route('index').'/resize/500-233-60'.'/'.$item->path .'' ?? '' }}" alt="Park">
+                                        <img class="img-ajust" src="{{ Route('index').'/resize/350-233-60'.'/'.$item->path .'' ?? '' }}" alt="Park">
                                     </a>
                                 </div>
                             @endif
@@ -176,6 +176,12 @@ $quantImages = count($images) ?? 0;
     .rating {
         border: none;
         margin-right: 49px
+    }
+
+    .img-ajust{
+       height: 74% !important; 
+       width: 100% !important;
+       object-fit: fill;
     }
 
     .myratings {

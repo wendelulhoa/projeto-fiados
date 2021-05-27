@@ -77,7 +77,8 @@ Route::group(['prefix'=>'mods'], function(){
     Route::post('/create', 'ModsController@create')->middleware('auth')->name('mods-create');
     Route::get('/edit/{id}', 'ModsController@getStrutureEdit')->middleware('auth')->name('mods-edit');
     Route::post('/update/{id}', 'ModsController@getStrutureEdit')->middleware('auth')->name('mods-update');
-    Route::post('/delete', 'ModsController@delete')->middleware('auth')->name('mods-delete');
+    Route::get('/delete/{id}', 'ModsController@delete')->middleware('auth')->name('mods-delete');
+    Route::delete('/delete/images/{id}', 'ModsController@deleteImage')->middleware('auth')->name('mods-images-delete');
 });
 
 Route::group(['prefix'=>'admin', 'middleware'=>['auth', 'verified']], function(){
