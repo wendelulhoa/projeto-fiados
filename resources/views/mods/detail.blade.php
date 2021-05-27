@@ -13,7 +13,7 @@ $quantImages = count($images) ?? 0;
                 <div class="product-gallery">
                     <div class="text-center">
                         <a class="lightbox" style="margin-bottom: 10px;" href="{{ Route('index').'/resize/1280-720-90'.'/'.$images[0]->path .'' ?? '' }}">
-                            <img src="{{ Route('index').'/resize/1280-720-90'.'/'. $images[0]->path ?? '' }}" alt="img">
+                            <img src="{{ Route('index').'/resize/850-450-70'.'/'. $images[0]->path ?? '' }}" alt="img">
                         </a>  
                     </div>
                 </div>
