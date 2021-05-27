@@ -37,10 +37,12 @@ class UserController extends Controller
             return redirect()->route('view-create');
         }
     }
+
     public function getStrutureCreate()
     {
         return view('user.create');
     }
+    
     public function getStrutureEdit()
     {
         try {

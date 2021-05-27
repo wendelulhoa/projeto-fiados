@@ -27,7 +27,7 @@
                                 @else
                                     <td>{{ Auth::user()->type_user == 0 && $item->approved ? 'Aprovado' : 'Não aprovado' }}</td>
                                 @endif
-                                <td><a href=""><i class="fas fa-edit"></i></i></a></td>
+                                <td><a href="{{ Route('mods-edit', ['id'=> $item->id]) }}"><i class="fas fa-edit"></i></i></a></td>
                                 <td><a href="" style="color: red"> <i class="fas fa-trash-alt"></i></a></td>
                             </tr>
                         @endforeach

@@ -1,17 +1,27 @@
+@php
+    if(isset($images)){
+        $images = json_decode($images) ?? [];
+        $quantImages = count($images) ?? 0;
+    }
+@endphp
 <form data-route="{{ Route('mods-create') }}" id="mod" method="POST" enctype="multipart/form-data">
         {{csrf_field()}}
     <div class="form-group ">
         <div class="form-group col-md-12">
             <label for="name" class="">Titulo</label>
-            <input type="text" name="name"  id="title" class="form-control reset" value="" placeholder="Digite um titulo" required/>
+            <input type="text" name="name"  id="title" class="form-control reset" value="{{ $title ?? '' }}" placeholder="Digite um titulo" required/>
         </div>
         <div class="form-group col-md-12">
             <label for="">link mod</label>
-            <input type="text" name="link" class="form-control reset" id="" placeholder="link do mod" required>
+            <input type="text" name="link" class="form-control reset" id="" value="{{ $linkMod ?? '' }}" placeholder="link do mod" required>
         </div>    
         <div class="form-group col-md-12">
             <label for="">link video <small>(opcional)</small></label>
-            <input type="text" name="link-video" class="form-control reset" id="" placeholder="link do mod" required>
+            <input type="text" name="link-video" class="form-control reset" id="" value="{{ $linkVideo ?? '' }}" placeholder="link do mod" required>
+        </div>    
+        <div class="form-group col-md-12">
+            <label for="">release <small>(opcional)</small></label>
+            <input type="text" name="link-video" class="form-control reset" id="" value="{{ $linkVideo ?? '' }}" placeholder="link do mod" >
         </div>    
             <div class="form-group col-md-12">
                 <label for="category-game-select">Categoria do jogo</label>
@@ -46,7 +56,16 @@
         </div>
     </div>
 <div class="row" id="img-mods">
-    
+    @if (isset($images))
+        @foreach ($images as $item)
+            <div class="col-6 col-md-3 pt-2">
+                <a class="member"> <img src="{{ Route('index').'/resize/854-480-60'.'/'.$item->path .'' ?? '' }}" alt="thumb1" class="thumbimg">
+                    <div class="memmbername">
+                    </div>
+                </a>
+            </div>
+        @endforeach
+    @endif
 </div>
         <button type="submit" id="teste" class="btn btn-primary float-right ml-2">Salvar</button>
 </form>

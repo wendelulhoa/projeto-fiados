@@ -131,6 +131,19 @@ class ModsController extends Controller
         }
     }
 
+    public function getStrutureEdit($id)
+    {
+        try {
+            $mod      = Mods::where(['id'=> $id, 'user_id'=> Auth::user()->id])->get();
+            if(count($mod) == 0){
+               return redirect(Route('index'));
+            }
+            return view('mods.edit', ['mod'=> $mod]);
+        } catch (Exception $e) {
+
+        }
+    }
+
     public function edit(Request $request)
     {
         try {

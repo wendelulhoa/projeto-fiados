@@ -63,6 +63,8 @@ route::get('teste', function(){
     Storage::delete($teste);
     Storage::delete($test2);
 });
+
+
 /*rotas de mods*/
 Route::group(['prefix'=>'mods'], function(){
     Route::get('', 'ModsController@index')->name('mods-index');
@@ -73,7 +75,8 @@ Route::group(['prefix'=>'mods'], function(){
     Route::post('/store/images', 'ModsController@imageStorage')->middleware('auth')->name('mods-store-images');
 
     Route::post('/create', 'ModsController@create')->middleware('auth')->name('mods-create');
-    Route::post('/edit', 'ModsController@edit')->middleware('auth')->name('mods-edit');
+    Route::get('/edit/{id}', 'ModsController@getStrutureEdit')->middleware('auth')->name('mods-edit');
+    Route::post('/update/{id}', 'ModsController@getStrutureEdit')->middleware('auth')->name('mods-update');
     Route::post('/delete', 'ModsController@delete')->middleware('auth')->name('mods-delete');
 });
 
@@ -126,14 +129,9 @@ Route::get('/get/logo', function(){
 Route::get('/images/user/img/perfil/{args}', function ($args)
 {
     $file = Storage::disk('local')->get("user/img/perfil/$args");
-    if(strpos($args, 'pdf')){
-        return response()->make($file,200,[ 'Content-Type' => 'application/pdf']);
-    }else if(strpos($args, 'jpeg')){
-        return response()->make($file,200,[ 'Content-Type' => 'image/jpeg']);
-    }else {
-        return response()->make($file,200,[ 'Content-Type' => 'image/png']);
-    }
-    
+    $file = Image::make($file)->resize(256, null, function ($constraint) { $constraint->aspectRatio(); } );
+
+    return $file->response('jpg', 60);
 });
 
 /*Rotas comentarios*/
@@ -200,7 +198,7 @@ Route::get('resize/{resize}/mods/images/{args}', function($resize,$args){
     // $logo = Image::make($logo)->resize(150, null, function ($constraint) { $constraint->aspectRatio(); } );
     // $img->insert($logo, 'bottom-right', 10, 10);
 
-    return $img->response('jpg', $resize[2]);
+    return $img->response('png', $resize[2]);
 })->name('resize-image');
 
 Route::any('watermark', 'AdminController@waterMark')->name('water-mark');

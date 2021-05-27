@@ -103,8 +103,21 @@
 									</a>
 								</div>
 							</div>
+									
 						@endif
 						</div>
+
+
+						<div class="tags ml-5 mb-5 pb-5">
+								<a href="#" class="badge badge-default mr-1 category-game" style="background: #808080" data-category-game="1"><i class="fas fa-tag"></i> GTA V</a>
+								<a href="#" class="badge badge-default mr-1 category-game" style="background: #808080" data-category-game="1"><i class="fas fa-tag"></i> GTA V</a>
+								<a href="#" class="badge badge-default mr-1 category-game" style="background: #808080" data-category-game="1"><i class="fas fa-tag"></i> GTA V</a>
+								<a href="#" class="badge badge-default mr-1 category-game" style="background: #808080" data-category-game="1"><i class="fas fa-tag"></i> GTA V</a>
+								<a href="#" class="badge badge-default mr-1 category-game" style="background: #808080" data-category-game="1"><i class="fas fa-tag"></i> GTA V</a>
+								<a href="#" class="badge badge-default mr-1 category-game" style="background: #808080" data-category-game="1"><i class="fas fa-tag"></i> GTA V</a>
+								<a href="#" class="badge badge-default mr-1 category-game" style="background: #808080" data-category-game="1"><i class="fas fa-tag"></i> GTA V</a>
+								<a href="#" class="badge badge-default mr-1 category-game" style="background: #808080" data-category-game="1"><i class="fas fa-tag"></i> GTA V</a>
+							</div>
 						<!-- End page-header -->
 
 						@yield('content')

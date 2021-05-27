@@ -12,6 +12,12 @@
       const total = $(this)[0].files.length;
       var imgs    = [];
       var files = $(this)[0].files[0];
+    
+      if(total > 10){
+        toastr.error("Ops! não pode inserir mais de 10 imagens.");
+        $('#files').val('');
+        return;
+      }
 
       for(var i = 0; i < total ; i++){
           var type = $(this)[0].files[i].type;

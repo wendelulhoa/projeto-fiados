@@ -6,8 +6,8 @@
                 <img src="{{ mix('images/logo.png') }}" class="header-brand-img main-logo" alt="IndoUi logo"> Ulhoa mods
             </a><!-- logo-->
             <div class="app-sidebar__toggle" data-toggle="sidebar">
-                <a class="open-toggle"  href="#"><i class="fa fa-align-left"></i></a>
-                <a class="close-toggle"  href="#"><i class="fas fa-times"></i></a>
+                <a class="open-toggle"  href="#"><i class="fe fe-align-left"></i></a>
+                <a class="close-toggle"  href="#"><i class="fe fe-x"></i></a>
             </div>
             <div class="d-flex order-lg-2 ml-auto header-right">
                 <div class="d-md-flex header-search" id="bs-example-navbar-collapse-1">
@@ -16,10 +16,10 @@
                             <input type="text" id="param" name="param" class="form-control" placeholder="Search...">
                             <span class="input-group-btn">
                                 <button type="reset" class="btn btn-default">
-                                    <i class="fas fa-times"></i>
+                                    <i class="fe fe-x"></i>
                                 </button>
                                 <button type="submit" id="search-mod" class="btn btn-default">
-                                    <i class="fa fa-search"></i>
+                                    <i class="fe fe-search"></i>
                                 </button>
                             </span>
                         </div>
@@ -58,8 +58,8 @@
                             </div>
                             <div class="dropdown-divider m-0"></div>
                             <a class="dropdown-item" href="#"><i class="dropdown-icon fe fe-user"></i>Perfil</a>
-                            <a class="dropdown-item" href="#"><i class="dropdown-icon fe fe-edit"></i>Mods</a>
-                            <a class="dropdown-item" href="#"><i class="dropdown-icon fe fe-mail"></i> Notificações</a>
+                            <a class="dropdown-item" href="{{ Route('mod-approved') }}"><i class="dropdown-icon fe fe-edit"></i>Mods</a>
+                            <a class="dropdown-item" href="{{ Route('notification-index') }}"><i class="dropdown-icon fe fe-mail"></i> Notificações</a>
                             <a class="dropdown-item" href="{{ route('logout') }}"><i class="dropdown-icon fe fe-power"></i> Sair</a>
                         </div>
                     </div>
