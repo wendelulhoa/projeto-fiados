@@ -25,12 +25,12 @@
                 <a class="side-menu__item"  data-toggle="slide" href="#"><i class="side-menu__icon fas fa-user-cog"></i><span class="side-menu__label">Admin</span><i class="angle fa fa-angle-right"></i></a>
                 <ul class="slide-menu">
                     @if (Auth::user()->type_user == 1)
-                        <li><a class="slide-item"  href="{{ Route('admin-index') }}"><span>Inicio</span></a></li>
+                        {{-- <li><a class="slide-item"  href="{{ Route('admin-index') }}"><span>Inicio</span></a></li> --}}
                         <li><a class="slide-item"  href="{{ Route('admin-create') }}"><span>Cadastro de mod</span></a></li>
                         <li><a class="slide-item"  href="{{ Route('admin-listusers') }}"><span>Úsuarios cadastrados</span></a></li>
                         {{-- <li><a class="slide-item"  href="{{ Route('water-mark') }}"><span>Inserir marca D'água</span></a></li> --}}
                     @else
-                        <li><a class="slide-item"  href="{{ Route('user-index') }}"><span>Inicio</span></a></li>
+                        {{-- <li><a class="slide-item"  href="{{ Route('user-index') }}"><span>Inicio</span></a></li> --}}
                         <li><a class="slide-item"  href="{{ Route('user-create') }}"><span>Cadastro de mod</span></a></li>
                     @endif
                     <li><a class="slide-item"  href="{{ Route('mod-approved') }}"><span>Mods aprovados</span></a></li>

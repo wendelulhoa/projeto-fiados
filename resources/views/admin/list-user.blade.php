@@ -10,7 +10,7 @@
         <div class="card">
             <div class="card-header border-0">
                 <div>
-                    <h3 class="card-title">{{ Route::getCurrentRoute()->getName() != 'mod-approved' ? 'Mods não aprovados' : 'Mods aprovados' }}</h3>
+                    <h3 class="card-title">Usuarios</h3>
                 </div>
             </div>
             <div class="table-responsive">
