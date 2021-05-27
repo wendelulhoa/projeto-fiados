@@ -51,6 +51,9 @@
 			.global-see{
 				display: block !important;
 			}
+			body{
+				background-image: url('{{ mix("/images/background-image.gif") }}');
+			}
 		</style>
 		@yield('script-css')
 	</head>
