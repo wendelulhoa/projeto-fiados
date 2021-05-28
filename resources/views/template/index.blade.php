@@ -10,6 +10,7 @@
 
 
 		<!-- Title -->
+		<link rel="sortcut icon" href="{{ mix('images/logo.png') }}" type="image/x-icon" />
 		<title>Ulhoa mods</title>
 
 		<!--Bootstrap css-->
