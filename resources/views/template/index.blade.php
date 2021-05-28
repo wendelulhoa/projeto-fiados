@@ -4,7 +4,7 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta content="Ulhoa mods" name="description">
+		<meta content="Um site de diversos mods, GTA V, GTA SAN ANDREAS, EURO TRUCK SIMULATOR 2, MODELOS 3D, GTA IV" name="description">
 		<meta content="Ulhoa developers" name="author">
 		<meta name="keywords" content="mods br, mods ets2, mods gta5, mods gta sa, mods 3d"/>
 
