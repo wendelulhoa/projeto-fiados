@@ -33,15 +33,15 @@ $quantImages = count($images) ?? 0;
                 <div class="product-gallery-data mb-0">
                     <h3 class="mb-3 font-weight-semibold">
                         {{ $mod[0]->name ?? 'ocorreu um erro informe ao suporte, logo resolveremos.' }}</h3>
-                    <a class="btn  btn-default mt-2" id="like" data-selected="{{ $likeSelect ? 'true' : 'false' }}"><i
+                    <button class="btn  btn-default mt-2" id="like" data-selected="{{ $likeSelect ? 'true' : 'false' }}"><i
                             class="fas fa-thumbs-up {{ $likeSelect ? 'text-info' : '' }}"></i> curtir <span
                             class="badge badge-info" id="qtdLikes" data-qtd-like='{{ $totalLikes ?? 0 }}'>
-                            {{ $totalLikes ?? 0 }}</span></a>
+                            {{ $totalLikes ?? 0 }}</span></button>
                     <a href="{{ $mod[0]->link ?? '' }}" class="btn  btn-success mt-2"> <i class="fas fa-download fa-1x"></i>
                         Download</a>
-                    <a class="btn btn-default mt-2" ><i class="fa fa-star text-warning"></i>Estrelas <span
+                    <button class="btn btn-default mt-2" ><i class="fa fa-star text-warning"></i>Estrelas <span
                             class="badge badge-warning" id="qtdStars" data-qtd-stars='{{ $totalStars ?? 0 }}' data-users="{{ $mod[0]->total_users_stars ?? 0 }}">
-                            {{ $totalStars ?? 0 }}</span></a>
+                            {{ $totalStars ?? 0 }}</span></button>
                     <div class="product-gallery-rats">
                         <ul class="product-gallery-rating">
                             <li>
