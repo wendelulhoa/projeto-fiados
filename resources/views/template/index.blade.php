@@ -54,6 +54,9 @@
 			body{
 				background-image: url('{{ mix("/images/background-image.png") }}');
 			}
+			.app-header, .app-sidebar{
+				opacity: 0.9;
+			}
 		</style>
 		@yield('script-css')
 	</head>
