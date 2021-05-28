@@ -52,7 +52,7 @@
 				display: block !important;
 			}
 			body{
-				background-image: url('{{ mix("/images/background-image.gif") }}');
+				background-image: url('{{ mix("/images/background-image.png") }}');
 			}
 		</style>
 		@yield('script-css')
