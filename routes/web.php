@@ -87,8 +87,12 @@ Route::group(['prefix'=>'admin', 'middleware'=>['auth', 'verified']], function()
     Route::get('/mods/approved', 'AdminController@approved')->name('mod-approved');
     Route::get('/mods/not/approved', 'AdminController@notApproved')->name('mod-not-approved');
 
+    Route::post('/user/disable/{id}', 'UserController@disableUser')->name('admin-user-disable');
+    Route::post('/user/active/{id}', 'UserController@activeUser')->name('admin-user-active');
+
     Route::get('/listusers', 'UserController@getStrutureUsers')->name('admin-listusers');
     Route::get('/create', 'AdminController@getStrutureCreate')->name('admin-create');
+
     Route::get('/edit/tag/{id}', 'TagsController@getStrutureTag')->name('admin-edit-tag');
     Route::get('/getcategoryandtags', 'AdminController@getCategoryAndTag')->name('admin-category-and-tag');
 });

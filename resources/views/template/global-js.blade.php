@@ -92,5 +92,39 @@
             $('#form-search-mod').submit();
         }
     });
+    $('.social-icon').click(function(e){
+        e.preventDefault();
+        if($(this).attr('href') != ''){
+            window.open($(this).attr('href'));
+        }
+    });
 
+    /*coloca a tag p*/
+    function convertHtmlDescription(data)
+    {
+        var teste = data;
+        data = data.split("\n");
+        var result = ''; 
+        
+        for(i = 0; data.length > i; i++){
+            var str  = data[i];
+            str      = `<p>${str}</p>`;
+            result   = result + str;
+        }
+        return result;
+    }
+
+    function sweetAlert(title, action){
+        Swal.fire({
+            title: title,
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'confirmar',
+            cancelButtonText:'cancelar'
+          }).then((result)=>{
+            if(result.isConfirmed){
+               action();    
+            }
+          }); 
+    }
 </script>

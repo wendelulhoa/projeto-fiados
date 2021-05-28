@@ -57,6 +57,10 @@
 			.app-header, .app-sidebar{
 				opacity: 0.9;
 			}
+
+			.app-sidebar{
+				top: -1px !important;
+			}
 		</style>
 		@yield('script-css')
 	</head>
@@ -148,7 +152,7 @@
 										<a class="social-icon" href=""><i class="fa fa-rss"></i></a>
 									</li>
 									<li>
-										<a class="social-icon" href=""><i class="fab fa-youtube"></i></a>
+										<a class="social-icon" href="https://www.youtube.com/channel/UCidYh2oEwCPegcEvsZqhO7g"><i class="fab fa-youtube"></i></a>
 									</li>
 									<li>
 										<a class="social-icon" href=""><i class="fab fa-instagram"></i></a>
@@ -203,8 +207,8 @@
 		<!-- Custom js-->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>
 		<script src="{{ mix('/js/custom.js') }}"></script>
-		@include('template.template-js')
 		@yield('script-js')
+		@include('template.global-js')
 
 	</body>
 </html>

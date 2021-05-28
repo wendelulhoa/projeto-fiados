@@ -19,14 +19,14 @@
         return;
       }
 
-    //   for(var i = 0; i < total ; i++){
-    //       var type = $(this)[0].files[i].type;
-    //       if(type != "image/jpeg" && type != "image/png"){
-    //         toastr.error("formatos permitidos jpg, png, bmp.");
-    //         $('#files').val('')
-    //         return ;
-    //       }
-    //   }
+      for(var i = 0; i < total ; i++){
+          var type = $(this)[0].files[i].type;
+          if(type != "image/jpeg" && type != "image/png"){
+            toastr.error("formatos permitidos jpg, png, bmp.");
+            $('#files').val('')
+            return ;
+          }
+      }
 
       for(var i = 0; i < total ; i++){
         var files = $(this)[0].files[i];
@@ -56,16 +56,8 @@
         e.preventDefault();
         
         $('#description').val(convertHtmlDescription($('#description-not-send').val()));
-
-        Swal.fire({
-            title: 'Tem certeza que deseja salvar este registro?',
-            icon: 'question',
-            showCancelButton: true,
-            confirmButtonText: 'confirmar',
-            cancelButtonText:'cancelar'
-          }).then((result)=>{
-            if(result.isConfirmed){
-                $('#global-loader').html(`
+        var action = ()=>{
+            $('#global-loader').html(`
                     <div class="row" style="width: 100%;">
                         <div class="col">
                             <div class="col-6 ml-auto mr-auto">
@@ -152,9 +144,8 @@
                          toastr.error("ocorreu um erro.")
                     }
                 });
-                
-            }
-          }); 
+        }
+        sweetAlert('Tem certeza que deseja salvar este registro?', action);
     });
 
     function getCategorysAndTags(){
@@ -245,45 +236,25 @@
                 break;
         }
     });
-
+    
     $('.status-mod').click(function(){
         var id = $(this).attr('data-id');
-        Swal.fire({
-            title: `Tem certeza que deseja ${$(this).attr('data-type') != 'true' ? 'aprovar' : 'bloquear' }?`,
-            icon: 'question',
-            showCancelButton: true,
-            confirmButtonText: 'confirmar',
-            cancelButtonText:'cancelar'
-          }).then((result)=>{
-            if(result.isConfirmed){
-               var ajax = $.ajax({
-                    url: "{{ Route('mods-approved') }}",
-                    method:'POST',
-                    data: {
-                        id   : $(this).attr('data-id'),
-                        type : $(this).attr('data-type') == 'true' ? true : false,
-                        "_token": "{{ csrf_token() }}"
-                    },
-                    success: function(data){
-                        $(`#tr-${id}`).fadeOut();
-                    }
-                });
-                
-            }
-          }); 
+        var action = ()=>{
+            $.ajax({
+                url: "{{ Route('mods-approved') }}",
+                method:'POST',
+                data: {
+                    id   : $(this).attr('data-id'),
+                    type : $(this).attr('data-type') == 'true' ? true : false,
+                    "_token": "{{ csrf_token() }}"
+                },
+                success: function(data){
+                    $(`#tr-${id}`).fadeOut();
+                }
+            });
+        }
+        sweetAlert(`Tem certeza que deseja ${$(this).attr('data-type') != 'true' ? 'aprovar' : 'bloquear' }?`, action)
     });
 
-    function convertHtmlDescription(data)
-    {
-        var teste = data;
-        data = data.split("\n");
-        var result = ''; 
-        
-        for(i = 0; data.length > i; i++){
-            var str  = data[i];
-            str      = `<p>${str}</p>`;
-            result   = result + str;
-        }
-        return result;
-    }
+    
 </script>
