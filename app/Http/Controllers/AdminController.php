@@ -53,9 +53,9 @@ class AdminController extends Controller
     public function approved(){
         try {
             if(Auth::user()->type_user == 0){
-                $mods = Mods::where(['approved'=> true, 'user_id'=> Auth::user()->id])->paginate(6) ?? [];
+                $mods = Mods::orderBy('id','asc')->where(['approved'=> true, 'user_id'=> Auth::user()->id])->paginate(6) ?? [];
             }else{
-                $mods = Mods::where('approved', 'true')->paginate(6) ?? [];
+                $mods = Mods::orderBy('id','asc')->where('approved', 'true')->paginate(6) ?? [];
             }
 
             return view('admin.approved', ['mods'=>$mods]);
@@ -67,9 +67,9 @@ class AdminController extends Controller
     public function notApproved(){
         try {
             if(Auth::user()->type_user == 0){
-                $mods = Mods::where(['approved'=> false, 'user_id'=> Auth::user()->id])->paginate(6) ?? [];
+                $mods = Mods::orderBy('id','asc')->where(['approved'=> false, 'user_id'=> Auth::user()->id])->paginate(6) ?? [];
             }else{
-                $mods = Mods::where(['approved'=> false])->paginate(6) ?? [];
+                $mods = Mods::orderBy('id','asc')->where(['approved'=> false])->paginate(6) ?? [];
             }
 
             return view('admin.not-approved', ['mods'=>$mods]);

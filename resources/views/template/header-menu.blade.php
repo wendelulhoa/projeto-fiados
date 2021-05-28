@@ -32,6 +32,7 @@
                         <a class="nav-link icon" id="total-notifications" data-toggle="dropdown">
                             
                         </a>
+                        <input type="text"  id="ids-notifications" value="" hidden>
                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                             <a class="dropdown-item text-center" href="{{ Route('notification-index') }}">Notificações</a>
                             <div class="dropdown-divider"></div>

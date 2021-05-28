@@ -1,6 +1,6 @@
 
 <script type="text/javascript" defer>
-    @if(Auth::check())
+    @if(Auth::check() && Auth::user()->active)
         $('#submit-message').on('click', function(e){
             var image = "{{ auth()->user()->image != null ? Route('index').'/'.'images/'.auth()->user()->image : mix('images/user.png') }}";
             var name = "{{ Auth::user()->name ?? ''}}";
@@ -69,9 +69,4 @@
             
         });
     @endif
-    
-
-    $('.jq-thumb').click(function(){
-        $('#carousel-mod').carousel(parseInt($(this).attr('data-index')))
-    })
 </script>

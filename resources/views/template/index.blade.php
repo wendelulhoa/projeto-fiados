@@ -4,6 +4,7 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="csrf-token" content="{{ csrf_token() }}">
 		<meta content="Um site de diversos mods, GTA V, GTA SAN ANDREAS, EURO TRUCK SIMULATOR 2, MODELOS 3D, GTA IV" name="description">
 		<meta content="Ulhoa developers" name="author">
 		<meta name="keywords" content="mods br, mods ets2, mods gta5, mods gta sa, mods 3d"/>
@@ -98,19 +99,19 @@
 								<div class="input-group">
 									
 									<a href="#" data-category-game="1" class=" mr-2 category-game" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="GTA 5">
-										<img src="{{ mix('/images/gta5.png') }}" class="rounded-circle user_img" style="width: 60px; height: 60px;" >
+										<img src="{{ mix('/images/gta5.png') }}" alt="GTAV" class="rounded-circle user_img" style="width: 60px; height: 60px;" >
 									</a>
 									<a href="#" data-category-game="2" class=" mr-2 category-game" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="GTA SA">
-										<img src="{{ mix('/images/gtasa.png') }}" class="rounded-circle user_img" style="width: 60px; height: 60px;" >
+										<img src="{{ mix('/images/gtasa.png') }}" alt="GTA SA" class="rounded-circle user_img" style="width: 60px; height: 60px;" >
 									</a>
 									<a href="#" data-category-game="3" class=" mr-2 category-game" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="EURO TRUCK SIMULATOR 2">
-										<img src="{{ mix('/images/ets2.png') }}" class="rounded-circle user_img" style="width: 60px; height: 60px;" >
+										<img src="{{ mix('/images/ets2.png') }}" alt="EURO TRUCK SIMULATOR 2" class="rounded-circle user_img" style="width: 60px; height: 60px;" >
 									</a>
 									<a href="#" data-category-game="4" class=" mr-2 category-game" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="GTA 4">
-										<img src="{{ mix('/images/gta4.ico') }}" class="rounded-circle user_img" style="width: 60px; height: 60px;" >
+										<img src="{{ mix('/images/gta4.ico') }}" alt="GTAIV" class="rounded-circle user_img" style="width: 60px; height: 60px;" >
 									</a>
 									<a href="#" data-category-game="5" class=" mr-2 category-game" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="Modelos 3d">
-										<img src="{{ mix('/images/model-3d.png') }}" class="rounded-circle user_img" style="width: 60px; height: 60px;" >
+										<img src="{{ mix('/images/model-3d.png') }}" alt="Modelos 3d" class="rounded-circle user_img" style="width: 60px; height: 60px;" >
 									</a>
 								</div>
 							</div>

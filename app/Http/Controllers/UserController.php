@@ -123,7 +123,7 @@ class UserController extends Controller
 
     public function getStrutureUsers(){
         try{
-            $users = User::paginate(5);
+            $users = User::orderBy('id','asc')->paginate(5);
 
             return view('admin.list-user', ['users'=>$users]);
         }catch (Exception $e){

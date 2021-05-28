@@ -1,6 +1,7 @@
 <script type="text/javascript" defer>
     $(document).ready(function(){
         @if(Auth::check())
+        var idsNotification =[];
             $.ajax({
                 url: "{{ Route('notification-get') }}",
                 method:'POST',
@@ -16,6 +17,7 @@
                         `);
                         /*monta as notificações*/
                         for(var i = 0; data.data.length > i; i++){
+                            idsNotification.push(data.data[i].id)
                             $('#notifications-user').append(`
                                 <a class="dropdown-item d-flex pb-4" href="#">
                                     <span class="avatar mr-3 br-3 align-self-center avatar-md cover-image bg-primary-transparent text-primary"><i class="fas fa-comment-dots"></i></i></span>
@@ -25,7 +27,7 @@
                                 </a>
                             `);
                         }
-                        
+                        $('#ids-notifications').val(idsNotification)
                     }else{
                         /*coloca o total de notificações*/
                         $('#total-notifications').append(`
@@ -127,4 +129,18 @@
             }
           }); 
     }
+
+    $('#total-notifications').click(function(){
+        $.ajax({
+                url: "{{ Route('notification-disable') }}",
+                method:'POST',
+                data:{
+                    _token: "{{ csrf_token() }}",
+                    ids: $('#ids-notifications').val()
+                },
+                success: function(data){
+
+                }
+        });
+    })
 </script>

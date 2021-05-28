@@ -156,7 +156,10 @@ class ModsController extends Controller
     public function detail($id)
     {
         try {
-            $mod      = Mods::where('id', $id)->get();
+            $mod      = Mods::where(['id'=> $id, 'approved'=>true])->get();
+            if(Auth::check()){
+                $mod  = Mods::where(['id'=> $id])->get();
+            }
             $user     = $mod[0]->user_id ?? 0;
             $comments = Comments::where(['id_mod' => $id])
                 ->join('users', 'comments.user_id', 'users.id')
@@ -168,17 +171,21 @@ class ModsController extends Controller
             $totalLikes = $mod[0]->total_likes ?? 0;
             $totalStars = $mod[0]->total_users_stars == 0 ? $mod[0]->total_stars : $mod[0]->total_stars / $mod[0]->total_users_stars;
            
-            $mods       = Mods::where([['id', '<>', $mod[0]['id']], ['category', $mod[0]['category']]])->paginate(5) ?? [];
+            $mods       = Mods::where([['id', '<>', $mod[0]['id']], ['category', $mod[0]['category']], ['approved', true]])->paginate(5) ?? [];
+            
             $star       = [];
             if (Auth::check()) {
                 $star       = Stars::where(['user_id' => Auth::user()->id, 'id_mod' => $id])->get();
                 $likeSelect = count(Likes::where(['user_id' => Auth::user()->id, 'id_mod' => $id])->get()) > 0 ? true : false;
                 $starSelect = count($star) > 0 ? true : false;
+                $likeSelect = Auth::user()->active ? $likeSelect : true;
+                $starSelect = Auth::user()->active ? $likeSelect : true;
             }
 
             return view('mods.detail', compact('mod', 'id', 'comments', 'user', 'likeSelect', 'starSelect', 'totalLikes', 'totalStars', 'mods', 'star'));
         } catch (Exception $e) {
-            abort(500);
+            // abort(500);
+            return redirect(Route('index'));
         }
 
     }

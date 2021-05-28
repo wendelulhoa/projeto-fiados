@@ -149,6 +149,7 @@ Route::group(['prefix'=>'comments'], function(){
 Route::group(['prefix'=>'notification'], function(){
     Route::post('/get', 'NotificationsController@getNotification')->name('notification-get');
     Route::get('', 'NotificationsController@index')->name('notification-index');
+    Route::post('/disable', 'NotificationsController@disable')->name('notification-disable');
     // Route::get('/edit/{id}', 'CommentController@edit')->name('comments-edit');
     // Route::get('/delete', 'CommentController@delete')->name('comments-delete');
 });

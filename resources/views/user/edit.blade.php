@@ -42,14 +42,14 @@
                                         <div class="form-group">
                                             <label for="exampleInputname">Username</label>
                                             <input type="text" class="form-control" id="exampleInputname" name="name"
-                                                placeholder="Username">
+                                                placeholder="Username" value="{{ Auth::user()->name }}">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Email</label>
                                     <input type="email" class="form-control" id="exampleInputEmail1" name="email"
-                                        placeholder="email address">
+                                        placeholder="email address" value="{{ Auth::user()->email }}">
                                 </div>
                                 <button type="submit" class="btn btn-primary float-right ml-2 mt-5">Salvar</button>
 
@@ -122,15 +122,13 @@
 @include('admin.admin-js')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script>
-    $('.password').on('focusout', function(){
-        $('.button-password').attr('disabled', true);
-       if($(this).attr('id') == 'password-verify'){
-           if($(this).val() == $('#password-new').val() && $(this).val().length > 7){
-               $('.button-password').attr('disabled', false);
-           }else{
-               toastr.error('Ops! as senhas não correspondem.')
-           }
-       }
+    $('.password').on('focusout keyup', function(){
+        
+        if($('#password-new').val() == $('#password-verify').val()){
+            $('.button-password').attr('disabled', false);
+        }else{
+            $('.button-password').attr('disabled', true);
+        }
     })
 
     $('#form-password').submit(function(e){
