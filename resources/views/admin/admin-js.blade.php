@@ -19,14 +19,14 @@
         return;
       }
 
-      for(var i = 0; i < total ; i++){
-          var type = $(this)[0].files[i].type;
-          if(type != "image/jpeg" && type != "image/png"){
-            toastr.error("formatos permitidos jpg, png, bmp.");
-            $('#files').val('')
-            return ;
-          }
-      }
+    //   for(var i = 0; i < total ; i++){
+    //       var type = $(this)[0].files[i].type;
+    //       if(type != "image/jpeg" && type != "image/png"){
+    //         toastr.error("formatos permitidos jpg, png, bmp.");
+    //         $('#files').val('')
+    //         return ;
+    //       }
+    //   }
 
       for(var i = 0; i < total ; i++){
         var files = $(this)[0].files[i];

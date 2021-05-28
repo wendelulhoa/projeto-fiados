@@ -78,7 +78,7 @@ class UserController extends Controller
                 
             // returns \Intervention\Image\Image - OK
             $resize         = Image::make($request->img)
-                            ->resize(256, null, function ($constraint) { $constraint->aspectRatio(); } )
+                            ->resize(512, null, function ($constraint) { $constraint->aspectRatio(); } )
                             ->encode('png',80);
             
             // calculate md5 hash of encoded image
