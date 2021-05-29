@@ -26,7 +26,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::any('/', 'ModsController@index')->name('index');
+Route::any('/', 'ModsController@index')->middleware('verify_host')->name('index');
 
 /*rotas de tags*/
 
@@ -68,7 +68,7 @@ route::get('teste', function(){
 
 
 /*rotas de mods*/
-Route::group(['prefix'=>'mods'], function(){
+Route::group(['prefix'=>'mods','middleware'=> ['verify_host']], function(){
     Route::get('', 'ModsController@index')->name('mods-index');
 
     Route::post('approved', 'ModsController@approvedMod')->name('mods-approved');

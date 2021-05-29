@@ -64,11 +64,6 @@
 	</head>
 
 	<body class="app sidebar-mini rtl">
-		@php
-			if(strripos(Route('index'), '157.245.83.191')){
-				return redirect('https://www.ulhoamods.com');
-			}
-		@endphp
 		<div id="global-loader">
 			<img src="{{ mix('/images/loader.svg') }}" alt="loader">
 		</div>
