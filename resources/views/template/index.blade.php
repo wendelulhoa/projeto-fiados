@@ -66,8 +66,7 @@
 	<body class="app sidebar-mini rtl">
 		@php
 			if(strripos(Route('index'), '157.245.83.191')){
-				dd('aaa');
-				redirect('https://www.ulhoamods.com');
+				return redirect('https://www.ulhoamods.com');
 			}
 		@endphp
 		<div id="global-loader">
