@@ -18,9 +18,3 @@ use Illuminate\Support\Facades\Storage;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-
-Route::post('store/img', 'ModsController@imageStorage')->name('store-img');
-
-Route::post('store/image/logo', function(Request $request){
-    $request->file->storeAs('logo.png', $request->file);
-});

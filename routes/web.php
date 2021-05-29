@@ -58,10 +58,12 @@ Route::group(['prefix'=>'category/mods'], function(){
 route::get('teste', function(){
     
     $teste = Storage::allFiles('mods/images');
-    $test2 = Storage::allFiles('images/mods-principal');
+    $teste1 = Storage::allFiles('user/img/perfil');
+    $teste2 = Storage::allFiles('images/mods-principal');
     
     Storage::delete($teste);
-    Storage::delete($test2);
+    Storage::delete($teste1);
+    Storage::delete($teste2);
 });
 
 

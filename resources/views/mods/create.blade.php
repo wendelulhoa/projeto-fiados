@@ -57,8 +57,8 @@
     </div>
 <div class="row" id="img-mods">
     @if (isset($images))
-        @foreach ($images as $item)
-            <div class="col-6 col-md-3 pt-2">
+        @foreach ($images as $key => $item)
+            <div class="col-6 col-md-3 pt-2" data-key="{{ $key }}">
                 <a class="member"> <img src="{{ Route('index').'/resize/854-480-60'.'/'.$item->path .'' ?? '' }}" alt="thumb1" class="thumbimg">
                     <div class="memmbername">
                         <span><button type="button" class="btn btn-default delete"  data-path="{{ $item->path ?? ''}}"><i class="fas fa-trash-alt text-danger"></i></button></span>

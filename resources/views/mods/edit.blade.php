@@ -29,17 +29,23 @@
     });
 
     $('.delete').click(function(){
-        $.ajax({
-            url: " {{ Route('mods-images-delete',['id'=> $mod[0]->id ]) }} ",
-            method: 'delete',
-            data:{
-                "_token": "{{ csrf_token() }}",
-                path: $(this).attr('data-path')
-            },
-            success: function(){
-                alert('success')
-            }
-        })
+        var action = ()=>{
+            var divRemove = $(this).parent().parent().parent().parent();
+            
+            $.ajax({
+                url: " {{ Route('mods-images-delete',['id'=> $mod[0]->id ]) }} ",
+                method: 'delete',
+                data:{
+                    "_token": "{{ csrf_token() }}",
+                    path: $(this).attr('data-path')
+                },
+                success: function(){
+                    toastr.success("Excluído com sucesso!");
+                    divRemove.remove();
+                }
+            });
+        }
+        sweetAlert('Deseja apagar essa imagem ?', action); 
     })
 </script>
 @include('admin.admin-js')

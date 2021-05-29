@@ -19,7 +19,15 @@
     </div>
 </div>
 @endsection
-
+@section('script-css')
+    <style>
+        #global-loader{
+            background: rgba(10,23,55,0.5);
+            padding-top: 200px;
+            
+        }
+    </style>
+@endsection
 @section('script-js')
 @include('admin.admin-js')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>

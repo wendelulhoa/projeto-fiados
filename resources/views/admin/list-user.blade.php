@@ -63,7 +63,7 @@
                         "_token": "{{ csrf_token() }}"
                     },
                     success: function(data){
-                        toastr.success("Cadastrado com sucesso")
+                        toastr.success("Sucesso!")
                         setTimeout(function(){
                             window.location.reload(true)
                         },500);
