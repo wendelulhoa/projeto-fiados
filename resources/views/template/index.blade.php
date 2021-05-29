@@ -65,9 +65,9 @@
 
 	<body class="app sidebar-mini rtl">
 		@php
-			if(){
-				
-			}
+			// if(){
+
+			// }
 		@endphp
 		<div id="global-loader">
 			<img src="{{ mix('/images/loader.svg') }}" alt="loader">
