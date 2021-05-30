@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://ulhoamods.com'),
+    'url' => env('APP_URL', 'https://ulhoamods.com'),
 
     'asset_url' => env('ASSET_URL', null),
 
