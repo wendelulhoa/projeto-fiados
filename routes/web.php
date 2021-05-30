@@ -83,7 +83,7 @@ Route::group(['prefix'=>'mods','middleware'=> ['verify_host']], function(){
     Route::delete('/delete/images/{id}', 'ModsController@deleteImage')->middleware('auth')->name('mods-images-delete');
 });
 
-Route::group(['prefix'=>'admin', 'middleware'=>['auth', 'verified']], function(){
+Route::group(['prefix'=>'admin', 'middleware'=>['auth', 'verified', 'verify_host']], function(){
     Route::get('', 'AdminController@index')->name('admin-index');
 
     Route::get('/mods/approved', 'AdminController@approved')->name('mod-approved');
@@ -99,7 +99,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>['auth', 'verified']], function()
     Route::get('/getcategoryandtags', 'AdminController@getCategoryAndTag')->name('admin-category-and-tag');
 });
 
-Route::group(['prefix'=>'user', 'middleware'=>['auth', 'verified']], function(){
+Route::group(['prefix'=>'user', 'middleware'=>['auth', 'verified', 'verify_host']], function(){
     Route::get('', 'UserController@index')->name('user-index');
 
     Route::post('update/image', 'UserController@updateImage')->name('user-image-update');
