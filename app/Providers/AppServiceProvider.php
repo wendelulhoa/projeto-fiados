@@ -28,9 +28,6 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
         if($this->app->environment('production')) {
             URL::forceScheme('https');
-            if(strripos(Route('index'), '157.230.226.98')){
-                return redirect('https://www.ulhoamods.com');
-            }
         }
     }
 }

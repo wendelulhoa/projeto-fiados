@@ -15,9 +15,9 @@ class verifyHost
      */
     public function handle($request, Closure $next)
     {
-        if(strripos(Route('index'), '157.245.83.191')){
-			return redirect('https://www.ulhoamods.com');
-		}
+        if(strripos(Route('index'), '157.230.226.98')){
+            return redirect('https://www.ulhoamods.com');
+        }
         return $next($request);
     }
 }
