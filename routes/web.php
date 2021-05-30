@@ -24,7 +24,7 @@ use Intervention\Image\ImageManagerStatic as Image;
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->middleware('verify_host')->name('home');
 
 Route::any('/', 'ModsController@index')->middleware('verify_host')->name('index');
 
