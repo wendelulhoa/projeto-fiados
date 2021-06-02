@@ -17,10 +17,12 @@ class CreateModsTable extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->text('description')->nullable();
+            $table->string('release')->nullable();
             $table->text('principal_image')->nullable();
             $table->json('images')->nullable();
             $table->boolean('approved')->nullable();
-            $table->json('tags')->nullable();
+            $table->string('tagPt')->nullable();
+            $table->string('tagEn')->nullable();
             $table->text('link')->nullable();
             $table->text('link_video')->nullable();
             $table->integer('category_game')->nullable();

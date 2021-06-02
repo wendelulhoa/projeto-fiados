@@ -133,24 +133,32 @@ class UserController extends Controller
 
     public function activeUser($id){
         try{
+            DB::beginTransaction();
+
             User::where('id', $id)->update([
                 'active' => true
             ]);
 
+            DB::commit();
             return response(['success'], 200);
         }catch (Exception $e){
+            DB::rollBack();
 
         }
     }
 
     public function disableUser($id){
         try{
+            DB::beginTransaction();
+
             User::where('id', $id)->update([
                 'active' => false
             ]);
 
+            DB::commit();
             return response(['success'], 200);
         }catch (Exception $e){
+            DB::rollBack();
 
         }
     }

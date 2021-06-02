@@ -4,10 +4,10 @@
         <div class="memberblock mb-0">
             <a href="{{ Route('mods-detail',['id'=>$item->id]) }}" class="member"> <img src="{{ Route('index') . '/'. $item->principal_image }}" alt="{{ $item->name }}">
                 <p class="text-center">{{$item->name}}</p>
-                <div class="memmbername row ml-auto">
+                <div class="memmbername row ml-auto" style="padding-left: 60px">
                     <p class="text-warning mb-0">
                         <i class="fas fa-download fa-1x text-success"></i>
-                        <p class="pl-2 pr-2">100</p>
+                        <p class="pl-2 pr-2">{{ $item->total_downloads ?? 0 }}</p>
                         <i class="fas fa-star text-warning"></i>
                         <p class="pl-2 pr-2">{{ $item->total_users_stars == 0 ? $item->total_stars : $item->total_stars / $item->total_users_stars }}</p>
                         <i class="fas fa-thumbs-up text-info"></i>
@@ -28,9 +28,9 @@
                     </a>
                     </div>
                     <div class=" text-center mt-4" style="text-overflow: ellipsis;">
-                        <div class="row pt-3 ml-auto" style="padding-left: 50px">
+                        <div class="row pt-3 ml-auto" style="padding-left: 90px">
                             <i class="fas fa-download fa-1x text-success"></i>
-                            <p class="pl-2 pr-2">100</p>
+                            <p class="pl-2 pr-2">{{ $item->total_downloads ?? 0 }}</p>
                             <i class="fas fa-star text-warning"></i>
                             <p class="pl-2 pr-2">{{ $item->total_users_stars == 0 ? $item->total_stars : $item->total_stars / $item->total_users_stars}}</p>
                             <i class="fas fa-thumbs-up text-info"></i>
@@ -40,8 +40,10 @@
                     </div>
                     <div class="product-info">
                         <div class="d-flex ">
-                            <a href="#" class="badge badge-default mr-1 category-game" data-category-game="{{ $item->category_game }}" ><i class="fas fa-tag"></i> {{ $categoryGame[$item->category_game - 1] ?? '' }}</a>
-                            <a href="#" class="badge badge-default mr-1 category-mod" data-category-game="{{  $item->category_game }}" data-category-mod="{{ $item->category  }}"><i class="fas fa-tag"></i>{{ $categoryMod[$item->category - 1] ?? '' }}</a>
+                            <a href="{{ Route('index-'.$routesNames[$item->category_game]) }}" class="badge badge-default mr-1"><i class="fas fa-tag"></i> {{ $routesNames[$item->category_game] ?? '' }}</a>
+                            <a href="{{ Route('search-category-'.$routesNames[$item->category_game].'-and-tag', ['category'=> $categoriesModsEn[$item->category] ]) }}" class="badge badge-default mr-1" ><i class="fas fa-tag"></i> {{ $categoryMod[$item->category]  ?? '' }}</a>
+                            <a href="{{ Route('search-category-'.$routesNames[$item->category_game].'-and-tag', ['category'=> $categoriesModsEn[$item->category], 'tag'=> $item->tagEn ]) }}" class="badge badge-default mr-1" ><i class="fas fa-tag"></i> {{ $item->tagPt ?? '' }}</a>
+                            <a class="badge badge-info mr-1" ><i class="fas fa-tag"></i>{{ $item->release ?? '' }}</a>
                         </div>
                     </div>
                 </div>

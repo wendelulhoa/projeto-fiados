@@ -3,7 +3,13 @@
         <div class="card">
             <div class="card-header border-0">
                 <div>
-                    <h3 class="card-title">{{ Route::getCurrentRoute()->getName() != 'mod-approved' ? 'Mods não aprovados' : 'Mods aprovados' }}</h3>
+                @if (Route::getCurrentRoute()->getName() == 'mod-approved')
+                    <h3 class="card-title">Mods aprovados</h3>
+                @elseif(Route::getCurrentRoute()->getName() == 'mod-my-mods')
+                    <h3 class="card-title">Meus mods</h3>
+                @else
+                    <h3 class="card-title">Mods não aprovados</h3>
+                @endif
                 </div>
             </div>
             <div class="table-responsive">
@@ -28,7 +34,7 @@
                                     <td>{{ Auth::user()->type_user == 0 && $item->approved ? 'Aprovado' : 'Não aprovado' }}</td>
                                 @endif
                                 <td><a href="{{ Route('mods-edit', ['id'=> $item->id]) }}"><i class="fas fa-edit"></i></i></a></td>
-                                <td><a href="{{ Route('mods-delete', ['id'=> $item->id]) }}" style="color: red"> <i class="fas fa-trash-alt"></i></a></td>
+                                <td><a class="delete-mod" href="{{ Route('mods-delete', ['id'=> $item->id]) }}" style="color: red"> <i class="fas fa-trash-alt"></i></a></td>
                             </tr>
                         @endforeach
                     </tbody>

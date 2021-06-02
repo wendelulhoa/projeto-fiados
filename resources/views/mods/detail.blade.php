@@ -13,20 +13,29 @@ $quantImages = count($images) ?? 0;
                 <div class="product-gallery">
                     <div class="text-center">
                         <a class="lightbox" style="margin-bottom: 10px;" href="{{ Route('index').'/resize/1280-720-90'.'/'.$images[0]->path .'' ?? '' }}">
-                            <img src="{{ Route('index').'/resize/850-450-70'.'/'. $images[0]->path ?? '' }}" alt="img">
+                            <img src="{{ Route('index').'/resize/850-450-70'.'/'. $images[0]->path ?? '' }}" alt="{{ $mod[0]->name }}">
                         </a>  
                     </div>
                 </div>
-                <div class="row pt-3">
+                    <div class="row pt-3">
                         @foreach ($images as $item)
                             @if ($images[0]->path != $item->path)
                                 <div class="col-sm-3 col-md-3">
                                     <a class="lightbox" href="{{ Route('index').'/resize/1280-720-90'.'/'.$item->path .'' ?? '' }}">
-                                        <img class="img-ajust" src="{{ Route('index').'/resize/350-233-60'.'/'.$item->path .'' ?? '' }}" alt="Park">
+                                        <img class="img-ajust" src="{{ Route('index').'/resize/350-233-60'.'/'.$item->path .'' ?? '' }}" alt="{{ $mod[0]->name }}">
                                     </a>
                                 </div>
                             @endif
                         @endforeach
+
+                        @if ($mod[0]->link_video != '')
+                            <div class="col-sm-3 col-md-3">
+                                <a class="lightbox" target="_blank"  style="margin-bottom: 10px;" href="{{ $mod[0]->link_video }}">
+                                    <img src="{{ Route('index').'/resize/850-450-70'.'/'. $images[0]->path ?? '' }}" alt="{{ $mod[0]->name }}">
+                                    <span class="far fa-play-circle fa-4x" style="position: absolute; top: 15%; right: 40%; color: white;"></span>
+                                </a>  
+                            </div>
+                        @endif
                     </div>
                 </div>
 
@@ -37,8 +46,10 @@ $quantImages = count($images) ?? 0;
                             class="fas fa-thumbs-up {{ $likeSelect ? 'text-info' : '' }}"></i> curtir <span
                             class="badge badge-info" id="qtdLikes" data-qtd-like='{{ $totalLikes ?? 0 }}'>
                             {{ $totalLikes ?? 0 }}</span></button>
-                    <a href="{{ $mod[0]->link ?? '' }}" class="btn  btn-success mt-2"> <i class="fas fa-download fa-1x"></i>
-                        Download</a>
+                    <a href="{{ $mod[0]->link ?? '' }}"  target="_blank" class="btn  btn-default mt-2 download"> <i class="fas fa-download text-success fa-1x"></i>
+                        Download <span id="qtdDownloads" data-qtd-downloads="{{ $mod[0]->total_downloads ?? 0 }}"
+                            class="badge badge-success">
+                            {{ $mod[0]->total_downloads ?? 0 }}</span></a>
                     <button class="btn btn-default mt-2" ><i class="fa fa-star text-warning"></i>Estrelas <span
                             class="badge badge-warning" id="qtdStars" data-qtd-stars='{{ $totalStars ?? 0 }}' data-users="{{ $mod[0]->total_users_stars ?? 0 }}">
                             {{ $totalStars ?? 0 }}</span></button>
@@ -99,6 +110,12 @@ $quantImages = count($images) ?? 0;
                             <div class="tab-pane active " id="tab5">
                                 <p class="text-muted">{!! $mod[0]->description ?? 'ocorreu um erro informe ao suporte,
                                     logo resolveremos.' !!}<p>
+                                <div class="d-flex ">
+                                    <a href="{{ Route('index-'.$routesNames[$mod[0]->category_game]) }}" class="badge badge-default mr-1"><i class="fas fa-tag"></i> {{ $routesNames[$mod[0]->category_game] ?? '' }}</a>
+                                    <a href="{{ Route('search-category-'.$routesNames[$mod[0]->category_game].'-and-tag', ['category'=> $categoriesModsEn[$mod[0]->category]]) }}" class="badge badge-default mr-1" ><i class="fas fa-tag"></i> {{ $categoryMod[$mod[0]->category]  ?? '' }}</a>
+                                    <a  class="badge badge-default mr-1" ><i class="fas fa-tag"></i> {{ $mod[0]->tagPt ?? '' }}</a>
+                                    <a class="badge badge-info mr-1" ><i class="fas fa-tag"></i>{{ $mod[0]->release ?? '' }}</a>
+                                </div>
                             </div>
                             <div class="tab-pane " id="tab6">
                                 <ul class="list-unstyled">
@@ -108,7 +125,18 @@ $quantImages = count($images) ?? 0;
                                             data-image-src="{{ $item->image != null ? Route('index').'/'.'images/'.$item->image : mix('images/user.png') }}"></span>
                                         <div class="media-body ">
                                             <h5 class="mt-0 mb-1">{{ $item->name }}</h5>
-                                            <p class="text-muted">{{ $item->message }}</p>
+                                            <div class="col">
+                                                <div class="row">
+                                                    <p class="text-muted">{{ $item->message }}</p>
+                                                </div>
+                                                    <div class="row">
+                                                    @if (Auth::check() && Auth::user()->id == $item->user_id || Auth::user()->id == $mod[0]->user_id)
+                                                        <a href="{{ Route('comments-delete', ['user_id'=> $item->user_id, 'id'=> $item->id, 'id_mod'=> $mod[0]->id])  }}" class="mr-2 delete-comment">excluir</a>  
+                                                    @endif
+                                                        {{-- <a href="" class="mr-2">editar</a>
+                                                        <a href="">mencionar</a> --}}
+                                                    </div>
+                                            </div>
                                         </div>
                                     </li>
                                     @endforeach
@@ -121,13 +149,16 @@ $quantImages = count($images) ?? 0;
                                     <button type="submit" id="submit-message"><i
                                             class="fas fa-paper-plane"></i></button>
                                 </div>
+                                <div class="pt-2">
+                                    {{ $comments->links() }}
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="card-footer text-right">
-                <a href="#" class="btn  btn-success"> <i class="fas fa-download fa-1x"></i> Download</a>
+                <a href="{{ $mod[0]->link ?? '' }}" data-qtd-downloads="{{ $mod[0]->total_downloads ?? 0 }}" target="_blank"class="btn  btn-success"> <i class="fas fa-download fa-1x"></i> Download</a>
             </div>
         </div>
 
@@ -141,6 +172,7 @@ $quantImages = count($images) ?? 0;
 </div>
 @section('script-js')
 @include('mods.mod-js')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script type='text/javascript'>
     $(document).ready(function () {
         $("input[type='radio']").click(function () {
@@ -163,8 +195,43 @@ $quantImages = count($images) ?? 0;
             } 
         });
     });
-        baguetteBox.run('.tz-gallery');
-        baguetteBox.run('.galery-top');
+    baguetteBox.run('.tz-gallery');
+    baguetteBox.run('.galery-top');
+
+    $('.download').click(function(){
+        $.ajax({
+            url: "{{ Route('download', ['id'=> $id ?? 0 ]) }}",
+            method:'POST',
+            data: {"_token": "{{ csrf_token() }}"},
+            success: function(data){ 
+                toastr.success("Obrigado!");
+                var total = parseInt($('#qtdDownloads').attr('data-qtd-downloads')) + 1;
+                $('#qtdDownloads').html(`${total}`)
+                $('#qtdDownloads').attr('data-qtd-like', total);
+            }
+        });
+    });
+
+    $('.delete-comment').click(function(e){
+        e.preventDefault();
+        var element = $(this).parent().parent().parent().parent();
+
+        var action = ()=>{
+            $.ajax({
+                url: $(this).attr('href'),
+                method:'POST',
+                data: {
+                    "_token": "{{ csrf_token() }}"
+                },
+                success: function(data){
+                    toastr.success("Excluido com sucesso!");
+                    element.remove();
+                }
+            });
+        };
+
+        sweetAlert(`Tem certeza que deseja excluir?`, action)
+    });
 </script> 
 
 @endsection

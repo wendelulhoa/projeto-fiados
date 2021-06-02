@@ -47,4 +47,17 @@ class CommentController extends Controller
             return response(['error' => $e], 400);
         }
     }
+
+    public function delete($user_id, $id, $id_mod){
+        try{
+            DB::beginTransaction();
+              if(Auth::check()){
+                Comments::where(['user_id'=> $user_id, 'id'=> $id, 'id_mod'=> $id_mod])->delete();
+              }
+            DB::commit();
+        }catch(Exception $e){
+            DB::rollBack();
+            return response(['error'=>$e], 400);
+        }
+    }
 }

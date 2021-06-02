@@ -48,6 +48,8 @@ class StarController extends Controller
     public function delete(Request $request)
     {
         try {
+            DB::beginTransaction();
+
             $stars     = Stars::where(['user_id' => Auth::user()->id, 'id_mod' => $request['id']]);
             $starsUser = $stars->get();
 
@@ -57,7 +59,9 @@ class StarController extends Controller
                 $total = $stars[0]->total_stars - 1;
                 Mods::where('id', '=', $request['id'])->update(['total_stars' => $total]);
             }
+            DB::commit();
         } catch (Exception $e) {
+            DB::rollBack();
             return response(['error' => $e], 400);
         }
     }

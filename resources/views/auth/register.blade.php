@@ -23,6 +23,11 @@
 										<div class="input-group mb-3">
 											<span class="input-group-addon bg-white"><i class="fa fa-user w-4"></i></span>
 											<input type="text" placeholder="digite seu nome" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+											@error('name') 
+												<span class="invalid-feedback" role="alert">
+													<strong>Esse username já existe!!</strong>
+												</span>
+											@enderror
 										</div>
 										<div class="input-group mb-3">
 											<span class="input-group-addon bg-white"><i class="fa fa-user"></i></span>

@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
         ]);
         User::create([
             'name' => 'mateus ulhoa',
-            'email' => 'mailto:mateusulhoa061@gmail.com',
+            'email' => 'mateusulhoa061@gmail.com',
             'email_verified_at' => now(),
             'password' => Hash::make('Ulhoa0503'), // password
             'type_user'=> 1,
@@ -36,15 +36,5 @@ class DatabaseSeeder extends Seeder
             'remember_token' =>null
         ]);
         
-        $categoryGame = ['GTA V', 'GTA SA', ' ETS2', 'GTA IV', 'MODELOS 3D'];
-        $categoryMods = ['VEÍCULOS', 'CAMINHÕES', 'ÔNIBUS', 'ARMAS', 'SCRIPTS', 'JOGADOR', 'MAPAS', 'OUTROS', 'FERRAMENTAS', 'CONSTRUÇÕES', 'TEXTURA'];
-
-        foreach($categoryMods as $key => $value){
-            CategoryMods::create(['name'=> $value]);
-        }
-
-        foreach($categoryGame as $key => $value){
-            CategoryGames::create(['name'=> $value]);
-        }
     }
 }

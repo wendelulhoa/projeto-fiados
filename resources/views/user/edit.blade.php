@@ -25,7 +25,7 @@
                 <div class="tabs-menu1 ">
                     <!-- Tabs -->
                     <ul class="nav panel-tabs">
-                        <li class=""><a href="#tab5" data-toggle="tab">username e email</a></li>
+                        {{-- <li class=""><a href="#tab5" data-toggle="tab">username e email</a></li> --}}
                         <li><a href="#tab6" data-toggle="tab" class="">Foto de perfil</a></li>
                         <li><a href="#tab7" data-toggle="tab" class="active">Senha</a></li>
                     </ul>

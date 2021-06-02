@@ -45,6 +45,8 @@ class LikeController extends Controller
 
     public function delete(Request $request){
         try{
+            DB::beginTransaction();
+
             $like = Likes::where(['user_id'=> Auth::user()->id, 'id_mod'=> $request['id']]);
             $likeUser = $like->get();
             
@@ -54,7 +56,9 @@ class LikeController extends Controller
                 $total = $likes[0]->total_likes - 1;
                 Mods::where('id', '=', $request['id'])->update(['total_likes'=> $total]); 
             }    
+            DB::commit();
         }catch(Exception $e){
+            DB::rollBack();
             return response(['error'=>$e], 400);
         }
     }

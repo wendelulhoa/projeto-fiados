@@ -27,29 +27,6 @@ class AdminController extends Controller
         }
     }
 
-    public function getStrutureCreate()
-    {
-        try {
-            return view('admin.create');
-        } catch (Exception $e) {
-
-        }
-    }
-
-    public function getCategoryAndTag()
-    {
-        try {
-            
-            $category     = CategoryMods::all();
-            $categoryGame = CategoryGames::all();
-            $tags         = Tags::all();
-
-            return ['category' => $category, 'tags' => $tags, 'categoryGame'=> $categoryGame];
-        } catch (Exception $e) {
-
-        }
-    }
-
     public function approved(){
         try {
             if(Auth::user()->type_user == 0){

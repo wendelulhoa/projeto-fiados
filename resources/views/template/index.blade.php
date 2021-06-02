@@ -80,32 +80,27 @@
                 <!-- app-content-->
 				<div class="app-content toggle-content">
 					<div class="side-app">
-						<form action="{{ Route('index') }}" method="post" id="form-category">
-							{{csrf_field()}}
-							<input type="text" value="" id="category-game-input" name="category-game" hidden>
-							<input type="text" value="" id="category-mod-input" name="category-mod" hidden>
-						</form>
 					    <!-- page-header -->
 						
 						<div class="page-header">
-						@if (Route::getCurrentRoute()->getName() != 'login' && Route::getCurrentRoute()->getName() != 'register')
-							<h1 class="page-title">{{ $type ?? 'Mods' }}</h1>
+						@if (Route::getCurrentRoute()->getName() != 'login' && Route::getCurrentRoute()->getName() != 'register' && Route::getCurrentRoute()->getName() == 'mods-edit')
+							<h1 class="page-title text-white">{{ $type ?? 'Mods' }}</h1>
 							<div class="ml-auto">
 								<div class="input-group">
 									
-									<a href="#" data-category-game="1" class=" mr-2 category-game" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="GTA 5">
+									<a href="{{ Route('index-gtav') }}" class=" mr-2 mt-2" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="GTA 5">
 										<img src="{{ mix('/images/gta5.png') }}" alt="GTAV" class="rounded-circle user_img" style="width: 60px; height: 60px;" >
 									</a>
-									<a href="#" data-category-game="2" class=" mr-2 category-game" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="GTA SA">
+									<a href="{{ Route('index-gtasa') }}"  class=" mr-2 mt-2" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="GTA SA">
 										<img src="{{ mix('/images/gtasa.png') }}" alt="GTA SA" class="rounded-circle user_img" style="width: 60px; height: 60px;" >
 									</a>
-									<a href="#" data-category-game="3" class=" mr-2 category-game" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="EURO TRUCK SIMULATOR 2">
+									<a href="{{ Route('index-ets2') }}"  class=" mr-2 mt-2" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="EURO TRUCK SIMULATOR 2">
 										<img src="{{ mix('/images/ets2.png') }}" alt="EURO TRUCK SIMULATOR 2" class="rounded-circle user_img" style="width: 60px; height: 60px;" >
 									</a>
-									<a href="#" data-category-game="4" class=" mr-2 category-game" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="GTA 4">
+									<a href="{{ Route('index-gtaiv') }}"  class=" mr-2 mt-2" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="GTA 4">
 										<img src="{{ mix('/images/gta4.ico') }}" alt="GTAIV" class="rounded-circle user_img" style="width: 60px; height: 60px;" >
 									</a>
-									<a href="#" data-category-game="5" class=" mr-2 category-game" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="Modelos 3d">
+									<a href="{{ Route('index-gtav') }}"  class=" mr-2 mt-2" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="Modelos 3d">
 										<img src="{{ mix('/images/model-3d.png') }}" alt="Modelos 3d" class="rounded-circle user_img" style="width: 60px; height: 60px;" >
 									</a>
 								</div>
@@ -115,16 +110,23 @@
 						</div>
 
 
-						<div class="tags ml-5 mb-5 pb-5">
-								<a href="#" class="badge badge-default mr-1 category-game" style="background: #808080" data-category-game="1"><i class="fas fa-tag"></i> GTA V</a>
-								<a href="#" class="badge badge-default mr-1 category-game" style="background: #808080" data-category-game="1"><i class="fas fa-tag"></i> GTA V</a>
-								<a href="#" class="badge badge-default mr-1 category-game" style="background: #808080" data-category-game="1"><i class="fas fa-tag"></i> GTA V</a>
-								<a href="#" class="badge badge-default mr-1 category-game" style="background: #808080" data-category-game="1"><i class="fas fa-tag"></i> GTA V</a>
-								<a href="#" class="badge badge-default mr-1 category-game" style="background: #808080" data-category-game="1"><i class="fas fa-tag"></i> GTA V</a>
-								<a href="#" class="badge badge-default mr-1 category-game" style="background: #808080" data-category-game="1"><i class="fas fa-tag"></i> GTA V</a>
-								<a href="#" class="badge badge-default mr-1 category-game" style="background: #808080" data-category-game="1"><i class="fas fa-tag"></i> GTA V</a>
-								<a href="#" class="badge badge-default mr-1 category-game" style="background: #808080" data-category-game="1"><i class="fas fa-tag"></i> GTA V</a>
+						@if (Route::current()->getName() != 'index' && Route::getCurrentRoute()->getName() == 'mods-edit')
+							<div class="tags ml-5 mb-5 pb-5">
+								@if (isset($keyCategories))
+									@foreach ($keyCategories as $item)
+										<a href="{{ Route('search-category-'.$routesNames[$game].'-and-tag', ['category'=> $categoriesModsEn[$item]]) }}" class="badge badge-default mr-1 mt-2" style="background: #808080"><i class="fas fa-tag"></i> {{ $categoryMod[$item] }}</a>
+									@endforeach
+								@elseif(isset($tags))
+									@foreach ($tags as $key => $item)
+										@if (isset($tagSelected) && $tagSelected == $tagEn[$key])
+											<a href="{{ Route('search-category-'.$routesNames[$game].'-and-tag', ['category'=> $categoriesModsEn[$category], 'tag'=> $tagEn[$key] ]) }}" class="badge badge-default mr-1 mt-2" ><i class="fas fa-check"></i> {{ $item }}</a>
+										@else
+											<a href="{{ Route('search-category-'.$routesNames[$game].'-and-tag', ['category'=> $categoriesModsEn[$category], 'tag'=> $tagEn[$key] ]) }}" class="badge badge-default mr-1 mt-2" style="background: #808080"><i class="fas fa-tag"></i> {{ $item }}</a>
+										@endif
+									@endforeach
+								@endif
 							</div>
+						@endif
 						<!-- End page-header -->
 
 						@yield('content')
@@ -157,7 +159,7 @@
 								</ul>
 							</div>
 							<div class="col-lg-12 col-sm-12   text-center">
-								Copyright © 2021 <a href="#">Ulhoa developer</a>. Designed by <a href="https://www.spruko.com/">Ulhoa</a> todos os direitos reservados.
+								Copyright © 2021 <a href="#">Ulhoa developer</a>. Designed by <a href="#">Ulhoa</a> todos os direitos reservados.
 							</div>
 						</div>
 					</div>

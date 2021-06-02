@@ -6,6 +6,7 @@ use App\Models\Notifications;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class NotificationsController extends Controller
 {
@@ -35,6 +36,8 @@ class NotificationsController extends Controller
 
     public function disable(Request $request){
         try{
+            DB::beginTransaction();
+
             $ids = explode(',', $request->ids) ?? [];
             if(count($ids) > 0){
                 Notifications::whereIn('id',$ids)->update([
@@ -42,8 +45,10 @@ class NotificationsController extends Controller
                 ]);
             }
 
+            DB::commit();
             return response(['success'], 200);
         }catch (Exception $e){
+            DB::rollBack();
 
         }
     }
