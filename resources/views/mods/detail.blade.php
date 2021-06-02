@@ -130,7 +130,7 @@ $quantImages = count($images) ?? 0;
                                                     <p class="text-muted">{{ $item->message }}</p>
                                                 </div>
                                                     <div class="row">
-                                                    @if (Auth::check() && Auth::user()->id == $item->user_id || Auth::user()->id == $mod[0]->user_id)
+                                                    @if (Auth::check() && isset(Auth::user()->id) && Auth::user()->id == $item->user_id || isset(Auth::user()->id) == $mod[0]->user_id)
                                                         <a href="{{ Route('comments-delete', ['user_id'=> $item->user_id, 'id'=> $item->id, 'id_mod'=> $mod[0]->id])  }}" class="mr-2 delete-comment">excluir</a>  
                                                     @endif
                                                         {{-- <a href="" class="mr-2">editar</a>
