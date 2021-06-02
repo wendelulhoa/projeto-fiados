@@ -161,7 +161,7 @@ Route::group(['prefix'=> 'assetocorsa'], function(){
 
 Route::group(['prefix'=> 'models3d'], function(){
     Route::get('', 'Models3dController@index')->name('index-models3d');  
-    Route::get('/{category}/{tag?}', 'Models3dController@search')->name('search-category-gtasa-and-tag');
+    Route::get('/{category}/{tag?}', 'Models3dController@search')->name('search-category-models3d-and-tag');
 });
 /*fim rotas de mods.*/
 

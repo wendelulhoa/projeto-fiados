@@ -83,7 +83,7 @@
 					    <!-- page-header -->
 						
 						<div class="page-header">
-						@if (Route::getCurrentRoute()->getName() != 'login' && Route::getCurrentRoute()->getName() != 'register' && Route::getCurrentRoute()->getName() == 'mods-edit')
+						@if (Route::getCurrentRoute()->getName() != 'login' && Route::getCurrentRoute()->getName() != 'register' && Route::getCurrentRoute()->getName() != 'mods-edit')
 							<h1 class="page-title text-white">{{ $type ?? 'Mods' }}</h1>
 							<div class="ml-auto">
 								<div class="input-group">
@@ -110,7 +110,7 @@
 						</div>
 
 
-						@if (Route::current()->getName() != 'index' && Route::getCurrentRoute()->getName() == 'mods-edit')
+						@if (Route::current()->getName() != 'index' && Route::getCurrentRoute()->getName() != 'mods-edit')
 							<div class="tags ml-5 mb-5 pb-5">
 								@if (isset($keyCategories))
 									@foreach ($keyCategories as $item)
