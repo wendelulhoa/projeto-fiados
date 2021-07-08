@@ -12,7 +12,7 @@
 
 		<!-- Title -->
 		<link rel="sortcut icon" href="{{ mix('images/logo.png') }}" type="image/x-icon" />
-		<title>Ulhoa mods</title>
+		<title>Blog</title>
 
 		<!--Bootstrap css-->
 		<link rel="stylesheet" href="{{ mix('/plugins/bootstrap/css/bootstrap.min.css') }}">
@@ -49,9 +49,6 @@
 			.global-see{
 				display: block !important;
 			}
-			body{
-				background-image: url('{{ mix("/images/background-image.png") }}');
-			}
 			.app-header, .app-sidebar{
 				opacity: 0.9;
 			}
@@ -83,30 +80,7 @@
 					    <!-- page-header -->
 						
 						<div class="page-header">
-						@if (Route::getCurrentRoute()->getName() != 'login' && Route::getCurrentRoute()->getName() != 'register' && Route::getCurrentRoute()->getName() != 'mods-edit')
-							<h1 class="page-title text-white">{{ $type ?? 'Mods' }}</h1>
-							<div class="ml-auto">
-								<div class="input-group">
-									
-									<a href="{{ Route('index-gtav') }}" class=" mr-2 mt-2" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="GTA 5">
-										<img src="{{ mix('/images/gta5.png') }}" alt="GTAV" class="rounded-circle user_img" style="width: 60px; height: 60px;" >
-									</a>
-									<a href="{{ Route('index-gtasa') }}"  class=" mr-2 mt-2" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="GTA SA">
-										<img src="{{ mix('/images/gtasa.png') }}" alt="GTA SA" class="rounded-circle user_img" style="width: 60px; height: 60px;" >
-									</a>
-									<a href="{{ Route('index-ets2') }}"  class=" mr-2 mt-2" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="EURO TRUCK SIMULATOR 2">
-										<img src="{{ mix('/images/ets2.png') }}" alt="EURO TRUCK SIMULATOR 2" class="rounded-circle user_img" style="width: 60px; height: 60px;" >
-									</a>
-									<a href="{{ Route('index-gtaiv') }}"  class=" mr-2 mt-2" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="GTA 4">
-										<img src="{{ mix('/images/gta4.ico') }}" alt="GTAIV" class="rounded-circle user_img" style="width: 60px; height: 60px;" >
-									</a>
-									<a href="{{ Route('index-gtav') }}"  class=" mr-2 mt-2" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="Modelos 3d">
-										<img src="{{ mix('/images/model-3d.png') }}" alt="Modelos 3d" class="rounded-circle user_img" style="width: 60px; height: 60px;" >
-									</a>
-								</div>
-							</div>
-									
-						@endif
+						
 						</div>
 
 

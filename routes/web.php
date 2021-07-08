@@ -140,6 +140,11 @@ Route::group(['prefix'=> 'gtav'], function(){
   Route::get('/{category}/{tag?}', 'GtavController@search')->name('search-category-gtav-and-tag');  
 });
 
+Route::group(['prefix'=> 'saude'], function(){
+  Route::get('', 'GtavController@index')->name('index-saude');  
+  Route::get('/{category}/{tag?}', 'GtavController@search')->name('search-category-gtav-and-tag');  
+});
+
 Route::group(['prefix'=> 'gtaiv'], function(){
     Route::get('', 'GtaivController@index')->name('index-gtaiv');  
     Route::get('/{category}/{tag?}', 'GtaivController@search')->name('search-category-gtaiv-and-tag');  
