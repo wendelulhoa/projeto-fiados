@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CategoryGames;
 use App\Models\CategoryMods;
 use App\Models\Mods;
-use App\Models\Tags;
+use App\Models\Posts;
 use App\Models\User;
 use Exception;
 use Illuminate\Support\Facades\Auth;
@@ -18,10 +18,9 @@ class AdminController extends Controller
     public function index()
     {
         try {
-            $mods = Mods::where('approved', 'false')->paginate(6) ?? [];
-            $tags = Tags::paginate(5) ?? [];
+            $posts = Posts::where('approved', 'false')->paginate(6) ?? [];
 
-            return view('admin.index', compact('mods', 'tags'));
+            return view('admin.index', compact('posts'));
         } catch (Exception $e) {
 
         }
@@ -29,13 +28,14 @@ class AdminController extends Controller
 
     public function approved(){
         try {
+            $categories = Posts::getCategories();
             if(Auth::user()->type_user == 0){
-                $mods = Mods::orderBy('id','asc')->where(['approved'=> true, 'user_id'=> Auth::user()->id])->paginate(6) ?? [];
+                $posts = Posts::orderBy('id','asc')->where(['approved'=> true, 'user_id'=> Auth::user()->id])->paginate(6) ?? [];
             }else{
-                $mods = Mods::orderBy('id','asc')->where('approved', 'true')->paginate(6) ?? [];
+                $posts = Posts::orderBy('id','asc')->where('approved', 'true')->paginate(6) ?? [];
             }
-
-            return view('admin.approved', ['mods'=>$mods]);
+            
+            return view('admin.approved', ['posts'=>$posts, 'categories'=> $categories]);
         } catch (Exception $e) {
             abort(500);
         }
@@ -43,13 +43,14 @@ class AdminController extends Controller
     
     public function notApproved(){
         try {
+            $categories = Posts::getCategories();
             if(Auth::user()->type_user == 0){
-                $mods = Mods::orderBy('id','asc')->where(['approved'=> false, 'user_id'=> Auth::user()->id])->paginate(6) ?? [];
+                $posts = Posts::orderBy('id','asc')->where(['approved'=> false, 'user_id'=> Auth::user()->id])->paginate(6) ?? [];
             }else{
-                $mods = Mods::orderBy('id','asc')->where(['approved'=> false])->paginate(6) ?? [];
+                $posts = Posts::orderBy('id','asc')->where('approved', 'false')->paginate(6) ?? [];
             }
-
-            return view('admin.not-approved', ['mods'=>$mods]);
+            
+            return view('admin.approved', ['posts'=>$posts, 'categories'=> $categories]);
         } catch (Exception $e) {
             abort(500);
         }

@@ -31,13 +31,11 @@
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
     integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
     crossorigin="anonymous" />
-		<!--Daterangepicker css-->
-		<link href="{{ mix('/plugins/bootstrap-daterangepicker/daterangepicker.css') }}" rel="stylesheet" />
 
 		<!-- Rightsidebar css -->
 		<link href="{{ mix('/plugins/sidebar/sidebar.css') }}" rel="stylesheet">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.css">
+		{{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.css"> --}}
 		<style>
 			
 			#global-loader img {
@@ -154,21 +152,9 @@
 		<script src="{{ mix('/plugins/bootstrap/js/popper.min.js') }}"></script>
 		<script src="{{ mix('/plugins/bootstrap/js/bootstrap.min.js') }}"></script>
 
-		<!--Jquery Sparkline js-->
-		<script src="{{ mix('/js/jquery.sparkline.min.js') }}"></script>
-
-		<!-- Chart Circle js-->
-		<script src="{{ mix('/js/circle-progress.min.js') }}"></script>
-
-		<!-- Daterangepicker js-->
-		<script src="{{ mix('/plugins/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
-
 		<!--Side-menu js-->
 		<script src="{{ mix('/plugins/sidemenu/sidemenu.js') }}"></script>
 
-		<!--Time Counter js-->
-		<script src="{{ mix('/plugins/counters/jquery.missofis-countdown.js') }}"></script>
-		<script src="{{ mix('/plugins/counters/counter.js') }}"></script>
 
 		<!-- P-scrollbar js-->
 		<script src="{{ mix('/plugins/p-scrollbar/p-scrollbar.js') }}"></script>
@@ -178,11 +164,10 @@
 		<script src="{{ mix('/plugins/sidebar/sidebar.js') }}"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 		<!-- Custom js-->
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>
+		{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script> --}}
+		
 		<script src="{{ mix('/js/custom.js') }}"></script>
 		@yield('script-js')
 		@include('template.global-js')
-        <script data-ad-client="ca-pub-2449464360646014" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
 	</body>
 </html>
