@@ -53,15 +53,15 @@ Route::group(['prefix'=>'posts'], function(){
     
     Route::get('/struture/create', 'PostsController@getStrutureCreate')->name('post-create-struture');
     
-    Route::any('/getcategories', 'PostsController@getCategories')->middleware(['auth', 'verified'])->name('get-categories');
+    Route::any('/getcategories', 'PostsController@getCategories')->middleware(['auth'])->name('get-categories');
     
-    Route::post('/create', 'PostsController@create')->middleware(['auth', 'verified'])->name('post-create');
-    Route::get('/edit/{id}', 'PostsController@getStrutureEdit')->middleware(['auth', 'verified'])->name('post-edit');
-    Route::post('/update/{id}', 'PostsController@edit')->middleware(['auth', 'verified'])->name('post-update');
-    Route::post('/delete/{id}', 'PostsController@delete')->middleware(['auth', 'verified'])->name('post-delete');
+    Route::post('/create', 'PostsController@create')->middleware(['auth'])->name('post-create');
+    Route::get('/edit/{id}', 'PostsController@getStrutureEdit')->middleware(['auth'])->name('post-edit');
+    Route::post('/update/{id}', 'PostsController@edit')->middleware(['auth'])->name('post-update');
+    Route::post('/delete/{id}', 'PostsController@delete')->middleware(['auth'])->name('post-delete');
 });
 
-Route::group(['prefix'=>'admin', 'middleware'=>['auth', 'verified', 'verify_host']], function(){
+Route::group(['prefix'=>'admin', 'middleware'=>['auth', 'verify_host']], function(){
     Route::get('', 'AdminController@index')->name('admin-index');
 
     Route::get('/mods/approved', 'AdminController@approved')->name('mod-approved');
@@ -73,7 +73,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>['auth', 'verified', 'verify_host
     Route::get('/listusers', 'UserController@getStrutureUsers')->name('admin-listusers');
 });
 
-Route::group(['prefix'=>'user', 'middleware'=>['auth', 'verified', 'verify_host']], function(){
+Route::group(['prefix'=>'user', 'middleware'=>['auth', 'verify_host']], function(){
     Route::get('', 'UserController@index')->name('user-index');
 
     Route::post('update/image', 'UserController@updateImage')->name('user-image-update');
@@ -117,7 +117,7 @@ Route::group(['prefix'=>'stars'], function(){
 
 
 
-Route::get('logout', 'Auth\LoginController@logout')->name('logout');
+Route::get('auth/logout', 'Auth\LoginController@logout')->name('logout');
 
 /*Rotas para tratamento de imagem*/
 Route::get('resize/{resize}/posts/images/{args}', function($resize,$args){
