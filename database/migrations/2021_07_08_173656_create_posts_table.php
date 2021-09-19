@@ -21,7 +21,7 @@ class CreatePostsTable extends Migration
             $table->boolean('approved')->nullable();
             $table->text('image_principal')->nullable();
             $table->json('content')->nullable();
-            $table->timestamps();
+            $table->timestamps(); 
         });
     }
 
