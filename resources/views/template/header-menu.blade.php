@@ -59,7 +59,6 @@
                             </div>
                             <div class="dropdown-divider m-0"></div>
                             <a class="dropdown-item" href="#"><i class="dropdown-icon fe fe-user"></i>Perfil</a>
-                            <a class="dropdown-item" href="{{ Route('mod-approved') }}"><i class="dropdown-icon fe fe-edit"></i>Mods</a>
                             <a class="dropdown-item" href="{{ Route('notification-index') }}"><i class="dropdown-icon fe fe-mail"></i> Notificações</a>
                             <a class="dropdown-item" href="{{ route('logout') }}"><i class="dropdown-icon fe fe-power"></i> Sair</a>
                         </div>

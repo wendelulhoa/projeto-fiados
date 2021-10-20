@@ -18,19 +18,11 @@ use Intervention\Image\ImageManagerStatic as Image;
 |
 */
 
-
-
-// Route::post('user/create', 'UserController@create')->name('create-user');
-
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->middleware('verify_host')->name('home');
+Route::get('', 'HomeController@index')->middleware('verify_host')->name('index');
 
-Route::any('/', 'PostsController@index')->middleware('verify_host')->name('index');
-
-Route::any('/{title?}', 'PostsController@index')->middleware('verify_host')->name('index-type');
-
-route::get('teste', function(){
+route::get('deleteallphotos', function(){
     
     $teste = Storage::allFiles('mods/images');
     $teste1 = Storage::allFiles('user/img/perfil');
@@ -42,35 +34,18 @@ route::get('teste', function(){
 });
 
 
-
-Route::get('/post/{id}/{type?}/{title?}', 'PostsController@detail')->name('post-detail');
-
-/*rotas de posts*/
-Route::group(['prefix'=>'posts'], function(){
-
-    Route::post('approved', 'PostsController@approvedPost')->name('post-approved');
-    
-    
-    Route::get('/struture/create', 'PostsController@getStrutureCreate')->name('post-create-struture');
-    
-    Route::any('/getcategories', 'PostsController@getCategories')->middleware(['auth'])->name('get-categories');
-    
-    Route::post('/create', 'PostsController@create')->middleware(['auth'])->name('post-create');
-    Route::get('/edit/{id}', 'PostsController@getStrutureEdit')->middleware(['auth'])->name('post-edit');
-    Route::post('/update/{id}', 'PostsController@edit')->middleware(['auth'])->name('post-update');
-    Route::post('/delete/{id}', 'PostsController@delete')->middleware(['auth'])->name('post-delete');
-});
-
 Route::group(['prefix'=>'admin', 'middleware'=>['auth', 'verify_host']], function(){
     Route::get('', 'AdminController@index')->name('admin-index');
-
-    Route::get('/mods/approved', 'AdminController@approved')->name('mod-approved');
-    Route::get('/mods/not/approved', 'AdminController@notApproved')->name('mod-not-approved');
 
     Route::post('/user/disable/{id}', 'UserController@disableUser')->name('admin-user-disable');
     Route::post('/user/active/{id}', 'UserController@activeUser')->name('admin-user-active');
 
     Route::get('/listusers', 'UserController@getStrutureUsers')->name('admin-listusers');
+
+    Route::group(['prefix'=>'create'], function(){
+        Route::get('/client', 'UserController@getStrutureEdit')->name('create-client');
+        Route::get('/purchases', 'UserController@getStrutureEdit')->name('create-purchases');
+    });
 });
 
 Route::group(['prefix'=>'user', 'middleware'=>['auth', 'verify_host']], function(){
@@ -90,46 +65,10 @@ Route::group(['prefix'=>'user', 'middleware'=>['auth', 'verify_host']], function
         Route::post('/get', 'NotificationsController@getNotification')->name('notification-get');
         Route::get('', 'NotificationsController@index')->name('notification-index');
         Route::post('/disable', 'NotificationsController@disable')->name('notification-disable');
-        // Route::get('/edit/{id}', 'CommentController@edit')->name('comments-edit');
-        // Route::get('/delete', 'CommentController@delete')->name('comments-delete');
     });
 });
 
-
-/*Rotas comentarios*/
-Route::group(['prefix'=>'comments'], function(){
-    Route::post('/create', 'CommentController@create')->name('comments-create');
-    Route::get('/edit/{id}', 'CommentController@edit')->name('comments-edit');
-    Route::post('/delete/{user_id}/{id}/{id_mod}/', 'CommentController@delete')->name('comments-delete');
-});
-
-/*Rotas likes*/
-Route::group(['prefix'=>'like'], function(){
-    Route::post('/create', 'LikeController@create')->name('like-create');
-    Route::delete('/delete', 'LikeController@delete')->name('like-delete');
- });
-
-/*Rotas estrelas*/
-Route::group(['prefix'=>'stars'], function(){
-    Route::post('/create', 'StarController@create')->name('star-create');
-    Route::delete('/delete', 'StarController@delete')->name('star-delete');
-});
-
-
-
 Route::get('auth/logout', 'Auth\LoginController@logout')->name('logout');
-
-/*Rotas para tratamento de imagem*/
-Route::get('resize/{resize}/posts/images/{args}', function($resize,$args){
-    $resize = explode('-', $resize);
-
-    $img = Image::cache(function($image) use($args, $resize){
-            $file = Storage::disk('local')->get("/posts/images/{$args}");
-            $img = $image->make($file)->resize($resize[0], $resize[1]);
-        },24000, true );
-
-    return Image::make($img)->response('jpg', $resize[2]);
-})->name('resize-image');
 
 Route::get('/images/{path}/{args}', function($path, $args){
     

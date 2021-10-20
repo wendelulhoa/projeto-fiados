@@ -26,12 +26,12 @@ class HomeController extends Controller
     {
         switch(Auth::user()->type_user){
             case 0:
-              return redirect()->route('index');
+              return redirect()->route('admin-index');
             break;
             case 1:
-               return redirect()->route('index');
+               return redirect()->route('admin-index');
             break;
         }
-        return redirect()->route('index');
+        return redirect()->route('admin-index');
     }
 }

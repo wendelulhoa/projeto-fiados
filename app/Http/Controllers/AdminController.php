@@ -18,11 +18,9 @@ class AdminController extends Controller
     public function index()
     {
         try {
-            $posts = Posts::where('approved', 'false')->paginate(6) ?? [];
-
-            return view('admin.index', compact('posts'));
+            return view('admin.index');
         } catch (Exception $e) {
-
+            
         }
     }
 

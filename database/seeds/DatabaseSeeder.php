@@ -25,16 +25,5 @@ class DatabaseSeeder extends Seeder
             'image'=> null,
             'remember_token' =>null
         ]);
-        User::create([
-            'name' => 'mateus ulhoa',
-            'email' => 'mateusulhoa061@gmail.com',
-            'email_verified_at' => now(),
-            'password' => Hash::make('Ulhoa0503'), // password
-            'type_user'=> 1,
-            'active'=> true,
-            'image'=> null,
-            'remember_token' =>null
-        ]);
-        
     }
 }

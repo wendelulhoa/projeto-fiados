@@ -5,7 +5,7 @@
         var id = $(this).attr('data-id');
         var action = ()=>{
             $.ajax({
-                url: "{{ Route('post-approved') }}",
+                url: "",
                 method:'POST',
                 data: {
                     id   : $(this).attr('data-id'),

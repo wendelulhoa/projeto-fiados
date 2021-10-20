@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateStarsTable extends Migration
+class CreatePurchasesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateStarsTable extends Migration
      */
     public function up()
     {
-        Schema::create('stars', function (Blueprint $table) {
+        Schema::create('purchases', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_mod')->nullable();
-            $table->float('stars')->nullable();
-            $table->integer('user_id')->nullable();
+            $table->integer('month');
+            $table->integer('year');
+            $table->float('amount');
+            $table->integer('user_id');
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ class CreateStarsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('stars');
+        Schema::dropIfExists('purchases');
     }
 }
