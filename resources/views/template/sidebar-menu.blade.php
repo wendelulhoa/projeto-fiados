@@ -12,20 +12,23 @@
             </li>
             @else
             <li class="slide">
-                <a class="side-menu__item"  data-toggle="slide" href="#"><i class="side-menu__icon fas fa-user-cog"></i><span class="side-menu__label">Admin</span><i class="angle fa fa-angle-right"></i></a>
-                <ul class="slide-menu">
-                    @if (Auth::user()->type_user == 1)
-                        <li><a class="slide-item"  href="{{ Route('admin-index') }}"><span>Inicio</span></a></li>
-                        <li><a class="slide-item"  href="{{ Route('admin-listusers') }}"><span>Úsuarios cadastrados</span></a></li>
-                        {{-- <li><a class="slide-item"  href="{{ Route('admin-create-client-view') }}"><span>Cadastradar cliente</span></a></li> --}}
-                        <li><a class="slide-item"  href="{{ Route('admin-listusers') }}"><span>Úsuarios cadastrados</span></a></li>
-                        {{-- <li><a class="slide-item"  href="{{ Route('water-mark') }}"><span>Inserir marca D'água</span></a></li> --}}
-                    @else
-                        {{-- <li><a class="slide-item"  href="{{ Route('user-index') }}"><span>Inicio</span></a></li> --}}
-                    @endif
-                    <li><a class="slide-item"  href="{{ Route('notification-index') }}"><span>Notificações</span></a></li>
-                    <li><a class="slide-item"  href="{{ Route('user-edit') }}"><span>Atualizar informações</span></a></li>
-                </ul>
+                @if (Auth::user()->type_user == 1)
+                    <a class="side-menu__item"  data-toggle="slide" href="#"><i class="side-menu__icon fas fa-user-cog"></i><span class="side-menu__label">Admin</span><i class="angle fa fa-angle-right"></i></a>
+                    <ul class="slide-menu">
+                            <li><a class="slide-item"  href="{{ Route('admin-index') }}"><span>Inicio</span></a></li>
+                            <li><a class="slide-item"  href="{{ Route('admin-listusers') }}"><span>Úsuarios cadastrados</span></a></li>
+                            <li><a class="slide-item"  href="{{ Route('admin-create-client-view') }}"><span>Cadastrar cliente</span></a></li>
+                            <li><a class="slide-item"  href="{{ Route('admin-create-purchases') }}"><span>Cadastrar compra</span></a></li>
+                            <li><a class="slide-item"  href="{{ Route('admin-new-payment') }}"><span>Pagar</span></a></li>
+                            <li><a class="slide-item"  href="{{ Route('admin-open-payments') }}"><span>Pagamentos em aberto</span></a></li>
+                            <li><a class="slide-item"  href="{{ Route('admin-closed-payments') }}"><span>Pagamentos</span></a></li>
+                            <li><a class="slide-item"  href="{{ Route('admin-listusers') }}"><span>Úsuarios cadastrados</span></a></li>
+                    
+                        <li><a class="slide-item"  href="{{ Route('notification-index') }}"><span>Notificações</span></a></li>
+                        <li><a class="slide-item"  href="{{ Route('user-edit') }}"><span>Atualizar informações</span></a></li>
+                    </ul>
+                @else
+                @endif
             </li>
         @endguest
         

@@ -56,3 +56,4 @@ mix.copy('resources/plugins/bootstrap/js/popper.min.js', 'public/plugins/bootstr
     .copy('resources/plugins/p-scrollbar/p-scrollbar-leftmenu.js', 'public/plugins/p-scrollbar/p-scrollbar-leftmenu.js')
     .copy('resources/plugins/sidebar/sidebar.js', 'public/plugins/sidebar/sidebar.js')
     .copy('resources/plugins/counters/counter.js', 'public/plugins/counters/counter.js')
+    .copy('resources/plugins/input-mask/jquery.mask.min.js', 'public/plugins/input-mask/jquery.mask.min.js');

@@ -41,11 +41,22 @@ Route::group(['prefix'=>'admin', 'middleware'=>['auth', 'verify_host']], functio
     Route::post('/user/active/{id}', 'UserController@activeUser')->name('admin-user-active');
 
     Route::get('/listusers', 'UserController@getStrutureUsers')->name('admin-listusers');
+    Route::get('/payment', 'PaymentController@getStruturePayment')->name('admin-new-payment');
+    Route::post('/payment/store', 'PaymentController@payment')->name('admin-store-payment');
+    Route::get('/openpayments', 'PaymentController@getStrutureOpenPayments')->name('admin-open-payments');
+    Route::get('/closedpayments', 'PaymentController@getStrutureClosedPayments')->name('admin-closed-payments');
+    
+    Route::post('/client/store', 'ClientController@store')->name('admin-store-client');
 
     Route::group(['prefix'=>'create'], function(){
-        Route::get('/client', 'UserController@getStrutureEdit')->name('create-client');
-        Route::get('/purchases', 'UserController@getStrutureEdit')->name('create-purchases');
+        Route::get('/client', 'ClientController@getStrutureCreate')->name('admin-create-client-view');
+        Route::get('/purchase', 'PurchasesController@getStrutureCreate')->name('admin-create-purchases');
+        Route::post('/purchase/store', 'PurchasesController@store')->name('admin-store-purchases');
     });
+});
+
+Route::group(['prefix'=>'client', 'middleware'=>['auth', 'verify_host']], function(){
+    Route::get('', 'ClientController@index')->name('client-index');
 });
 
 Route::group(['prefix'=>'user', 'middleware'=>['auth', 'verify_host']], function(){

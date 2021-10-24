@@ -33,5 +33,6 @@
     "/plugins/p-scrollbar/p-scrollbar.js": "/plugins/p-scrollbar/p-scrollbar.js",
     "/plugins/p-scrollbar/p-scrollbar-leftmenu.js": "/plugins/p-scrollbar/p-scrollbar-leftmenu.js",
     "/plugins/sidebar/sidebar.js": "/plugins/sidebar/sidebar.js",
-    "/plugins/counters/counter.js": "/plugins/counters/counter.js"
+    "/plugins/counters/counter.js": "/plugins/counters/counter.js",
+    "/plugins/input-mask/jquery.mask.min.js": "/plugins/input-mask/jquery.mask.min.js"
 }

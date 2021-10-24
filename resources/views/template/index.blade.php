@@ -12,7 +12,7 @@
 
 		<!-- Title -->
 		<link rel="sortcut icon" href="{{ mix('images/logo.png') }}" type="image/x-icon" />
-		<title>Blog</title>
+		<title>Mercado ulhoa</title>
 
 		<!--Bootstrap css-->
 		<link rel="stylesheet" href="{{ mix('/plugins/bootstrap/css/bootstrap.min.css') }}">
@@ -154,7 +154,7 @@
 
 		<!--Side-menu js-->
 		<script src="{{ mix('/plugins/sidemenu/sidemenu.js') }}"></script>
-
+		<script src="{{ mix('/plugins/input-mask/jquery.mask.min.js') }}"></script>
 
 		<!-- P-scrollbar js-->
 		<script src="{{ mix('/plugins/p-scrollbar/p-scrollbar.js') }}"></script>

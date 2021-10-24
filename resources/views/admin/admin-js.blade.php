@@ -1,6 +1,8 @@
 
 <script type="text/javascript" defer>
-    
+    $('#cpf').mask('000.000.000-00');
+    $('#phone').mask('(00)00000-0000');
+    $('.select2').select2({width:'100%'});
     $('.status-mod').click(function(){
         var id = $(this).attr('data-id');
         var action = ()=>{
