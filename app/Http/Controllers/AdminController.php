@@ -4,9 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\CategoryGames;
 use App\Models\CategoryMods;
+use App\Models\Clients;
 use App\Models\Mods;
+use App\Models\Payments;
 use App\Models\Posts;
+use App\Models\Purchases;
 use App\Models\User;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,7 +22,13 @@ class AdminController extends Controller
     public function index()
     {
         try {
-            return view('admin.index');
+            /* Busca os pagamentos. */ 
+            $closedPayments = Payments::closedPayments(null, 6);
+            $openPayments   = Payments::openPayments(null, 6);
+            $purchases      = Purchases::getAllPurchases( Carbon::now()->format('m'), Carbon::now()->format('Y'));
+            $totalClients   = Clients::getTotalClients();
+            
+            return view('admin.index', ['closedPayments' =>$closedPayments,'openPayments' =>$openPayments, 'purchases' => $purchases, 'totalClients' => $totalClients]);
         } catch (Exception $e) {
             
         }

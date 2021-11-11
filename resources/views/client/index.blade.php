@@ -1,5 +1,12 @@
 @extends('template.index')
 
 @section('content')
-    @include('layouts.card-values')
+
+    @include('client.components.table-open-payments')
+    
+    @include('client.components.table-closed-payments')
+
+    @include('layouts.modal-purchases')
+
+    @include('client.client-js')
 @endsection

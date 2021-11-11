@@ -42,6 +42,8 @@ mix.copy('resources/js/jquery-3.4.1.min.js', 'public/js')
     .copy('resources/js/jquery.sparkline.min.js', 'public/js')
     .copy('resources/js/circle-progress.min.js', 'public/js')
     .copy('resources/js/custom.js', 'public/js')
+    .copy('resources/js/echarts.js', 'public/js')
+    .copy('resources/js/circle-progress.min.js', 'public/js')
     .copy('resources/iconfonts/', 'public/iconfonts');
 
 /*Plugins js*/
@@ -56,4 +58,7 @@ mix.copy('resources/plugins/bootstrap/js/popper.min.js', 'public/plugins/bootstr
     .copy('resources/plugins/p-scrollbar/p-scrollbar-leftmenu.js', 'public/plugins/p-scrollbar/p-scrollbar-leftmenu.js')
     .copy('resources/plugins/sidebar/sidebar.js', 'public/plugins/sidebar/sidebar.js')
     .copy('resources/plugins/counters/counter.js', 'public/plugins/counters/counter.js')
-    .copy('resources/plugins/input-mask/jquery.mask.min.js', 'public/plugins/input-mask/jquery.mask.min.js');
+    .copy('resources/plugins/input-mask/jquery.mask.min.js', 'public/plugins/input-mask/jquery.mask.min.js')
+    .copy('resources/plugins/echarts/echarts.js', 'public/plugins/echarts/echarts.js')
+    .copy('resources/plugins/chart/chart.bundle.js', 'public/plugins/chart/chart.bundle.js')
+    .copy('resources/plugins/chart/chart.extension.js', 'public/plugins/chart/chart.extension.js')

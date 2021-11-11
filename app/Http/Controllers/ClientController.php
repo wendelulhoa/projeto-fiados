@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Clients;
+use App\Models\Payments;
 use App\Models\User;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
@@ -15,7 +17,12 @@ class ClientController extends Controller
 
     public function index() {
         try {
-            return view('client.index');
+            /* Busca os pagamentos. */ 
+            $closedPayments = Payments::closedPayments(Auth::user()->id);
+            $openPayments   = Payments::openPayments(Auth::user()->id);
+            $limit          = Clients::getLimit(Auth::user()->id);
+
+            return view('client.index', ['closedPayments'=>$closedPayments, 'openPayments'=> $openPayments, 'limit'=> $limit]);
         } catch (Exception $e) {
 
         }

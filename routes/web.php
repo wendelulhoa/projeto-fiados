@@ -46,6 +46,8 @@ Route::group(['prefix'=>'admin', 'middleware'=>['auth', 'verify_host']], functio
     Route::get('/openpayments', 'PaymentController@getStrutureOpenPayments')->name('admin-open-payments');
     Route::get('/closedpayments', 'PaymentController@getStrutureClosedPayments')->name('admin-closed-payments');
     
+    Route::get('/purchase/getpurchases', 'PurchasesController@getPurchases')->name('purchases-getpurchases');
+
     Route::post('/client/store', 'ClientController@store')->name('admin-store-client');
 
     Route::group(['prefix'=>'create'], function(){

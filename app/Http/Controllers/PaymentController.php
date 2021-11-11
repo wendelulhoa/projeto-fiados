@@ -31,11 +31,16 @@ class PaymentController extends Controller
                             $purchasesTotal += floatval($item->amount);
                         }
 
+                        /* Verifica se realmente tem algo a pagar. */ 
+                        if(floatval($data['amount']) > $purchasesTotal || $purchasesTotal == 0.00) {
+                            return 'o valor não pode exeder o total de compras.';
+                        }
+
                         $purchasesTotal += $amountPaymentActive;
                         $purchasesTotal -= floatval($data['amount']);
 
                         /* Paga a conta e depois faz um novo pagamento em aberto. */ 
-                        Payments::where(['user_id' => $data['client'], 'active'=> true])->update(['date_payment'=> Carbon::now(), 'active'=> false, 'amount'=> $data['amount']]);
+                        Payments::where(['user_id' => $data['client'], 'active'=> true])->update(['date_payment'=> Carbon::now(), 'active'=> false, 'amount'=> convertToDecimal($data['amount'])]);
                         
                         Payments::create([
                             'date_payment' => Carbon::now(),

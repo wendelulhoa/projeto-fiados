@@ -30,15 +30,19 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-label">Nome</label>
-                                <input type="text" class="form-control" name="name" placeholder="nome">
+                                <input type="text" class="form-control" name="name" placeholder="nome" required>
                             </div>
                             <div class="form-group">
                                 <label class="form-label">data de nascimento</label>
-                                <input type="date" class="form-control" name="birth" placeholder="data de nascimento" value="">
+                                <input type="date" class="form-control" name="birth" placeholder="data de nascimento" value="" required>
                             </div>
                             <div class="form-group">
                                 <label class="form-label">cpf</label>
-                                <input type="text" class="form-control" name="cpf" id="cpf" placeholder="cpf">
+                                <input type="text" class="form-control" name="cpf" id="cpf" placeholder="cpf" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">limite</label>
+                                <input type="text" class="form-control" name="limit" id="limit" placeholder="limite" required>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -53,7 +57,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="form-label">Senha</label>
-                                <input type="password" class="form-control" name="password" placeholder="senha">
+                                <input type="password" class="form-control" name="password" placeholder="senha" required>
                             </div>
                         </div>
                     </div>
@@ -76,4 +80,7 @@
 @section('script-js')
 @include('admin.admin-js')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script>
+    $('.select2').select2({width:'100%'});
+</script>
 @endsection

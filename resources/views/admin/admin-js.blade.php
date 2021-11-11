@@ -2,7 +2,10 @@
 <script type="text/javascript" defer>
     $('#cpf').mask('000.000.000-00');
     $('#phone').mask('(00)00000-0000');
-    $('.select2').select2({width:'100%'});
+
+    $('#amount').maskMoney({prefix:'R$ ', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});
+    $('#limit').maskMoney({prefix:'R$ ', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});
+
     $('.status-mod').click(function(){
         var id = $(this).attr('data-id');
         var action = ()=>{
@@ -43,4 +46,61 @@
 
         sweetAlert(`Tem certeza que deseja excluir?`, action)
     });
+
+    var ctx = document.getElementById("barChart");
+	var myChart = new Chart(ctx, {
+		type: 'bar',
+		data: {
+			labels: ['nov', 'dez'],
+			datasets: [{
+				label: "Pagamentos",
+				data: ["60", "15"],
+				borderColor: "#5964ff",
+				borderWidth: "0",
+				backgroundColor: "#5964ff"
+			}, {
+				label: "Compras",
+				data: ["60", "25"],
+				borderColor: "#ff5964",
+				borderWidth: "0",
+				backgroundColor: "#ff5964"
+			},]
+		},
+		options: {
+			responsive: true,
+			maintainAspectRatio: false,
+			scales: {
+				xAxes: [{
+					ticks: {
+						fontColor: "#bbc1ca",
+					 },
+					gridLines: {
+						color: 'rgba(0,0,0,0.03)'
+					}
+				}],
+				yAxes: [{
+					ticks: {
+						beginAtZero: true,
+						fontColor: "#bbc1ca",
+					},
+					gridLines: {
+						color: 'rgba(0,0,0,0.03)'
+					},
+				}]
+			},
+            tooltips: {
+                callbacks: {
+                    label: function (tooltipItem, data) {
+                        // console.log(,  );
+                        return tooltipItem.datasetIndex == 1 ? `Compras: ${data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index]}%` : `Pagamentos: ${data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index]}%`;
+                    }
+                }
+            },
+			legend: {
+				labels: {
+					fontColor: "#bbc1ca"
+				},
+			},
+		}
+	});
 </script>

@@ -40,7 +40,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-label">Valor a ser pago</label>
-                                <input type="text" class="form-control" name="amount" placeholder="valor">
+                                <input type="text" class="form-control" id="amount" name="amount" placeholder="valor">
                             </div>
                         </div>
                     </div>
@@ -65,4 +65,5 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 @include('admin.admin-js')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script>$('.select2').select2({width:'100%'});</script>
 @endsection

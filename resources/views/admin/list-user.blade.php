@@ -2,7 +2,7 @@
  
  
 @section('content')
-    <div class="row">
+<div class="row">
     <div class="col-md-12 col-lg-12">
         <div class="card">
             <div class="card-header border-0">
@@ -47,7 +47,7 @@
         <div class="pt-2" >
             {{ $users->links() }}
         </div>
-    </div><!-- col end -->
+</div><!-- col end -->
 </div>
 @section('script-js')
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>

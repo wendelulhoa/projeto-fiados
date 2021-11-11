@@ -147,6 +147,16 @@
 
 		<!-- Jquery js-->
 		<script src="{{ mix('/js/jquery-3.4.1.min.js') }}"></script>
+		
+		{{-- charts --}}
+		<script src="{{ mix('/js/circle-progress.min.js') }}"></script>
+
+		<script src="{{ mix('/plugins/echarts/echarts.js') }}"></script>
+		<script src="{{ mix('/plugins/chart/chart.bundle.js') }}"></script>
+		<script src="{{ mix('/plugins/chart/chart.extension.js') }}"></script>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js" integrity="sha512-Rdk63VC+1UYzGSgd3u2iadi0joUrcwX0IWp2rTh6KXFoAmgOjRS99Vynz1lJPT8dLjvo6JZOqpAHJyfCEZ5KoA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 		<!--Bootstrap.min js-->
 		<script src="{{ mix('/plugins/bootstrap/js/popper.min.js') }}"></script>

@@ -23,6 +23,7 @@
     "/js/jquery.sparkline.min.js": "/js/jquery.sparkline.min.js",
     "/js/circle-progress.min.js": "/js/circle-progress.min.js",
     "/js/custom.js": "/js/custom.js",
+    "/js/echarts.js": "/js/echarts.js",
     "/plugins/bootstrap/js/popper.min.js": "/plugins/bootstrap/js/popper.min.js",
     "/plugins/bootstrap/js/bootstrap.min.js": "/plugins/bootstrap/js/bootstrap.min.js",
     "/plugins/rating/jquery.rating-stars.js": "/plugins/rating/jquery.rating-stars.js",
@@ -34,5 +35,8 @@
     "/plugins/p-scrollbar/p-scrollbar-leftmenu.js": "/plugins/p-scrollbar/p-scrollbar-leftmenu.js",
     "/plugins/sidebar/sidebar.js": "/plugins/sidebar/sidebar.js",
     "/plugins/counters/counter.js": "/plugins/counters/counter.js",
-    "/plugins/input-mask/jquery.mask.min.js": "/plugins/input-mask/jquery.mask.min.js"
+    "/plugins/input-mask/jquery.mask.min.js": "/plugins/input-mask/jquery.mask.min.js",
+    "/plugins/echarts/echarts.js": "/plugins/echarts/echarts.js",
+    "/plugins/chart/chart.bundle.js": "/plugins/chart/chart.bundle.js",
+    "/plugins/chart/chart.extension.js": "/plugins/chart/chart.extension.js"
 }
