@@ -8,6 +8,7 @@ use App\Models\Purchases;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class PurchasesController extends Controller
@@ -35,7 +36,8 @@ class PurchasesController extends Controller
                         'amount'       => 0.00, 
                         'month'        => Carbon::now()->format('m'),
                         'year'         => Carbon::now()->format('Y'), 
-                        'user_id'      => $data['client'], 
+                        'user_id'      => $data['client'],
+                        'func_id'      => Auth::user()->id, 
                         'active'       => true
                     ])->id;
                 } else{ 
@@ -57,6 +59,7 @@ class PurchasesController extends Controller
                         'year'   => Carbon::now()->format('Y'), 
                         'amount' => convertToDecimal($data['amount']), 
                         'user_id'=> $data['client'], 
+                        'func_id'=> Auth::user()->id, 
                         'payment_id' => $paymentId
                     ]);
 
@@ -74,7 +77,6 @@ class PurchasesController extends Controller
             }
         } catch (Exception $e) {
             DB::rollback();
-            dd($e);
             return response()->json(['message'=> 'Ops! ocorreu um erro, fale com os administradores.'], 500);
         }
     }

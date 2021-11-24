@@ -9,6 +9,7 @@ use App\Models\Purchases;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
@@ -58,7 +59,8 @@ class PaymentController extends Controller
                             'amount'       => $purchasesTotal,
                             'month'        => Carbon::now()->format('m'),
                             'year'         => Carbon::now()->format('Y'), 
-                            'user_id'      => $data['client'], 
+                            'user_id'      => $data['client'],
+                            'func_id'      => Auth::user()->id,  
                             'active'       => true
                         ])->id;
                         
