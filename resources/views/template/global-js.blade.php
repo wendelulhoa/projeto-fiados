@@ -77,23 +77,7 @@
             `);
         @endif
     });
-
-    $('.category-game').click(function(){
-        $('#category-game-input').val($(this).attr('data-category-game'))
-        $('#form-category').submit();
-    });
     
-    $('.category-mod').click(function(){
-        $('#category-game-input').val($(this).attr('data-category-game'))
-        $('#category-mod-input').val($(this).attr('data-category-mod'))
-        $('#form-category').submit();
-    });
-    
-    $('#search-mod').click(function(){
-        if($('#param').val() != '' && $('#param').val()){
-            $('#form-search-mod').submit();
-        }
-    });
     $('.social-icon').click(function(e){
         e.preventDefault();
         if($(this).attr('href') != ''){
@@ -143,4 +127,20 @@
                 }
         });
     })
+
+    /*
+    * Converte Número para Moeda
+    * params: convertNumberToCurrency(100)
+    * retorno: 100,00
+    */
+    function convertNumberToCurrency(n, c, d, t, p = false, q = false) {
+        if (p && Math.abs(parseFloat(n)).toFixed(2) == '0.00') {
+            return q ? '&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;-' : '-';
+        }
+
+        c = isNaN(c = Math.abs(c)) ? 2 : c, d = d == undefined ? "," : d, t = t == undefined ? "." : t, s = n < 0 ? "-" : "", i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "", j = (j = i.length) > 3 ? j % 3 : 0;
+        var number = s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+
+        return number;
+    }
 </script>

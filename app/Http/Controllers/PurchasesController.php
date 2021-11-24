@@ -14,7 +14,7 @@ class PurchasesController extends Controller
 {
 
     /**
-     * Undocumented function
+     * Realiza a compra
      *
      * @return void
      */
@@ -27,12 +27,14 @@ class PurchasesController extends Controller
                 DB::beginTransaction();
                 $paymentActive = Payments::paymentActive($data['client']);
                 $purchasesTotal= convertToDecimal($data['amount'] ?? 0.00); 
-                $limit         = Clients::where(['user_id'=>$data['client']])->first()->limit;  
+                $limit         = convertToDecimal(Clients::getLimit($data['client']));
 
                 if(empty($paymentActive)) {
                     $paymentId = Payments::create([
                         'date_payment' => Carbon::now(),
                         'amount'       => 0.00, 
+                        'month'        => Carbon::now()->format('m'),
+                        'year'         => Carbon::now()->format('Y'), 
                         'user_id'      => $data['client'], 
                         'active'       => true
                     ])->id;
@@ -43,9 +45,9 @@ class PurchasesController extends Controller
                 $purchases           = Purchases::where(['payment_id'=>$paymentId])->get();
                 /* Faz a soma das contas.*/ 
                 foreach($purchases as $item) {
-                    $purchasesTotal += floatval($item->amount);
+                    $purchasesTotal += floatval($item->amount ?? 0.00);
                 }
-    
+
                 if($purchasesTotal > $limit ) {  
                     $notApproved = true;
                 } else {
@@ -57,18 +59,22 @@ class PurchasesController extends Controller
                         'user_id'=> $data['client'], 
                         'payment_id' => $paymentId
                     ]);
+
+                    /* Atualiza os valores do pagamento ativo. */ 
+                    Payments::where(['id'=> $paymentId])->update(['amount'=> $purchasesTotal]);
                 }
 
                 DB::commit();
             }
 
             if($notApproved) {
-                return 'não tem limite sufiente.';
+                return response()->json(['message'=> 'Ops! não tem limite sufiente.'], 400);
+            } else {
+                return response()->json(['message'=> 'Cadastrado com sucesso.', 'amount' => moneyConvert($purchasesTotal)], 200);
             }
         } catch (Exception $e) {
             DB::rollback();
-            dd($e);
-            abort(500);
+            return response()->json(['message'=> 'Ops! ocorreu um erro, fale com os administradores.'], 500);
         }
     }
 
@@ -77,11 +83,19 @@ class PurchasesController extends Controller
      *
      * @return view
      */
-    public function getStrutureCreate()
+    public function getStrutureCreate($id = null)
     {
         try {
-            $clients = Clients::getAllClients();
-            return view('client.create-purchase', ['clients'=>$clients]);
+            if($id != null) {
+                $client        = Clients::getClient($id);
+                $openPayment   = Payments::paymentActive($id);
+                $limit         = Clients::getLimit($id);
+                
+                return view('client.create-purchase', ['client'=>$client, 'limit' => $limit, 'openPayment'=> $openPayment,'id'=> $id]);
+            } else {
+                $clients = Clients::getAllClients();
+                return view('client.create-purchase', ['clients'=>$clients, 'id'=> $id]);
+            }
         } catch (Exception $e) {
             abort(500);
         }

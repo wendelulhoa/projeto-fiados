@@ -10,33 +10,45 @@
                 <div>
                     <h3 class="card-title">Cadastro de cliente</h3>
                 </div>
+                <div class="card-options">
+                    <a href="" class="mr-4 text-default" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">
+                        <span class="fe fe-more-horizontal fs-20"></span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                        <li><a href="#"><i class="fe fe-eye mr-2"></i>View</a></li>
+                        <li><a href="#"><i class="fe fe-plus-circle mr-2"></i>Add</a></li>
+                        <li><a href="#"><i class="fe fe-trash-2 mr-2"></i>Remove</a></li>
+                        <li><a href="#"><i class="fe fe-download-cloud mr-2"></i>Download</a></li>
+                        <li><a href="#"><i class="fe fe-settings mr-2"></i>More</a></li>
+                    </ul>
+                </div>
             </div>
             <div class="card-body">
-                <form action="{{ route('admin-store-client')}}" method="post">
+                <form action="{{ route('admin-update-client')}}" method="post">
                     @csrf
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-label">Nome</label>
-                                <input type="text" class="form-control" name="name" placeholder="nome" value="{{}}" required>
+                                <input type="text" class="form-control" value="{{$client[0]->name ?? ''}}" name="name" placeholder="nome" required>
                             </div>
                             <div class="form-group">
                                 <label class="form-label">data de nascimento</label>
-                                <input type="date" class="form-control" name="birth" placeholder="data de nascimento" value="" required>
+                                <input type="date" value="{{$client[0]->birth ?? ''}}" class="form-control" name="birth" placeholder="data de nascimento" value="" required>
                             </div>
                             <div class="form-group">
                                 <label class="form-label">cpf</label>
-                                <input type="text" class="form-control" name="cpf" id="cpf" placeholder="cpf" required>
+                                <input type="text" class="form-control" value="{{$client[0]->cpf ?? ''}}" name="cpf" id="cpf" placeholder="cpf" required>
                             </div>
                             <div class="form-group">
                                 <label class="form-label">limite</label>
-                                <input type="text" class="form-control" name="limit" id="limit" placeholder="limite" required>
+                                <input type="text" class="form-control" value="{{moneyConvert($client[0]->limit ?? 0.00)}}" name="limit" id="limit" placeholder="limite" required>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-label">Email (opcional)</label>
-                                <input type="text" class="form-control" name="email" placeholder="email.">
+                                <input type="text" class="form-control" name="email" value="{{isset($client[0]->email) && $client[0]->email == $client[0]->cpf ? '' :  $client[0]->email}}" placeholder="email.">
                             </div>
                             <div class="form-group">
                                 <label class="form-label">Telefone</label>
@@ -44,9 +56,10 @@
                                 <div class="invalid-feedback">numero incorreto</div>
                             </div>
                             <div class="form-group">
-                                <label class="form-label">Senha</label>
-                                <input type="password" class="form-control" name="password" placeholder="senha" required>
+                                <label class="form-label">Senha (opcional)</label>
+                                <input type="password" class="form-control" name="password" placeholder="senha">
                             </div>
+                            <input type="text" value="{{$client[0]->user_id ?? ''}}" name="user_id" hidden>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary float-right">Cadastrar</button>

@@ -53,4 +53,9 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         $this->notify(new VerifyEmail());
     }
+
+    /* Pega todos admins. */ 
+    public static function getAllAdmins() {
+        return User::where(['type_user'=>1])->get();
+    }
 }

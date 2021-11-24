@@ -13,74 +13,53 @@ use App\Models\User;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Symfony\Component\HttpFoundation\Request;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManagerStatic as Image;
 
 class AdminController extends Controller
 {
-    public function index()
+    /**
+     * Tela do admin.
+     *
+     * @param integer $month
+     * @param integer $year
+     * @return view
+     */ 
+    public function index($month, $year)
     {
         try {
-            /* Busca os pagamentos. */ 
-            $closedPayments = Payments::closedPayments(null, 6);
-            $openPayments   = Payments::openPayments(null, 6);
-            $purchases      = Purchases::getAllPurchases( Carbon::now()->format('m'), Carbon::now()->format('Y'));
+            /* Faz as buscas para pegar as informações da tela de admin. */ 
+            $closedPayments = Payments::closedPayments(null,$month, $year, 6);
+            $openPayments   = Payments::openPayments(null, $month, $year, 6);
+            $purchases      = Purchases::getAllPurchases(null, $month, $year);
             $totalClients   = Clients::getTotalClients();
+            $totalPayment   = 0.00;
+            $totalPurchase  = 0.00;
             
-            return view('admin.index', ['closedPayments' =>$closedPayments,'openPayments' =>$openPayments, 'purchases' => $purchases, 'totalClients' => $totalClients]);
-        } catch (Exception $e) {
-            
-        }
-    }
+            /* Pega todos pagamentos  e todas compras*/ 
+            $allClosedPayments = Payments::getAllClosedpayments(null, $month, $year);
+            $allPurchases      = Purchases::getAllPurchases(null, $month, $year, false);
+            $salesQuantity     =  count($allPurchases);
 
-    public function approved(){
-        try {
-            $categories = Posts::getCategories();
-            if(Auth::user()->type_user == 0){
-                $posts = Posts::orderBy('id','asc')->where(['approved'=> true, 'user_id'=> Auth::user()->id])->paginate(6) ?? [];
-            }else{
-                $posts = Posts::orderBy('id','asc')->where('approved', 'true')->paginate(6) ?? [];
+            /* Faz a soma dos pagamentos.*/ 
+            foreach($allClosedPayments as $payment) {
+                $totalPayment += $payment->amount ?? 0.00;
             }
-            
-            return view('admin.approved', ['posts'=>$posts, 'categories'=> $categories]);
-        } catch (Exception $e) {
-            abort(500);
-        }
-    }
-    
-    public function notApproved(){
-        try {
-            $categories = Posts::getCategories();
-            if(Auth::user()->type_user == 0){
-                $posts = Posts::orderBy('id','asc')->where(['approved'=> false, 'user_id'=> Auth::user()->id])->paginate(6) ?? [];
-            }else{
-                $posts = Posts::orderBy('id','asc')->where('approved', 'false')->paginate(6) ?? [];
+
+            /* Faz a soma das compras.*/ 
+            foreach($allPurchases as $purchase) {
+                $totalPurchase += $purchase->amount ?? 0.00; 
             }
+
+            /* Salva o ano e o mes*/ 
+            Session::put('month', $month);
+            Session::put('year', $year);
             
-            return view('admin.approved', ['posts'=>$posts, 'categories'=> $categories]);
+            return view('admin.index', ['closedPayments' =>$closedPayments,'openPayments' =>$openPayments, 'purchases' => $purchases, 'totalClients' => $totalClients, 'totalPurchase' => $totalPurchase, 'totalPayment' => $totalPayment, 'salesQuantity' => $salesQuantity ]);
         } catch (Exception $e) {
             abort(500);
-        }
-    }
-
-    public function waterMark(Request $request){
-        try{
-            if(isset($request->logo)){
-                Storage::delete('logo-img/logo.png');
-                // returns \Intervention\Image\Image - OK
-                $logo = Image::make($request['logo'])
-                                ->resize(512, null, function ($constraint) { $constraint->aspectRatio(); } )
-                                ->encode('png', 70);
-            
-                // use hash as a name
-                $principalImage = "logo-img/logo.png";
-
-                Storage::put($principalImage, $logo);
-            }
-            return view('admin.water-mark');
-        }catch(Exception $e){
-            return view('admin.water-mark');
         }
     }
 }

@@ -14,61 +14,7 @@ use Intervention\Image\ImageManagerStatic as Image;
 
 class UserController extends Controller
 {
-    public function index()
-    {
-        return view('user.index');
-    }
-
-    public function create(Request $request)
-    {
-        DB::beginTransaction();
-        try {
-            User::create([
-                'name'      => $request['username'],
-                'email'     => $request['email'],
-                'password'  => Hash::make($request['password']),
-                'active'    => true,
-                'image'     => null,
-                'type_user' => 0,
-            ]);
-            DB::commit();
-        } catch (Exception $e) {
-            DB::rollback();
-            return redirect()->route('view-create');
-        }
-    }
-
-    public function getStrutureCreate()
-    {
-        return view('user.create');
-    }
-    
-    public function getStrutureEdit()
-    {
-        try {
-            return view('user.edit');
-        } catch (Exception $e) {
-
-        }
-    }
-
-    public function update(Request $request)
-    {
-        DB::beginTransaction();
-        try {
-            User::where('id', Auth::user()->id)->update([
-                'name'      => $request['username'],
-                'email'     => $request['email'],
-                'password'  => Hash::make($request['password']),
-                'type_user' => 0,
-            ]);
-            DB::commit();
-        } catch (Exception $e) {
-            DB::rollback();
-            return redirect()->route('view-create');
-        }
-    }
-
+    /* Faz a atualizão da foto de perfil. */ 
     public function updateImage(Request $request)
     {
         DB::beginTransaction();
@@ -102,6 +48,7 @@ class UserController extends Controller
         }
     }
 
+    /* Atualiza a senha com a nova. */ 
     public function updatePassword(Request $request){
         DB::beginTransaction();
         try {
@@ -121,6 +68,7 @@ class UserController extends Controller
         }
     }
 
+    /* Lista todos os usuarios. */ 
     public function getStrutureUsers(){
         try{
             $users = User::orderBy('id','asc')->paginate(5);
@@ -131,6 +79,7 @@ class UserController extends Controller
         }
     }
 
+    /* Habilita um usuario*/ 
     public function activeUser($id){
         try{
             DB::beginTransaction();
@@ -147,6 +96,7 @@ class UserController extends Controller
         }
     }
 
+    /* Desabilita um usuario. */
     public function disableUser($id){
         try{
             DB::beginTransaction();
@@ -162,5 +112,4 @@ class UserController extends Controller
 
         }
     }
-
 }

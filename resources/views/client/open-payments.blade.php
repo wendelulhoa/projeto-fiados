@@ -6,6 +6,11 @@
 
     @include('layouts.modal-purchases')
 
-    @include('client.client-js')
-
+    @section('script-js')
+        @include('client.client-js')
+        <script>
+            /* Link para navegar entre periodos. */ 
+            var linkUpdate = "{{ Route('admin-open-payments', [0, 0]) }}";
+        </script>
+    @endsection
 @endsection

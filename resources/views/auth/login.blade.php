@@ -21,7 +21,7 @@
 												<p class="text-muted">Entre com sua conta</p>
 												<div class="input-group mb-3">
 													<span class="input-group-addon bg-white"><i class="fa fa-user"></i></span>
-													<input id="email" placeholder="Digite seu email..." type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+													<input id="email" placeholder="Digite seu email..." type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
                                                     @error('email')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>Verifique o email ou senha se estão corretos!</strong>

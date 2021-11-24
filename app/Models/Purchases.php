@@ -14,10 +14,31 @@ class Purchases extends Model
     }
 
     /* Pega as compras de um id de pagamento*/ 
-    protected static function getAllPurchases($month, $year) {
-       return Purchases::select('purchases.*', 'users.name', 'clients.cpf')->
-                join('clients', 'purchases.user_id','=', 'clients.user_id')->
-                join('users', 'purchases.user_id','=', 'users.id')->
-                where(['month'=> $month,'year' => $year])->orderBy('id', 'DESC')->paginate(6);
+    protected static function getAllPurchases($id = null, $month, $year, $isPaginate = true) {
+      if($id != null) {
+         if($isPaginate) {
+            return Purchases::select('purchases.*', 'users.name', 'clients.cpf')->
+                  join('clients', 'purchases.user_id','=', 'clients.user_id')->
+                  join('users', 'purchases.user_id','=', 'users.id')->
+                  where(['purchases.month'=> $month,'purchases.year' => $year, 'purchases.user_id'=> $id])->orderBy('id', 'DESC')->paginate(6);
+         } else {
+            return Purchases::select('purchases.*', 'users.name', 'clients.cpf')->
+                  join('clients', 'purchases.user_id','=', 'clients.user_id')->
+                  join('users', 'purchases.user_id','=', 'users.id')->
+                  where(['purchases.month'=> $month,'purchases.year' => $year, 'purchases.user_id'=> $id])->orderBy('id', 'DESC')->get();        
+         }
+      } else {
+         if($isPaginate) {
+            return Purchases::select('purchases.*', 'users.name', 'clients.cpf')->
+                  join('clients', 'purchases.user_id','=', 'clients.user_id')->
+                  join('users', 'purchases.user_id','=', 'users.id')->
+                  where(['month'=> $month,'year' => $year])->orderBy('id', 'DESC')->paginate(6);
+         } else {
+            return Purchases::select('purchases.*', 'users.name', 'clients.cpf')->
+                  join('clients', 'purchases.user_id','=', 'clients.user_id')->
+                  join('users', 'purchases.user_id','=', 'users.id')->
+                  where(['month'=> $month,'year' => $year])->orderBy('id', 'DESC')->get();      
+         }
+      }
     }
 }

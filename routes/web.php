@@ -22,43 +22,48 @@ Auth::routes();
 
 Route::get('', 'HomeController@index')->middleware('verify_host')->name('index');
 
-route::get('deleteallphotos', function(){
-    
-    $teste = Storage::allFiles('mods/images');
-    $teste1 = Storage::allFiles('user/img/perfil');
-    $teste2 = Storage::allFiles('images/mods-principal');
-    
-    Storage::delete($teste);
-    Storage::delete($teste1);
-    Storage::delete($teste2);
-});
+Route::group(['prefix'=>'admin', 'middleware'=>['auth', 'user_is_admin']], function(){
 
-
-Route::group(['prefix'=>'admin', 'middleware'=>['auth', 'verify_host']], function(){
-    Route::get('', 'AdminController@index')->name('admin-index');
+    Route::get('/month/{month}/year/{year}', 'AdminController@index')->name('admin-index');
 
     Route::post('/user/disable/{id}', 'UserController@disableUser')->name('admin-user-disable');
     Route::post('/user/active/{id}', 'UserController@activeUser')->name('admin-user-active');
 
     Route::get('/listusers', 'UserController@getStrutureUsers')->name('admin-listusers');
-    Route::get('/payment', 'PaymentController@getStruturePayment')->name('admin-new-payment');
-    Route::post('/payment/store', 'PaymentController@payment')->name('admin-store-payment');
-    Route::get('/openpayments', 'PaymentController@getStrutureOpenPayments')->name('admin-open-payments');
-    Route::get('/closedpayments', 'PaymentController@getStrutureClosedPayments')->name('admin-closed-payments');
+
+    /* Rotas relacionadas a pagamentos. */ 
+    Route::any('/payment/{id?}', 'PaymentController@getStruturePayment')->name('admin-new-payment');
+    Route::post('/payments/store', 'PaymentController@payment')->name('admin-store-payment');
+    Route::get('/month/{month}/year/{year}/openpayments', 'PaymentController@getStrutureOpenPayments')->name('admin-open-payments');
+    Route::get('/month/{month}/year/{year}/closedpayments', 'PaymentController@getStrutureClosedPayments')->name('admin-closed-payments');
     
     Route::get('/purchase/getpurchases', 'PurchasesController@getPurchases')->name('purchases-getpurchases');
 
-    Route::post('/client/store', 'ClientController@store')->name('admin-store-client');
-
+    
     Route::group(['prefix'=>'create'], function(){
         Route::get('/client', 'ClientController@getStrutureCreate')->name('admin-create-client-view');
-        Route::get('/purchase', 'PurchasesController@getStrutureCreate')->name('admin-create-purchases');
-        Route::post('/purchase/store', 'PurchasesController@store')->name('admin-store-purchases');
+        Route::post('/client/store', 'ClientController@store')->name('admin-store-client');
+        Route::get('/purchase/{id?}', 'PurchasesController@getStrutureCreate')->name('admin-create-purchases');
+        Route::post('/purchases/store', 'PurchasesController@store')->name('admin-store-purchases');
+    });
+    
+    Route::group(['prefix'=>'edit'], function(){
+        Route::get('/client/{id}', 'ClientController@getStrutureEdit')->name('admin-edit-client-view');
+        Route::post('/client/store', 'ClientController@update')->name('admin-update-client');
+        Route::get('/purchase/{id?}', 'PurchasesController@getStrutureCreate')->name('admin-edit-purchases');
+        Route::post('/purchases/update', 'PurchasesController@update')->name('admin-update-purchases');
     });
 });
 
 Route::group(['prefix'=>'client', 'middleware'=>['auth', 'verify_host']], function(){
-    Route::get('', 'ClientController@index')->name('client-index');
+    Route::get('/month/{month}/year/{year}', 'ClientController@index')->name('client-index');
+
+    /* Rotas de pagamentos e compras. */
+    Route::get('/month/{month}/year/{year}/openpayments/{id?}', 'PaymentController@getStrutureOpenPayments')->name('client-open-payments');
+    Route::get('/month/{month}/year/{year}/closedpayments/{id?}', 'PaymentController@getStrutureClosedPayments')->name('client-closed-payments');
+    
+    /* Busca as compras desse pagamento. */ 
+    Route::get('/purchase/getpurchases', 'PurchasesController@getPurchases')->name('purchases-client-getpurchases');
 });
 
 Route::group(['prefix'=>'user', 'middleware'=>['auth', 'verify_host']], function(){
@@ -67,8 +72,6 @@ Route::group(['prefix'=>'user', 'middleware'=>['auth', 'verify_host']], function
     Route::post('update/image', 'UserController@updateImage')->name('user-image-update');
     
     Route::post('update/password', 'UserController@updatePassword')->name('user-password-update');
-    
-    Route::get('myposts', 'PostsController@myPosts')->name('my-posts');
 
     Route::get('/create', 'UserController@getStrutureCreate')->name('user-create');
     Route::get('/edit', 'UserController@getStrutureEdit')->name('user-edit');

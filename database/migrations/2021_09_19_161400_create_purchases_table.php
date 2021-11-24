@@ -20,6 +20,8 @@ class CreatePurchasesTable extends Migration
             $table->integer('year');
             $table->float('amount');
             $table->integer('user_id');
+            $table->integer('func_id');
+            $table->text('note');
             $table->integer('payment_id');
             $table->timestamps();
         });

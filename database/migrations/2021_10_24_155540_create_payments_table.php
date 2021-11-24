@@ -17,8 +17,12 @@ class CreatePaymentsTable extends Migration
             $table->id();
             $table->integer('user_id');
             $table->float('amount');
+            $table->integer('month');
+            $table->integer('year');
             $table->boolean('active');
             $table->timestamp('date_payment')->nullable();
+            $table->integer('func_id');
+            $table->text('note');
             $table->timestamps();
         });
     }

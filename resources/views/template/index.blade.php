@@ -28,6 +28,10 @@
 
 		<!-- Sidemenu css -->
 		<link href="{{ mix('/plugins/sidemenu/sidemenu.css') }}" rel="stylesheet" />
+		
+		{{-- datapicker --}}
+		<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.css'>
+
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
     integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
     crossorigin="anonymous" />
@@ -78,7 +82,20 @@
 					    <!-- page-header -->
 						
 						<div class="page-header">
-						
+							@if (Auth::check())
+								<h1 class="page-title"></h1>
+								<div class="ml-auto">
+									<div class="input-group">
+										<a class="btn btn-primary btn-icon text-white mr-2" id="datetimepicker" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="Calendario">
+											<span>
+												<i class="fe fe-calendar"></i>
+												{{getMonth(Session::get('month'))}}/{{Session::get('year')}}
+											</span>
+											{{-- <input type='text' class="form-control" name='lolol'> --}}
+										</a>
+									</div>
+								</div>
+							@endif
 						</div>
 
 
@@ -179,5 +196,6 @@
 		<script src="{{ mix('/js/custom.js') }}"></script>
 		@yield('script-js')
 		@include('template.global-js')
+		@include('layouts.datapicker-js')
 	</body>
 </html>

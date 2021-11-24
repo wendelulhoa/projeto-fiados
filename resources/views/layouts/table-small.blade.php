@@ -5,7 +5,9 @@
                 <h3 class="card-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{$title ?? ''}}</font></font></h3>
             </div>
             <div class="card-options">
-                <a href="{{$link ?? ''}}"><i class="fe fe-eye mr-2"></i>Visualizar todos</a>
+                @if (isset($link) && !empty($link))
+                    <a href="{{$link ?? ''}}"><i class="fe fe-eye mr-2"></i>Visualizar todos</a>
+                @endif
             </div>
         </div>
         <div class="card-body p-0">

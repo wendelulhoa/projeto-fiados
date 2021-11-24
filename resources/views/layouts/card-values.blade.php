@@ -2,7 +2,7 @@
     <div class="card text-center">
         <div class="card-body">
             <h6 class="mb-3">{{$title}}</h6>
-            <h2 class="mb-2 number-font"><i class="mdi mdi-cash-multiple text-success mr-2"></i>{{$value}}</h2>
+            <h2 class="mb-2 number-font"><i class="mdi mdi-cash-multiple text-success mr-2"></i><span id="{{$idAlterText ?? ''}}">{{$value}}</span></h2>
         </div>
     </div>
 </div>

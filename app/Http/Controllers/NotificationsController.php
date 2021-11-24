@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Clients;
 use App\Models\Notifications;
+use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -51,5 +53,41 @@ class NotificationsController extends Controller
             DB::rollBack();
 
         }
+    }
+
+    /**
+     * Notifica o cliente e os admin quando realiza um pagamento. 
+     *
+     * @param integer $userId
+     * @param float $amount
+     * @return void
+     */
+    public static function notifyAdminAndClientPayment($userId, $amount) {
+        $admins = User::getAllAdmins();
+        $client = Clients::getClient($userId);
+
+        /* Notifica os administradores. */
+        foreach($admins as $admin) {
+            Notifications::create([
+                'type'    => 'P',
+                'title'   => 'Obrigado! pagamento realizado de R$: ' . moneyConvert($amount),
+                'message' => View('layouts.templates-notifications.template-notification-payment', ['amount'=>$amount, 'client' => $client])->render(),
+                'link'    => '',
+                'user_id' => $admin->id,
+                'active'  => true,
+            ]); 
+        }
+
+        /* Notifica o cliente.*/
+        Notifications::create([
+            'type'    => 'P',
+            'title'   => 'Obrigado! pagamento realizado de R$: ' . moneyConvert($amount),
+            'message' => View('layouts.templates-notifications.template-notification-payment', ['amount'=>$amount, 'client' => $client])->render(),
+            'link'    => '',
+            'user_id' => $userId,
+            'active'  => true,
+        ]); 
+
+
     }
 }

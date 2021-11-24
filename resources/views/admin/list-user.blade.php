@@ -19,7 +19,7 @@
                             <th>Tipo Úsuario</th>
                             <th>Status</th>
                             <th>data criação</th>
-                            <th colspan="3">Ação</th>
+                            <th colspan="2">Ações</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -37,6 +37,7 @@
                             <td>{!! $item->active ? '<button class="btn btn-success btn-sm " >ativo</button>' : '<button class="btn btn-danger btn-sm " >bloqueado</button>' !!}</td>
                             <td>{{ date_format($item->created_at ,'d/m/Y H:i:s') }}</td>
                             <td>{!! $item->active ? $buttonDisable : $buttonActive  !!}</td>
+                            <td><a href="{{$item->type_user != 0 ? '#' : route('admin-edit-client-view', ['id' => $item->id])}}"><i class="fas fa-edit"></i></i></a></td>
                         </tr>
                         @endforeach
                     </tbody>
