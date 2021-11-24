@@ -77,7 +77,6 @@ class PurchasesController extends Controller
             }
         } catch (Exception $e) {
             DB::rollback();
-            dd($e);
             return response()->json(['message'=> 'Ops! ocorreu um erro, fale com os administradores.'], 500);
         }
     }

@@ -22,7 +22,7 @@ class CreatePaymentsTable extends Migration
             $table->boolean('active');
             $table->timestamp('date_payment')->nullable();
             $table->integer('func_id');
-            $table->text('note');
+            $table->text('note')->nullable();
             $table->timestamps();
         });
     }

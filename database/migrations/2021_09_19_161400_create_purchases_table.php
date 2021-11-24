@@ -21,7 +21,7 @@ class CreatePurchasesTable extends Migration
             $table->float('amount');
             $table->integer('user_id');
             $table->integer('func_id');
-            $table->text('note');
+            $table->text('note')->nullable();
             $table->integer('payment_id');
             $table->timestamps();
         });
