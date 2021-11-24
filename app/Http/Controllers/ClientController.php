@@ -102,7 +102,7 @@ class ClientController extends Controller
             return redirect(route('admin-edit-client-view', ['id'=> $userId]));
         } catch (Exception $e) {
             DB::rollback();
-            dd($e);
+            abort(500);
         }
     }
     
