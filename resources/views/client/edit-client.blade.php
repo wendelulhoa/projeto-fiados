@@ -38,7 +38,12 @@
                             </div>
                             <div class="form-group">
                                 <label class="form-label">cpf</label>
-                                <input type="text" class="form-control" value="{{$client[0]->cpf ?? ''}}" name="cpf" id="cpf" placeholder="cpf" required>
+                                <input type="text" class="form-control @error('cpf') is-invalid @enderror" value="{{$client[0]->cpf ?? ''}}" name="cpf" id="cpf" placeholder="cpf" required>
+                                @error('cpf')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>Verifique se o cpf foi inserido corretamente</strong>
+                                    </span>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label class="form-label">limite</label>
@@ -48,10 +53,15 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-label">Email (opcional)</label>
-                                <input type="text" class="form-control" name="email" value="{{isset($client[0]->email) && $client[0]->email == $client[0]->cpf ? '' :  $client[0]->email}}" placeholder="email.">
+                                <input type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{isset($client[0]->email) && $client[0]->email == $client[0]->cpf ? '' :  $client[0]->email}}" placeholder="email.">
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>Ops! esse email está sendo usado.</strong>
+                                    </span>
+                                @enderror
                             </div>
                             <div class="form-group">
-                                <label class="form-label">Telefone</label>
+                                <label class="form-label">Telefone (opcional)</label>
                                 <input type="text" class="form-control" id="phone" name="phone" placeholder="telefone">
                                 <div class="invalid-feedback">numero incorreto</div>
                             </div>

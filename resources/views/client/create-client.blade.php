@@ -18,29 +18,40 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-label">Nome</label>
-                                <input type="text" class="form-control" name="name" placeholder="nome" value="{{}}" required>
+                                <input type="text" class="form-control" name="name" placeholder="nome" value="{{old('name') ?? ''}}" required>
+                                
                             </div>
                             <div class="form-group">
                                 <label class="form-label">data de nascimento</label>
-                                <input type="date" class="form-control" name="birth" placeholder="data de nascimento" value="" required>
+                                <input type="date" class="form-control" name="birth" placeholder="data de nascimento" value="{{old('birth') ?? ''}}" required>
                             </div>
                             <div class="form-group">
                                 <label class="form-label">cpf</label>
-                                <input type="text" class="form-control" name="cpf" id="cpf" placeholder="cpf" required>
+                                <input type="text" class="form-control @error('cpf') is-invalid @enderror" value="{{old('cpf') ?? ''}}" name="cpf" id="cpf" placeholder="cpf" required>
+                                @error('cpf')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>Verifique se o cpf foi inserido corretamente</strong>
+                                    </span>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label class="form-label">limite</label>
-                                <input type="text" class="form-control" name="limit" id="limit" placeholder="limite" required>
+                                <input type="text" class="form-control" name="limit" value="{{old('limit') ?? ''}}" id="limit" placeholder="limite" required>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-label">Email (opcional)</label>
-                                <input type="text" class="form-control" name="email" placeholder="email.">
+                                <input type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{old('email') ?? ''}}" placeholder="email.">
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>Ops! esse email está sendo usado.</strong>
+                                    </span>
+                                @enderror
                             </div>
                             <div class="form-group">
-                                <label class="form-label">Telefone</label>
-                                <input type="text" class="form-control" id="phone" name="phone" placeholder="telefone">
+                                <label class="form-label">Telefone (opcional)</label>
+                                <input type="text" class="form-control" id="phone" value="{{old('phone') ?? ''}}" name="phone" placeholder="telefone">
                                 <div class="invalid-feedback">numero incorreto</div>
                             </div>
                             <div class="form-group">

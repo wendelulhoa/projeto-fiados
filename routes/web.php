@@ -49,7 +49,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>['auth', 'user_is_admin']], funct
     
     Route::group(['prefix'=>'edit'], function(){
         Route::get('/client/{id}', 'ClientController@getStrutureEdit')->name('admin-edit-client-view');
-        Route::post('/client/store', 'ClientController@update')->name('admin-update-client');
+        Route::post('/client/update', 'ClientController@update')->name('admin-update-client');
         Route::get('/purchase/{id?}', 'PurchasesController@getStrutureCreate')->name('admin-edit-purchases');
         Route::post('/purchases/update', 'PurchasesController@update')->name('admin-update-purchases');
     });

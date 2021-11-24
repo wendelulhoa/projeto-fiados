@@ -72,6 +72,15 @@ class ClientController extends Controller
             $data = $request->all();
 
             if (!empty($data)) {
+                /* Tira a formatção do cpf. */ 
+                $data['cpf']  = unformatedCpf($data['cpf'] ?? 0);  
+
+                $validator = $this->validator($data);
+                
+                if (!empty($validator->errors())) {
+                    return redirect()->route('admin-create-client-view')->withErrors($validator->errors())->withInput();
+                }
+
                 DB::beginTransaction();
                 $userId = User::create([
                     'name'     => $data['name'],
@@ -108,7 +117,15 @@ class ClientController extends Controller
         try {
             $data = $request->all();
             if (!empty($data)) {
+                /* Tira a formatção do cpf. */ 
+                $data['cpf']  = unformatedCpf($data['cpf'] ?? 0);  
+
+                $validator = $this->validator($data);
                 
+                if (!empty($validator->errors())) {
+                    return redirect()->route('admin-edit-client-view', ['id'=> $data['user_id']])->withErrors($validator->errors())->withInput();
+                }
+
                 DB::beginTransaction();
 
                 if(isset($data['password']) && !empty($data['password'])) {
@@ -178,10 +195,19 @@ class ClientController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
+        $validator = Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
+
+        if(isset($data['cpf']) && strlen($data['cpf']) < 11 || isset($data['cpf']) && strlen($data['cpf']) > 11 || !isset($data['cpf'])) {
+            $validator->after(function ($validator) {
+                $validator->errors()->add(
+                    'cpf', 'Verifique se o cpf foi inserido corretamente.'
+                );
+            });
+        }
+
+        return $validator;
     }
 }
