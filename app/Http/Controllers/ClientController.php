@@ -76,8 +76,9 @@ class ClientController extends Controller
                 $data['cpf']  = unformatedCpf($data['cpf'] ?? 0);  
 
                 $validator = $this->validator($data);
-                
-                if (!empty($validator->errors())) {
+
+                if ($validator->fails()) {
+                    dd($validator->errors());
                     return redirect()->route('admin-create-client-view')->withErrors($validator->errors())->withInput();
                 }
 
@@ -122,7 +123,7 @@ class ClientController extends Controller
 
                 $validator = $this->validator($data);
                 
-                if (!empty($validator->errors())) {
+                if ($validator->fails()) {
                     return redirect()->route('admin-edit-client-view', ['id'=> $data['user_id']])->withErrors($validator->errors())->withInput();
                 }
 
