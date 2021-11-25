@@ -32,6 +32,7 @@ class PaymentController extends Controller
                         $purchases           = Purchases::where(['payment_id'=>$paymentActive->id])->get();
                         $purchasesTotal      = 0.00; 
                         $amountPaymentActive = $paymentActive->amount;
+                        $note                = isset($data['note']) ? $data['note'] : '';
 
                         /* Faz a soma das contas.*/ 
                         foreach($purchases as $item) {
@@ -61,10 +62,12 @@ class PaymentController extends Controller
                             'year'         => Carbon::now()->format('Y'), 
                             'user_id'      => $data['client'],
                             'func_id'      => Auth::user()->id,  
+                            'note'         => $note,  
                             'active'       => true
                         ])->id;
                         
-                        NotificationsController::notifyAdminAndClientPayment($data['client'], convertToDecimal($data['amount']));
+                        /* Notifica o cliente e os administradores. */ 
+                        NotificationsController::notifyAdminAndClientPayment($data['client'], convertToDecimal($data['amount']), $note);
 
                         DB::commit();
                         return response()->json(['message'=> 'Pagamento realizado com sucesso.', 'amount'=> moneyConvert($purchasesTotal)], 200);

@@ -11,10 +11,6 @@
                     <div class="timelineleft-body">
                         {!! $item->message !!}
                     </div>
-                    
-                    {{-- <div class="timelineleft-footer">
-                        <a class="btn btn-info text-white btn-flat btn-sm">ir</a>
-                    </div> --}}
                 </div>
             </li>
         @endforeach

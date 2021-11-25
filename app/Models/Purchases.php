@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Purchases extends Model
 {
-    public $fillable = ['day', 'month','year', 'amount', 'user_id', 'func_id', 'payment_id'];
+    public $fillable = ['day', 'month','year', 'amount', 'user_id', 'func_id', 'note', 'payment_id'];
 
     /* Pega as compras de um id de pagamento*/ 
     protected static function getPurchases($paymentId) {

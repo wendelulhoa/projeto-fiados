@@ -53,7 +53,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-label">Email (opcional)</label>
-                                <input type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{isset($client[0]->email) && $client[0]->email == $client[0]->cpf ? '' :  $client[0]->email}}" placeholder="email.">
+                                <input type="text" disabled class="form-control @error('email') is-invalid @enderror" name="email" value="{{isset($client[0]->email) && $client[0]->email == $client[0]->cpf ? '' :  $client[0]->email}}" placeholder="email.">
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>Ops! esse email está sendo usado.</strong>

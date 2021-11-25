@@ -34,6 +34,10 @@
                                         <input type="text" class="form-control reset" id="amount" name="amount" placeholder="valor">
                                     </div>
                                 </div>
+                                <div class="form-group col-md-12">
+                                    <label class="form-label">Resumo (opcional)</label>
+                                    <textarea class="form-control" name="note" rows="4" placeholder="Escreva um breve resumo..."></textarea>
+                                </div>
                             </div>
                             <button type="submit" class="btn btn-primary float-right" if>Cadastrar</button>
                         </form>

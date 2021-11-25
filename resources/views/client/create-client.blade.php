@@ -58,6 +58,14 @@
                                 <label class="form-label">Senha</label>
                                 <input type="password" class="form-control" name="password" placeholder="senha" required>
                             </div>
+                            <div class="form-group">
+                                <label class="form-label">Senha</label>
+                                <select class="form-control" name="typeuser">
+                                    <option value="0" data-select2-id="164">Cliente</option>
+                                    <option value="1" data-select2-id="165">Admin</option>
+                                </select>
+                            </div>
+                            
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary float-right">Cadastrar</button>

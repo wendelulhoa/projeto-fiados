@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Payments extends Model
 {
-    public $fillable = ['date_payment', 'day', 'month','year', 'amount', 'user_id', 'func_id', 'active'];
+    public $fillable = ['date_payment', 'day', 'month','year', 'amount', 'user_id', 'func_id', 'note', 'active'];
 
     /**
      * Verifica se tem conta em aberto

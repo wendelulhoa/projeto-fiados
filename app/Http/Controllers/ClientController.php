@@ -78,7 +78,6 @@ class ClientController extends Controller
                 $validator = $this->validator($data);
 
                 if ($validator->fails()) {
-                    dd($validator->errors());
                     return redirect()->route('admin-create-client-view')->withErrors($validator->errors())->withInput();
                 }
 
@@ -89,7 +88,7 @@ class ClientController extends Controller
                     'password' => Hash::make($data['password']),
                     'active'   => true,
                     'image'    => null,
-                    'type_user' => 0
+                    'type_user'=>  isset($data['typeuser']) && !empty($data['typeuser']) ? $data['typeuser'] : 0
                 ])->id;
 
                 Clients::create([
@@ -121,10 +120,9 @@ class ClientController extends Controller
                 /* Tira a formatção do cpf. */ 
                 $data['cpf']  = unformatedCpf($data['cpf'] ?? 0);  
 
-                $validator = $this->validator($data);
-                
-                if ($validator->fails()) {
-                    return redirect()->route('admin-edit-client-view', ['id'=> $data['user_id']])->withErrors($validator->errors())->withInput();
+                if(isset($data['cpf']) && strlen($data['cpf']) < 11 || isset($data['cpf']) && strlen($data['cpf']) > 11 || !isset($data['cpf'])) {
+                    $validator['cpf'] = 'verifique o cpf e tente novamente';
+                    return redirect()->route('admin-edit-client-view', ['id'=> $data['user_id']])->withErrors($validator)->withInput();
                 }
 
                 DB::beginTransaction();
@@ -134,13 +132,13 @@ class ClientController extends Controller
                         'name'     => $data['name'],
                         'email'    => isset($data['email']) && !empty($data['email']) ? $data['email'] : unformatedCpf($data['cpf']),
                         'password' => Hash::make($data['password']),
-                        'type_user'=> 0
+                        'type_user'=> isset($data['typeuser']) && !empty($data['typeuser']) ? $data['typeuser'] : 0
                     ]);
                 } else {
                     User::where(['id'=> $data['user_id']])->update([
                         'name'     => $data['name'],
                         'email'    => isset($data['email']) && !empty($data['email']) ? $data['email'] : unformatedCpf($data['cpf']),
-                        'type_user'=> 0
+                        'type_user'=> isset($data['typeuser']) && !empty($data['typeuser']) ? $data['typeuser'] : 0
                     ]);
                 }
 

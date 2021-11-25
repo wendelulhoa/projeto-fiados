@@ -29,6 +29,7 @@ class PurchasesController extends Controller
                 $paymentActive = Payments::paymentActive($data['client']);
                 $purchasesTotal= convertToDecimal($data['amount'] ?? 0.00); 
                 $limit         = convertToDecimal(Clients::getLimit($data['client']));
+                $note          = isset($data['note']) ? $data['note'] : '';
 
                 if(empty($paymentActive)) {
                     $paymentId = Payments::create([
@@ -44,7 +45,8 @@ class PurchasesController extends Controller
                     $paymentId = $paymentActive->id;
                 }
 
-                $purchases           = Purchases::where(['payment_id'=>$paymentId])->get();
+                $purchases           = Purchases::where(['payment_id' => $paymentId])->get();
+                
                 /* Faz a soma das contas.*/ 
                 foreach($purchases as $item) {
                     $purchasesTotal += floatval($item->amount ?? 0.00);
@@ -54,12 +56,13 @@ class PurchasesController extends Controller
                     $notApproved = true;
                 } else {
                     Purchases::create([
-                        'day'    => Carbon::now()->format('d'), 
-                        'month'  => Carbon::now()->format('m'),
-                        'year'   => Carbon::now()->format('Y'), 
-                        'amount' => convertToDecimal($data['amount']), 
-                        'user_id'=> $data['client'], 
-                        'func_id'=> Auth::user()->id, 
+                        'day'        => Carbon::now()->format('d'), 
+                        'month'      => Carbon::now()->format('m'),
+                        'year'       => Carbon::now()->format('Y'), 
+                        'amount'     => convertToDecimal($data['amount']), 
+                        'user_id'    => $data['client'], 
+                        'func_id'    => Auth::user()->id, 
+                        'note'       => $note,  
                         'payment_id' => $paymentId
                     ]);
 
@@ -73,6 +76,9 @@ class PurchasesController extends Controller
             if($notApproved) {
                 return response()->json(['message'=> 'Ops! não tem limite sufiente.'], 400);
             } else {
+                /* Notifica o cliente e os administradores. */ 
+                NotificationsController::notifyAdminAndClientPurchase($data['client'], convertToDecimal($data['amount']), $note);
+                
                 return response()->json(['message'=> 'Cadastrado com sucesso.', 'amount' => moneyConvert($purchasesTotal)], 200);
             }
         } catch (Exception $e) {

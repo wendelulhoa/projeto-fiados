@@ -60,9 +60,10 @@ class NotificationsController extends Controller
      *
      * @param integer $userId
      * @param float $amount
+     * @param string $note
      * @return void
      */
-    public static function notifyAdminAndClientPayment($userId, $amount) {
+    public static function notifyAdminAndClientPayment($userId, $amount, $note = '') {
         $admins = User::getAllAdmins();
         $client = Clients::getClient($userId);
 
@@ -70,8 +71,8 @@ class NotificationsController extends Controller
         foreach($admins as $admin) {
             Notifications::create([
                 'type'    => 'P',
-                'title'   => 'Obrigado! pagamento realizado de R$: ' . moneyConvert($amount),
-                'message' => View('layouts.templates-notifications.template-notification-payment', ['amount'=>$amount, 'client' => $client])->render(),
+                'title'   => 'pagamento realizado de R$: ' . moneyConvert($amount),
+                'message' => View('layouts.templates-notifications.template-notification-payment', ['amount'=>$amount, 'client' => $client, 'note' => $note])->render(),
                 'link'    => '',
                 'user_id' => $admin->id,
                 'active'  => true,
@@ -82,12 +83,45 @@ class NotificationsController extends Controller
         Notifications::create([
             'type'    => 'P',
             'title'   => 'Obrigado! pagamento realizado de R$: ' . moneyConvert($amount),
-            'message' => View('layouts.templates-notifications.template-notification-payment', ['amount'=>$amount, 'client' => $client])->render(),
+            'message' => View('layouts.templates-notifications.template-notification-payment', ['amount'=>$amount, 'client' => $client, 'note' => $note])->render(),
             'link'    => '',
             'user_id' => $userId,
             'active'  => true,
         ]); 
+    }
 
+    /**
+     * Notifica o cliente e os admin quando realiza um pagamento. 
+     *
+     * @param integer $userId
+     * @param float $amount
+     * @param string $note
+     * @return void
+     */
+    public static function notifyAdminAndClientPurchase($userId, $amount, $note = '') {
+        $admins = User::getAllAdmins();
+        $client = Clients::getClient($userId);
 
+        /* Notifica os administradores. */
+        foreach($admins as $admin) {
+            Notifications::create([
+                'type'    => 'P',
+                'title'   => 'Compra de R$: ' . moneyConvert($amount),
+                'message' => View('layouts.templates-notifications.template-notification-payment', ['amount'=>$amount, 'client' => $client, 'note' => $note])->render(),
+                'link'    => '',
+                'user_id' => $admin->id,
+                'active'  => true,
+            ]); 
+        }
+
+        /* Notifica o cliente.*/
+        Notifications::create([
+            'type'    => 'P',
+            'title'   => 'Compra de R$: ' . moneyConvert($amount),
+            'message' => View('layouts.templates-notifications.template-notification-payment', ['amount'=>$amount, 'client' => $client, 'note' => $note])->render(),
+            'link'    => '',
+            'user_id' => $userId,
+            'active'  => true,
+        ]); 
     }
 }
