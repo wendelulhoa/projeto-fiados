@@ -90,6 +90,9 @@
                         if(data.amount != undefined) {
                             $('#open-payment').text('R$: ' + data.amount)
                         }
+                        
+                        /* Atualiza as notificações. */ 
+                        getNotifications();
                     },
                     error: function(data){
                         if(data.responseJSON.message != undefined) {
