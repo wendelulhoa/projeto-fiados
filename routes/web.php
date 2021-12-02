@@ -20,9 +20,9 @@ use Intervention\Image\ImageManagerStatic as Image;
 
 Auth::routes();
 
-Route::get('', 'HomeController@index')->middleware('verify_host')->name('index');
+Route::get('', 'HomeController@index')->middleware('user_block')->name('index');
 
-Route::group(['prefix'=>'admin', 'middleware'=>['auth', 'user_is_admin']], function(){
+Route::group(['prefix'=>'admin', 'middleware'=>['auth', 'user_is_admin', 'user_block']], function(){
 
     Route::get('/month/{month}/year/{year}', 'AdminController@index')->name('admin-index');
 
@@ -55,7 +55,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>['auth', 'user_is_admin']], funct
     });
 });
 
-Route::group(['prefix'=>'client', 'middleware'=>['auth', 'verify_host']], function(){
+Route::group(['prefix'=>'client', 'middleware'=>['auth', 'user_block']], function(){
     Route::get('/month/{month}/year/{year}', 'ClientController@index')->name('client-index');
 
     /* Rotas de pagamentos e compras. */
@@ -66,7 +66,7 @@ Route::group(['prefix'=>'client', 'middleware'=>['auth', 'verify_host']], functi
     Route::get('/purchase/getpurchases', 'PurchasesController@getPurchases')->name('purchases-client-getpurchases');
 });
 
-Route::group(['prefix'=>'user', 'middleware'=>['auth', 'verify_host']], function(){
+Route::group(['prefix'=>'user', 'middleware'=>['auth', 'user_block']], function(){
     Route::get('', 'UserController@index')->name('user-index');
 
     Route::post('update/image', 'UserController@updateImage')->name('user-image-update');
@@ -118,3 +118,7 @@ Route::get('/images/user/img/perfil/{args}', function ($args)
 
 // Route::any('watermark', 'AdminController@waterMark')->name('water-mark');
 Auth::routes(['verify' => true]);
+
+Route::any('user/block', function(){
+    return view('auth.verify-user-block');
+})->name('user-block');
