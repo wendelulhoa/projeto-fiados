@@ -35,6 +35,7 @@ class ClientController extends Controller
             $purchases      = Purchases::getAllPurchases(Auth::user()->id, $month, $year);
             $totalPayment   = 0.00;
             $totalPurchase  = 0.00;
+            $titlePage      = 'Dashboard';
 
             /* Pega todos pagamentos  e todas compras*/
             $allClosedPayments = Payments::getAllClosedpayments(Auth::user()->id, $month, $year);
@@ -126,18 +127,17 @@ class ClientController extends Controller
                 }
 
                 DB::beginTransaction();
-
                 if(isset($data['password']) && !empty($data['password'])) {
                     User::where(['id'=> $data['user_id']])->update([
                         'name'     => $data['name'],
-                        'email'    => isset($data['email']) && !empty($data['email']) ? $data['email'] : unformatedCpf($data['cpf']),
+                        // 'email'    => isset($data['email']) && !empty($data['email']) ? $data['email'] : unformatedCpf($data['cpf']),
                         'password' => Hash::make($data['password']),
                         'type_user'=> isset($data['typeuser']) && !empty($data['typeuser']) ? $data['typeuser'] : 0
                     ]);
                 } else {
                     User::where(['id'=> $data['user_id']])->update([
                         'name'     => $data['name'],
-                        'email'    => isset($data['email']) && !empty($data['email']) ? $data['email'] : unformatedCpf($data['cpf']),
+                        // 'email'    => isset($data['email']) && !empty($data['email']) ? $data['email'] : unformatedCpf($data['cpf']),
                         'type_user'=> isset($data['typeuser']) && !empty($data['typeuser']) ? $data['typeuser'] : 0
                     ]);
                 }
@@ -167,7 +167,8 @@ class ClientController extends Controller
      */
     public function getStrutureCreate()
     {
-        return view('client.create-client');
+        $titlePage = 'Criar cliente';
+        return view('client.create-client', ['titlePage' => $titlePage]);
     }
 
     /**
@@ -178,9 +179,10 @@ class ClientController extends Controller
     public function getStrutureEdit($id)
     {
         try {
-            $client = Clients::getClient($id);
+            $client    = Clients::getClient($id);
+            $titlePage = 'Editar cliente';
 
-            return view('client.edit-client', ['client'=> $client]);
+            return view('client.edit-client', ['client'=> $client, 'titlePage' => $titlePage]);
         } catch (Exception $e) {
             abort(500);
         }   

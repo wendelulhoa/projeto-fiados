@@ -10,7 +10,7 @@
                 <a class="close-toggle"  href="#"><i class="fe fe-x"></i></a>
             </div>
             <div class="d-flex order-lg-2 ml-auto header-right">
-                <div class="d-md-flex header-search" id="bs-example-navbar-collapse-1">
+                {{-- <div class="d-md-flex header-search" id="bs-example-navbar-collapse-1">
                     <form class="navbar-form" action="{{ Route('index') }}" method="GET" id="form-search-mod" role="search">
                         <div class="input-group ">
                             <input type="text" id="param" name="param" class="form-control" placeholder="Search...">
@@ -24,7 +24,7 @@
                             </span>
                         </div>
                     </form>
-                </div><!-- Search -->
+                </div><!-- Search --> --}}
                 @guest
                     
                 @else

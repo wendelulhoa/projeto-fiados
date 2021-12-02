@@ -42,7 +42,8 @@ class AdminController extends Controller
             $allClosedPayments = Payments::getAllClosedpayments(null, $month, $year);
             $allPurchases      = Purchases::getAllPurchases(null, $month, $year, false);
             $salesQuantity     =  count($allPurchases);
-
+            $titlePage         = 'Dashboard';
+            
             /* Faz a soma dos pagamentos.*/ 
             foreach($allClosedPayments as $payment) {
                 $totalPayment += $payment->amount ?? 0.00;
@@ -57,7 +58,7 @@ class AdminController extends Controller
             Session::put('month', $month);
             Session::put('year', $year);
             
-            return view('admin.index', ['closedPayments' =>$closedPayments,'openPayments' =>$openPayments, 'purchases' => $purchases, 'totalClients' => $totalClients, 'totalPurchase' => $totalPurchase, 'totalPayment' => $totalPayment, 'salesQuantity' => $salesQuantity ]);
+            return view('admin.index', ['closedPayments' =>$closedPayments,'openPayments' =>$openPayments, 'purchases' => $purchases, 'totalClients' => $totalClients, 'totalPurchase' => $totalPurchase, 'totalPayment' => $totalPayment, 'salesQuantity' => $salesQuantity, 'titlePage' => $titlePage ]);
         } catch (Exception $e) {
             abort(500);
         }

@@ -99,11 +99,13 @@ class PurchasesController extends Controller
                 $client        = Clients::getClient($id);
                 $openPayment   = Payments::paymentActive($id);
                 $limit         = Clients::getLimit($id);
+                $titlePage     = 'Comprar';
                 
-                return view('client.create-purchase', ['client'=>$client, 'limit' => $limit, 'openPayment'=> $openPayment,'id'=> $id]);
+                return view('client.create-purchase', ['client'=>$client, 'limit' => $limit, 'openPayment'=> $openPayment,'id'=> $id, 'titlePage' => $titlePage]);
             } else {
-                $clients = Clients::getAllClients();
-                return view('client.create-purchase', ['clients'=>$clients, 'id'=> $id]);
+                $titlePage = 'Escolha um usuario';
+                $clients   = Clients::getAllClients();
+                return view('client.create-purchase', ['clients'=>$clients, 'id'=> $id, 'titlePage' => $titlePage]);
             }
         } catch (Exception $e) {
             abort(500);

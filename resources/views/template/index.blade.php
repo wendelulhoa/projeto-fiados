@@ -5,14 +5,14 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="csrf-token" content="{{ csrf_token() }}">
-		<meta content="Um site de diversos mods, GTA V, GTA SAN ANDREAS, EURO TRUCK SIMULATOR 2, MODELOS 3D, GTA IV" name="description">
+		<meta content="Mercado Ulhoa" name="description">
 		<meta content="Ulhoa developers" name="author">
-		<meta name="keywords" content="mods br, mods ets2, mods gta5, mods gta sa, mods 3d"/>
+		<meta name="keywords" content="fiados, mercado, ulhoa"/>
 
 
 		<!-- Title -->
 		<link rel="sortcut icon" href="{{ mix('images/logo.png') }}" type="image/x-icon" />
-		<title>Mercado ulhoa</title>
+		<title>{{$titlePage ?? 'Mercado ulhoa'}}</title>
 
 		<!--Bootstrap css-->
 		<link rel="stylesheet" href="{{ mix('/plugins/bootstrap/css/bootstrap.min.css') }}">
@@ -83,7 +83,7 @@
 						
 						<div class="page-header">
 							@if (Auth::check())
-								<h1 class="page-title"></h1>
+							<h1 class="page-title">{{$titlePage ?? 'Mercado ulhoa'}}</h1>
 								<div class="ml-auto">
 									<div class="input-group">
 										<a class="btn btn-primary btn-icon text-white mr-2" id="datetimepicker" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="Calendario">

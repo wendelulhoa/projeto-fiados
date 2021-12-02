@@ -71,9 +71,10 @@ class UserController extends Controller
     /* Lista todos os usuarios. */ 
     public function getStrutureUsers(){
         try{
-            $users = User::orderBy('id','asc')->paginate(5);
+            $users     = User::orderBy('id','asc')->paginate(5);
+            $titlePage = 'Usuarios';
 
-            return view('admin.list-user', ['users'=>$users]);
+            return view('admin.list-user', ['users'=>$users, 'titlePage' => $titlePage]);
         }catch (Exception $e){
 
         }
@@ -109,6 +110,15 @@ class UserController extends Controller
             return response(['success'], 200);
         }catch (Exception $e){
             DB::rollBack();
+
+        }
+    }
+
+    public function getStrutureEdit()
+    {
+        try {
+            return view('user.edit');
+        } catch (Exception $e) {
 
         }
     }

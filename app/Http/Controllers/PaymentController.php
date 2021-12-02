@@ -94,9 +94,10 @@ class PaymentController extends Controller
             if($id != null) {
                 $client = Clients::getClient($id);
                 $openPayment   = Payments::paymentActive($id);
-                $limit          = Clients::getLimit($id);
+                $limit         = Clients::getLimit($id);
+                $titlePage     = 'Pagar';
 
-                return view('client.payment-purchase', ['client'=> $client, 'limit' => $limit, 'openPayment'=> $openPayment,'id' => $id]);
+                return view('client.payment-purchase', ['client'=> $client, 'limit' => $limit, 'openPayment'=> $openPayment,'id' => $id, 'titlePage' => $titlePage]);
             } else {
                 $clients = Clients::getAllClients();
                 return view('client.payment-purchase', ['clients'=>$clients, 'id' => $id]);
@@ -116,12 +117,13 @@ class PaymentController extends Controller
     public function getStrutureOpenPayments($month, $year, $id = null) {
         try {
             $openPayments = Payments::openPayments($id, $month, $year);
+            $titlePage    = 'Pagamentos em aberto';
             
             /* Salva o ano e o mes*/ 
             Session::put('month', $month);
             Session::put('year', $year);
 
-            return view('client.open-payments', ['openPayments'=>$openPayments]);
+            return view('client.open-payments', ['openPayments'=>$openPayments, 'titlePage' => $titlePage]);
         } catch (Exception $e) {
             abort(500);
         }
@@ -137,12 +139,13 @@ class PaymentController extends Controller
     public function getStrutureClosedPayments($month, $year, $id = null) {
         try {
             $closedPayments = Payments::closedPayments($id, $month, $year);
+            $titlePage      = 'Pagamentos';
 
             /* Salva o ano e o mes*/ 
             Session::put('month', $month);
             Session::put('year', $year);
 
-            return view('client.closed-payments', ['closedPayments'=>$closedPayments]);
+            return view('client.closed-payments', ['closedPayments'=>$closedPayments, 'titlePage' => $titlePage]);
         } catch (Exception $e) {
             abort(500);
         }
