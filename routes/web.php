@@ -22,6 +22,7 @@ Auth::routes();
 
 Route::get('', 'HomeController@index')->middleware('user_block')->name('index');
 
+/* rotas de administradores. */ 
 Route::group(['prefix'=>'admin', 'middleware'=>['auth', 'user_is_admin', 'user_block']], function(){
 
     Route::get('/month/{month}/year/{year}', 'AdminController@index')->name('admin-index');
@@ -55,6 +56,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>['auth', 'user_is_admin', 'user_b
     });
 });
 
+/* Rotas de clientes. */ 
 Route::group(['prefix'=>'client', 'middleware'=>['auth', 'user_block']], function(){
     Route::get('/month/{month}/year/{year}', 'ClientController@index')->name('client-index');
 
@@ -122,3 +124,10 @@ Auth::routes(['verify' => true]);
 Route::any('user/block', function(){
     return view('auth.verify-user-block');
 })->name('user-block');
+
+
+Route::get('getcoins','PaymentController@getCoins')->name('getcoins');
+
+Route::any('coins', function(){
+    return view('testes.search-coin-comparison');
+});

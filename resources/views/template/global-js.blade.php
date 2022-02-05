@@ -154,4 +154,17 @@
             `);
         @endif
     }
+
+    var naoVou = 0;
+    var vou    = 0;
+
+    for(var i = 0; i < 100; i++) {
+       if(Math.floor(Math.random() * (2 - 0)) == 0) {
+            naoVou++;
+       } else {
+            vou++;
+       }
+    }
+
+    console.log(`vou : ${vou}`, `não vou : ${naoVou}`);
 </script>
